@@ -1,23 +1,23 @@
-" This is Gary Bernhardt's .vimrc file
-" vim:set ts=2 sts=2 sw=2 expandtab:
-
 " remove all existing autocmds
 autocmd!
 
 " initialize @tpope, whence all vim plugins come
 execute pathogen#infect()
+filetype off
+
+call pathogen#helptags()
 
 " add line numbers
 set number
 
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " ctrlP Fuzzy Search
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 let g:ctrlp_map = '<c-p>'
 let g:ctrlp_cmd = 'CtrlP'
 
 " add a delimiter at 80th column
-hi ColorColumn ctermbg=11 ctermfg=11
+hi ColorColumn ctermbg=11 ctermfg=8
 set cc=80
 
 " slimux
@@ -27,7 +27,7 @@ nnoremap <\>: SlimuxREPLSendLine<CR>
 vnoremap <\>: SlimuxREPLSendLine<CR>
 nnoremap <\>: SlimuxREPLConfigure<CR>
 
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " BASIC EDITING CONFIGURATION
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 set nocompatible
@@ -147,8 +147,8 @@ set re=1
 " COLOR
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 :set t_Co=256 " 256 colors
-:set background=dark
-:color slate
+" :set background=dark
+" :color slate
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " STATUS LINE
