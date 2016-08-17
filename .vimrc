@@ -3,9 +3,9 @@ autocmd!
 
 " initialize @tpope, whence all vim plugins come
 execute pathogen#infect()
-filetype off
-
 call pathogen#helptags()
+
+filetype off
 
 " add line numbers
 set number
@@ -23,9 +23,10 @@ set cc=80
 " slimux
 " I've this built into the script, which is not
 " what the original has
-nnoremap <\>: SlimuxREPLSendLine<CR>
-vnoremap <\>: SlimuxREPLSendLine<CR>
-nnoremap <\>: SlimuxREPLConfigure<CR>
+map <Leader>s :SlimuxREPLSendLine<CR>
+vmap <Leader>s :SlimuxREPLSendSelection<CR>
+map <Leader>a :SlimuxShellLast<CR>
+map <Leader>k :SlimuxSendKeysLast<CR>
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " BASIC EDITING CONFIGURATION
