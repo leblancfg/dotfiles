@@ -25,7 +25,7 @@ set cc=80
 " what the original has
 map <Leader>s :SlimuxREPLSendLine<CR>
 vmap <Leader>s :SlimuxREPLSendSelection<CR>
-map <Leader>a :SlimuxShellLast<CR>
+map <Leader>a :SlimuxREPLConfigure<CR>
 map <Leader>k :SlimuxSendKeysLast<CR>
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -55,7 +55,7 @@ set switchbuf=useopen
 set showtabline=2
 set winwidth=79
 " This makes RVM work inside Vim. I have no idea why.
-set shell=bash
+set shell=zsh
 " Prevent Vim from clobbering the scrollback buffer. See
 " http://www.shallowsky.com/linux/noaltscreen.html
 set t_ti= t_te=
