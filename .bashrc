@@ -7,7 +7,9 @@
 
 alias ls='ls --color=auto'
 PS1='[\u@\h \W]\$ '
-# >>>>BEGIN ADDED BY CNCHI INSTALLER<<<< #
-BROWSER=/usr/bin/chromium
-EDITOR=/usr/bin/nano
-# >>>>>END ADDED BY CNCHI INSTALLER<<<<< #
+
+function gitp () { git add . && git commit -m "$@" && git push origin master ; }
+alias nb="cd /c/Users/FLeblanc/notebooks"
+alias jn="cd /c/Users/FLeblanc && jupyter notebook &> /dev/null &"
+alias jnk='ps -W | grep "jupyter-notebook" | awk "{print \$1}" | xargs kill -f'
+alias an='$"`where python | grep conda`"'
