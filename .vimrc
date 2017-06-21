@@ -8,7 +8,7 @@ set number
 " colorscheme paraiso_dark
 
 " Backup (~) files are a hassle, so keep them all in one spot instead.
-set backupdir=~/.vim/backup
+" set backupdir=~/.vim/backup
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Set custom maps
@@ -18,6 +18,20 @@ let maplocalleader="\\"
 " Copy-paste, works with Cygwin and mouse-enabled X Server on Linux
 map <leader>y "*y
 map <leader>p "*p
+
+" Map Ctrl-j & Ctrl-k to move lines around
+nnoremap <C-j> :m .+1<CR>==
+nnoremap <C-k> :m .-2<CR>==
+inoremap <C-j> <Esc>:m .+1<CR>==gi
+inoremap <C-k> <Esc>:m .-2<CR>==gi
+vnoremap <C-j> :m '>+1<CR>gv=gv
+vnoremap <C-k> :m '<-2<CR>gv=gv
+
+" Easier .vimrc refresh
+nmap <Leader>r :so $MYVIMRC<CR>
+
+" Run tests from leader-space
+nmap <Leader><Space> :!pytest tests.py<CR>
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " ----- vim-plug -----
@@ -36,21 +50,21 @@ call plug#begin('~/.vim/plugged')
 Plug 'tpope/vim-sensible'
 
 " vim-orgmode - Note taking and well, everything.
-Plug 'jceb/vim-orgmode'
-Plug 'tpope/vim-speeddating'
-Plug 'mattn/calendar-vim'
+" Plug 'jceb/vim-orgmode'
+" Plug 'tpope/vim-speeddating'
+" Plug 'mattn/calendar-vim'
 Plug 'reedes/vim-pencil'
 
 " riv.vim - Restructured Text in Vim
-Plug 'Rykka/riv.vim'
+" Plug 'Rykka/riv.vim'
 
 " - Markdown for vim
 Plug 'plasticboy/vim-markdown'
 Plug 'godlygeek/tabular'
 
 " Pandoc Markdown
-Plug 'vim-pandoc/vim-pandoc'
-Plug 'vim-pandoc/vim-pandoc-syntax'
+" Plug 'vim-pandoc/vim-pandoc'
+" Plug 'vim-pandoc/vim-pandoc-syntax'
 
 " slimux - Send commands to other tmux panes
 Plug 'epeli/slimux'
