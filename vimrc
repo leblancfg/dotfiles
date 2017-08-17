@@ -51,6 +51,9 @@ endif
 " Start plugin manager section
 call plug#begin('~/.vim/plugged')
 
+" NERDtree - file explorer
+Plug 'scrooloose/nerdtree'
+
 " vim-sensible - Vim keybindings everyone can agree on.
 Plug 'tpope/vim-sensible'
 
@@ -114,6 +117,8 @@ nnoremap <Leader>x :SlimuxREPLConfigure<CR>
 " Use Enter as "Previous Command" in left tmux pane
 nnoremap <CR> :!tmux send-keys -t right Up C-m <CR> <CR>
 
+" Open NERDTree with C-N
+map <C-n> :NERDTreeToggle<CR>
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " MULTIPURPOSE TAB KEY
 " Indent if we're at the beginning of a line. Else, do completion.
