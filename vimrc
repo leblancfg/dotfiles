@@ -4,6 +4,8 @@
 set relativenumber
 set number
 
+filetype plugin indent on
+
 " Themeing?
 " colorscheme paraiso_dark
 
@@ -32,6 +34,9 @@ nmap <Leader>r :so $MYVIMRC<CR>
 
 " Run tests from leader-space
 nmap <Leader><Space> :!pytest tests.py<CR>
+
+" Handy way to insert UTC timestamp
+nmap <Leader>d :r! date "+\%Y-\%m-\%d \%H:\%M:\%S"<CR>
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " ----- vim-plug -----
