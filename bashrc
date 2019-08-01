@@ -32,12 +32,17 @@ function panstrap () {
 # Update dotfiles
 dfpush() {
     (
-        cd ~/dotfiles && git add . && git commit -m 'autoupdate' && git push origin master
+        cd ~/dotfiles
+	git add .
+	git commit -m 'autoupdate'
+	git push origin master
     )
 }
 dfpull() {
     (
-        cd ~/dotfiles && git pull --ff-only && ./install -q
+        cd ~/dotfiles
+	git pull --ff-only
+	./install  2>&1 >/dev/null
     )
 }
 
