@@ -5,11 +5,17 @@
 - clean: ['~']
 
 - link:
-    ~/.dotfiles: ''
-    ~/.bashrc: bashrc
-    ~/.tmux.conf: tmux.conf
-    ~/.vimrc: vimrc
-    ~/Templates: Templates
-
+    ~/.bashrc:
+      path: bashrc
+      force: true
+    ~/.tmux.conf:
+      path: tmux.conf
+      force: true
+    ~/.vimrc:
+      path: vimrc
+      force: true
+    ~/Templates:
+      path: Templates
+      force: true
 - shell:
   - [git submodule update --init --recursive, Installing submodules]
