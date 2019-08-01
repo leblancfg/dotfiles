@@ -22,4 +22,4 @@
       path: xsession
 
 - shell:
-  - git submodule sync --recursive
+  - [git submodule update --init --recursive, Installing submodules]
