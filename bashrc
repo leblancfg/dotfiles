@@ -5,48 +5,29 @@
 # If not running interactively, don't do anything
 [[ $- != *i* ]] && return
 
-# Common actions
-alias jn="cd /c/Users/FLeblanc && jupyter notebook &> /dev/null &"
+# ls aliases
+alias la="ls -A"
+alias ll="ls -l"
+alias l='ls'
+
+## Jupyter Notebook
+alias jn="cd && jupyter notebook &> /dev/null &"
 alias jnk='ps -W | grep "jupyter-notebook" | awk "{print \$1}" | xargs kill -f'
-alias py='$"`where python | grep conda`"'
-alias rgrep='grep -rF'
 
 ## Git
 # Add, commit, and push to master.
-# git recursively pull all subdirectories
 function gitp () { git add --all && git commit -m "$@" && git push origin master ; }
+# git recursively pull all subdirectories
 alias gitr="find . -name ".git" -type d | sed 's/\/.git//' |  xargs -P10 -I{} git -C {} pull"
 
-# ls aliases
-alias la="ls -A"
-alias l='ls'
+## Pandoc
+function panstrap () {
+	DIR="$HOME/Templates"
+	if [ "$#" -ne 2 ]; then
+	    echo "Illegal number of parameters"
+	fi
+	pandoc "$1" -o "$2" --template $DIR/template.html --css $DIR/template.css --self-contained --toc --toc-depth 2 ; }
 
-# Update dotfiles
-dfu() {
-    (
-        cd ~/.dotfiles && git pull --ff-only && ./install -q
-    )
-}
-
-# Go up [n] directories
-up()
-{
-    local cdir="$(pwd)"
-    if [[ "${1}" == "" ]]; then
-        cdir="$(dirname "${cdir}")"
-    elif ! [[ "${1}" =~ ^[0-9]+$ ]]; then
-        echo "Error: argument must be a number"
-    elif ! [[ "${1}" -gt "0" ]]; then
-        echo "Error: argument must be positive"
-    else
-        for ((i=0; i<${1}; i++)); do
-            local ncdir="$(dirname "${cdir}")"
-            if [[ "${cdir}" == "${ncdir}" ]]; then
-                break
-            else
-                cdir="${ncdir}"
-            fi
-        done
-    fi
-    cd "${cdir}"
-}
+## Etc
+alias shrug="echo '¯\\_(ツ)_/¯' > /dev/clipboard"
+alias az="az.cmd"
