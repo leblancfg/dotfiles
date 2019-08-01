@@ -1,31 +1,25 @@
 - defaults:
     link:
       relink: true
+      force: true
 
 - clean: ['~']
 
 - link:
     ~/.bashrc:
       path: bashrc
-      force: true
     ~/.tmux.conf:
       path: tmux.conf
-      force: true
     ~/.vimrc:
       path: vimrc
-      force: true
     ~/Templates:
       path: Templates
-      force: true
     ~/.xmodmap:
       path: xmodmap
-      force: true
     ~/xscreensaver:
       path: xscreensaver
-      force: true
     ~/xsession:
       path: xsession
-      force: true
 
 - shell:
   - [git submodule update --init --recursive, Installing submodules]
