@@ -1,5 +1,5 @@
 # dotfiles
-:briefcase: configuration files for terminal and tools, links directly to ~
+:briefcase: configuration files for terminal and tools, links directly to ~. Powered by [Dotbot](https://github.com/anishathalye/dotbot).
 
 ## Portable configuration files
 You could say I'm a *nix user stuck in Windows-land. I use Linux at home, I have a MacBook Pro laptop. ¯\\_(ツ)_/¯
