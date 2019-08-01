@@ -28,6 +28,19 @@ function panstrap () {
 	fi
 	pandoc "$1" -o "$2" --template $DIR/template.html --css $DIR/template.css --self-contained --toc --toc-depth 2 ; }
 
+## Dotfiles
+# Update dotfiles
+dfpush() {
+    (
+        cd ~/dotfiles && git add . && git commit -m 'autoupdate' && git push origin master
+    )
+}
+dfpull() {
+    (
+        cd ~/dotfiles && git pull --ff-only && ./install -q
+    )
+}
+
 ## Etc
 alias shrug="echo '¯\\_(ツ)_/¯' > /dev/clipboard"
 alias az="az.cmd"
