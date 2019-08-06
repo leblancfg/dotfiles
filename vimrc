@@ -38,10 +38,10 @@ map <Leader>z :w<CR> :AsyncRun pandoc % -o %:r.pdf --variable urlcolor=cyan && s
 
 " Pandoc metadata block header
 let g:metadataBlock="---\n
-\ title: Insert Title Here\n
-\ author: François Leblanc\n
-\ date: \n
-\ ..."
+\title: Insert Title Here\n
+\author: François Leblanc\n
+\date: \n
+\..."
 map <Leader>m ggm`O<ESC> :put =metadataBlock<CR>
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
