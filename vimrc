@@ -28,7 +28,7 @@ vnoremap <C-k> :m '<-2<CR>gv=gv
 nmap <Leader>r :so $MYVIMRC<CR>
 
 " Run tests from leader-space
-nmap <Leader><Space> :!pytest tests.py<CR>
+nmap <Leader><Space> :!pytest<CR>
 
 " Handy way to insert UTC timestamp
 nmap <Leader>d :r! date "+\%Y-\%m-\%d \%H:\%M:\%S"<CR>
