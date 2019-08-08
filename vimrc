@@ -31,6 +31,9 @@ vnoremap <C-k> :m '<-2<CR>gv=gv
 " Easier .vimrc refresh
 nmap <Leader>r :so $MYVIMRC<CR>
 
+" Run tests in tmux pane 1 from ctrl-leader-space
+nmap <Leader>t :w<CR> :!tmux send-keys -t 1 , Space<CR>
+
 " Run tests from leader-space
 nmap <Leader><Space> :w<CR> :!pytest<CR>
 
