@@ -10,6 +10,8 @@ set tabstop=8 softtabstop=0 expandtab shiftwidth=4 smarttab
 " Reload indent file after each save
 filetype plugin indent on
 
+" Silent Running
+command! -nargs=1 Silent execute ':silent !'.<q-args> | execute ':redraw!'
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Set custom maps
@@ -32,7 +34,7 @@ vnoremap <C-k> :m '<-2<CR>gv=gv
 nmap <Leader>r :so $MYVIMRC<CR>
 
 " Run tests in tmux pane 1 from ctrl-leader-space
-nmap <Leader>t :w<CR> :!tmux send-keys -t 1 , Space<CR>
+nmap <Leader>t :w<CR> :Silent tmux send-keys -t 1 , Space<CR>
 
 " Run tests from leader-space
 nmap <Leader><Space> :w<CR> :!pytest<CR>
