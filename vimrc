@@ -28,7 +28,7 @@ vnoremap <C-k> :m '<-2<CR>gv=gv
 nmap <Leader>r :so $MYVIMRC<CR>
 
 " Run tests from leader-space
-nmap <Leader><Space> :!pytest<CR>
+nmap <Leader><Space> :w<CR> :!pytest<CR>
 
 " Handy way to insert UTC timestamp
 nmap <Leader>d :r! date "+\%Y-\%m-\%d \%H:\%M:\%S"<CR>
@@ -43,6 +43,9 @@ let g:metadataBlock="---\n
 \date: \n
 \..."
 map <Leader>m ggm`O<ESC> :put =metadataBlock<CR>
+
+" Search and replace word under cursor
+nnoremap <Leader>s :%s/\<<C-r><C-w>\>/
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " ----- vim-plug -----
