@@ -4,6 +4,10 @@
 set relativenumber
 set number
 
+" Tabs are 4 spaces, natch.
+set tabstop=8 softtabstop=0 expandtab shiftwidth=4 smarttab
+
+" Reload indent file after each save
 filetype plugin indent on
 
 
