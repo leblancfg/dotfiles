@@ -42,7 +42,7 @@ dfpull() {
     (
         cd ~/dotfiles
 	git pull --ff-only
-	./install  2>&1 >/dev/null
+	bash install  2>&1 >/dev/null
     )
 }
 
