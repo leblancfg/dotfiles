@@ -19,6 +19,8 @@ alias jnk='ps -W | grep "jupyter-notebook" | awk "{print \$1}" | xargs kill -f'
 function gitp () { git add --all && git commit -m "$@" && git push origin master ; }
 # git recursively pull all subdirectories
 alias gitr="find . -name ".git" -type d | sed 's/\/.git//' |  xargs -P10 -I{} git -C {} pull"
+# Re-apply gitignore
+alias giti="git rm -r --cached . && git add . && git commit -m 're-applied .gitignore'"
 
 ## Pandoc
 function panstrap () {
