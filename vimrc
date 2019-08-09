@@ -37,7 +37,7 @@ nmap <Leader>r :so $MYVIMRC<CR>
 nmap <Leader>t :w<CR> :Silent tmux send-keys -t 1 , Space<CR>
 
 " Run tests from leader-space
-nmap <Leader><Space> :w<CR> :!pytest -qq<CR>
+nmap <Leader><Space> :w<CR> :!pytest -q<CR>
 
 " Handy way to insert UTC timestamp
 nmap <Leader>d :r! date "+\%Y-\%m-\%d \%H:\%M:\%S"<CR>
