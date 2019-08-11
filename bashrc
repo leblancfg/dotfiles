@@ -168,6 +168,8 @@ dfpull() {
 ## Etc
 alias shrug="echo '¯\\_(ツ)_/¯' > /dev/clipboard"
 alias az="az.cmd"
+alias vi="vim"
 
 ## Anaconda
 export PATH="$HOME/anaconda3/bin:$PATH"
+
