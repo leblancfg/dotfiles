@@ -139,10 +139,20 @@ alias giti="git rm -r --cached . && git add . && git commit -m 're-applied .giti
 ## Pandoc
 function panstrap () {
 	DIR="$HOME/Templates"
-	if [ "$#" -ne 2 ]; then
-	    echo "Illegal number of parameters"
+	if [ "$#" -eq 2 ]
+        then
+            pandoc "$1" -o "$2" --template $DIR/template.html --css $DIR/template.css --self-contained --toc --toc-depth 2
+	elif [ "$#" -eq 1 ]
+        then
+            filename=$(basename -- "$1")
+            filename="${filename%.*}"
+            OUTPUT_FILENAME="$filename.html"
+            pandoc "$1" -o "$OUTPUT_FILENAME" --template $DIR/template.html --css $DIR/template.css --self-contained --toc --toc-depth 2
+        else
+	    echo "Illegal number of parameters: need at least input filename and optional output filename"
+            exit 1
 	fi
-	pandoc "$1" -o "$2" --template $DIR/template.html --css $DIR/template.css --self-contained --toc --toc-depth 2 ; }
+}
 
 ## Dotfiles
 # Update dotfiles
