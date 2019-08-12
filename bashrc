@@ -116,11 +116,8 @@ if ! shopt -oq posix; then
   fi
 fi
 #
-# ~/.bashrc
+# Custom ~/.bashrc. To be refactored to `.bash_aliases` eventually
 #
-
-# If not running interactively, don't do anything
-[[ $- != *i* ]] && return
 
 # ls aliases
 alias la="ls -A"
