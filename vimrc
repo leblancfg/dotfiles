@@ -51,10 +51,14 @@ let g:metadataBlock="---\n
 \author: François Leblanc\n
 \date: \n
 \..."
-map <Leader>m ggm`O<ESC> :put =metadataBlock<CR>
+map <Leader>m ggm`O<ESC> :put =metadataBlock<CR> ggd2djfI
 
 " Search and replace word under cursor
 nnoremap <Leader>s :%s/\<<C-r><C-w>\>/
+
+" Put an X in the checkmark on that line
+nmap <leader>x 0f[lsX<Esc>
+
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " ----- vim-plug -----
