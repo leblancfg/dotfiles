@@ -79,15 +79,14 @@ Plug 'scrooloose/nerdtree'
 " vim-sensible - Vim keybindings everyone can agree on.
 Plug 'tpope/vim-sensible'
 
-" vim-orgmode - Note taking and well, everything.
-Plug 'reedes/vim-pencil'
-
-" AsyncRun
+" AsyncRun - do stuff in the background
  Plug 'skywind3000/asyncrun.vim'
 
-" - Markdown for vim
+" Prose and Markdown
+Plug 'reedes/vim-pencil'
 Plug 'plasticboy/vim-markdown'
 Plug 'godlygeek/tabular'
+Plug 'reedes/vim-wordy'
 
 " Tim Pope extravaganza
 Plug 'tpope/vim-fugitive'
@@ -95,15 +94,16 @@ Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-obsession'
 
+"" Python
 " vim-flake8 - Python static syntax, style check, and complexity measures.
 Plug 'nvie/vim-flake8', { 'for': 'python' }
-
-" Prose - Wordy
-Plug 'reedes/vim-wordy'
 
 " Vim Jedi - Python autocompletion
 " Commented out because too buggy? 
 " Plug 'davidhalter/jedi-vim'
+
+" vim-www for DevDocs
+Plug 'waiting-for-dev/vim-www', { 'for': 'python' }
 
 " Add plugins to &runtimepath
 call plug#end()
