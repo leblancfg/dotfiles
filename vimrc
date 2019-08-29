@@ -102,9 +102,6 @@ Plug 'nvie/vim-flake8', { 'for': 'python' }
 " Commented out because too buggy? 
 " Plug 'davidhalter/jedi-vim'
 
-" vim-www for DevDocs
-Plug 'waiting-for-dev/vim-www', { 'for': 'python' }
-
 " Add plugins to &runtimepath
 call plug#end()
 
@@ -118,7 +115,6 @@ let g:vim_markdown_folding_disabled = 1
 
 " Open NERDTree with C-N
 map <C-n> :NERDTreeToggle<CR>
-
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " MULTIPURPOSE TAB KEY
