@@ -43,7 +43,7 @@ nmap <Leader><Space> :w<CR> :!pytest -qq<CR>
 nmap <Leader>d :r! date "+\%Y-\%m-\%d \%H:\%M:\%S"<CR>
 
 " Markdown to PDF and launch
-map <Leader>z :w<CR> :AsyncRun pandoc % -o %:r.pdf --variable urlcolor=cyan && start %:r.pdf<CR>
+map <Leader>z :w<CR> :AsyncRun pandoc % -o %:r.pdf --toc --variable urlcolor=cyan && start %:r.pdf<CR>
 
 " Pandoc metadata block header
 let g:metadataBlock="---\n
