@@ -43,7 +43,7 @@ nmap <Leader><Space> :w<CR> :!pytest -qq<CR>
 nmap <Leader>d :r! date "+\%Y-\%m-\%d \%H:\%M:\%S"<CR>
 
 " Markdown to PDF and launch
-map <Leader>z :w<CR> :AsyncRun pandoc % -o %:r.pdf --toc --variable urlcolor=cyan && start %:r.pdf<CR>
+map <Leader>z :w<CR> :AsyncRun pandoc % -o %:r.pdf --toc --highlight-style zenburn --variable urlcolor=cyan && start %:r.pdf<CR>
 
 " Pandoc metadata block header
 let g:metadataBlock="---\n
@@ -59,6 +59,8 @@ nnoremap <Leader>s :%s/\<<C-r><C-w>\>/
 " Put an X in the checkmark on that line
 nmap <leader>x 0f[lsX<Esc>
 
+" Edit vimrc
+nmap <Leader>v :w<CR> :vsp ~/.vimrc<CR>
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " ----- vim-plug -----

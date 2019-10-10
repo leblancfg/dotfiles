@@ -1,0 +1,9 @@
+### Unix Readline settings
+# Prefix history search, eg $ git (up) gives
+# git-specific commands from history
+"\e[A": history-search-backward
+"\e[B": history-search-forward
+
+# Make completion a little less dumb than default
+set show-all-if-ambiguous on
+set completion-ignore-case on
