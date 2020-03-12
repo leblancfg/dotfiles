@@ -31,7 +31,7 @@ vnoremap <C-j> :m '>+1<CR>gv=gv
 vnoremap <C-k> :m '<-2<CR>gv=gv
 
 " Easier .vimrc refresh
-nmap <Leader>r :so $MYVIMRC<CR>
+nmap <Leader>R :so $MYVIMRC<CR>
 
 " Run tests in tmux pane 1 from ctrl-leader-space
 nmap <Leader>t :w<CR> :Silent tmux send-keys -t 1 , Space<CR>
@@ -54,7 +54,7 @@ let g:metadataBlock="---\n
 map <Leader>m ggm`O<ESC> :put =metadataBlock<CR> ggd2djfI
 
 " Search and replace word under cursor
-nnoremap <Leader>s :%s/\<<C-r><C-w>\>/
+nnoremap <Leader>S :%s/\<<C-r><C-w>\>/
 
 " Put an X in the checkmark on that line
 nmap <leader>x 0f[lsX<Esc>
@@ -99,10 +99,11 @@ Plug 'tpope/vim-obsession'
 "" Python
 " vim-flake8 - Python static syntax, style check, and complexity measures.
 Plug 'nvie/vim-flake8', { 'for': 'python' }
+Plug 'psf/black'
 
 " Vim Jedi - Python autocompletion
 " Commented out because too buggy? 
-" Plug 'davidhalter/jedi-vim'
+Plug 'davidhalter/jedi-vim'
 
 " Add plugins to &runtimepath
 call plug#end()
@@ -117,6 +118,9 @@ let g:vim_markdown_folding_disabled = 1
 
 " Open NERDTree with C-N
 map <C-n> :NERDTreeToggle<CR>
+
+" Autoformat Python with Black
+nnoremap <F6> :Black<CR>
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " MULTIPURPOSE TAB KEY
