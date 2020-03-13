@@ -5,7 +5,23 @@ set relativenumber
 set number
 
 " Tabs are 4 spaces, natch.
-set tabstop=8 softtabstop=0 expandtab shiftwidth=4 smarttab
+" Only do this part when compiled with support for autocommands.
+if has("autocmd")
+    " Use filetype detection and file-based automatic indenting.
+    filetype plugin indent on
+
+    " Use actual tab chars in Makefiles.
+    autocmd FileType make set tabstop=8 shiftwidth=8 softtabstop=0 noexpandtab
+endif
+
+" For everything else, use a tab width of 4 space chars.
+set tabstop=4       " The width of a TAB is set to 4.
+                    " Still it is a \t. It is just that
+                    " Vim will interpret it to be having
+                    " a width of 4.
+set shiftwidth=4    " Indents will have a width of 4.
+set softtabstop=4   " Sets the number of columns for a TAB.
+set expandtab       " Expand TABs to spaces.
 
 " Reload indent file after each save
 filetype plugin indent on
@@ -31,7 +47,7 @@ vnoremap <C-j> :m '>+1<CR>gv=gv
 vnoremap <C-k> :m '<-2<CR>gv=gv
 
 " Easier .vimrc refresh
-nmap <Leader>R :so $MYVIMRC<CR>
+nmap <Leader><C-r> :so $MYVIMRC<CR>
 
 " Run tests in tmux pane 1 from ctrl-leader-space
 nmap <Leader>t :w<CR> :Silent tmux send-keys -t 1 , Space<CR>
@@ -100,10 +116,8 @@ Plug 'tpope/vim-obsession'
 " vim-flake8 - Python static syntax, style check, and complexity measures.
 Plug 'nvie/vim-flake8', { 'for': 'python' }
 Plug 'psf/black'
-
-" Vim Jedi - Python autocompletion
-" Commented out because too buggy? 
 Plug 'davidhalter/jedi-vim'
+Plug 'sirver/ultisnips'
 
 " Add plugins to &runtimepath
 call plug#end()
