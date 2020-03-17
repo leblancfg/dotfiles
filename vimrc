@@ -4,6 +4,10 @@
 set relativenumber
 set number
 
+" Feiltypes?
+filetype on
+filetype plugin on
+
 " Tabs are 4 spaces, natch.
 " Only do this part when compiled with support for autocommands.
 if has("autocmd")
@@ -48,9 +52,6 @@ vnoremap <C-k> :m '<-2<CR>gv=gv
 
 " Easier .vimrc refresh
 nmap <Leader><C-r> :so $MYVIMRC<CR>
-
-" Run tests in tmux pane 1 from ctrl-leader-space
-nmap <Leader>t :w<CR> :Silent tmux send-keys -t 1 , Space<CR>
 
 " Run tests from leader-space
 nmap <Leader><Space> :w<CR> :!pytest -qq<CR>
@@ -117,7 +118,7 @@ Plug 'tpope/vim-obsession'
 Plug 'nvie/vim-flake8', { 'for': 'python' }
 Plug 'psf/black'
 Plug 'davidhalter/jedi-vim'
-Plug 'sirver/ultisnips'
+Plug 'alfredodeza/pytest.vim'
 
 " Add plugins to &runtimepath
 call plug#end()
@@ -135,6 +136,10 @@ map <C-n> :NERDTreeToggle<CR>
 
 " Autoformat Python with Black
 nnoremap <F6> :Black<CR>
+
+" Testing pytest.vim
+" Run tests in tmux pane 1 from ctrl-leader-space
+nmap <Leader>t :wa<CR>:Pytest project -m "not slow"<CR>
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " MULTIPURPOSE TAB KEY

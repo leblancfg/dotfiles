@@ -131,7 +131,7 @@ alias l='ls'
 
 ## Jupyter Notebook
 alias jn="cd && jupyter notebook &> /dev/null &"
-alias jnk='ps -W | grep "jupyter-notebook" | awk "{print \$1}" | xargs kill -f'
+alias jnk='ps -ax | grep "jupyter-notebook" | awk "{print \$1}" | xargs kill -f'
 
 ## Git
 # Add, commit, and push to master.
