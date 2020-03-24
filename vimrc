@@ -116,7 +116,7 @@ Plug 'tpope/vim-obsession'
 "" Python
 " vim-flake8 - Python static syntax, style check, and complexity measures.
 Plug 'nvie/vim-flake8', { 'for': 'python' }
-Plug 'psf/black'
+Plug 'psf/black', { 'tag': '19.10b0' }
 Plug 'davidhalter/jedi-vim'
 Plug 'alfredodeza/pytest.vim'
 
@@ -134,12 +134,16 @@ let g:vim_markdown_folding_disabled = 1
 " Open NERDTree with C-N
 map <C-n> :NERDTreeToggle<CR>
 
+" Remove trailing whitespace
+nnoremap <F5> :let _s=@/<Bar>:%s/\s\+$//e<Bar>:let @/=_s<Bar><CR>
+
 " Autoformat Python with Black
 nnoremap <F6> :Black<CR>
 
 " Testing pytest.vim
 " Run tests in tmux pane 1 from ctrl-leader-space
 nmap <Leader>t :wa<CR>:Pytest project -m "not slow"<CR>
+nmap <Leader>f :wa<CR>:Pytest file -m "not slow"<CR>
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " MULTIPURPOSE TAB KEY
