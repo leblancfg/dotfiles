@@ -5,3 +5,5 @@ source ~/.bashrc
 # eval "$('/c/Anaconda/Scripts/conda.exe' 'shell.bash' 'hook')"
 # <<< conda initialize <<<
 
+
+export PATH="$HOME/.poetry/bin:$PATH"
