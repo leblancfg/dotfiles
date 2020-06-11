@@ -60,6 +60,7 @@ nmap <Leader><Space> :w<CR> :!pytest -qq<CR>
 nmap <Leader>d :r! date "+\%Y-\%m-\%d"<CR>
 
 " Markdown to PDF and launch
+" TODO: probably broken
 map <Leader>z :w<CR> :AsyncRun pandoc % -o %:r.pdf --toc --highlight-style zenburn --variable urlcolor=cyan && start %:r.pdf<CR>
 
 " Pandoc metadata block header
@@ -73,11 +74,15 @@ map <Leader>m ggm`O<ESC> :put =metadataBlock<CR> ggd2djfI
 " Search and replace word under cursor
 nnoremap <Leader>S :%s/\<<C-r><C-w>\>/
 
+" Edit vimrc
+nmap <Leader>v :w<CR> :vsp ~/.vimrc<CR>
+
+"" Markdown ""
 " Put an X in the checkmark on that line
 nmap <leader>x 0f[lsX<Esc>
 
-" Edit vimrc
-nmap <Leader>v :w<CR> :vsp ~/.vimrc<CR>
+" New checkmarked line
+nmap <leader>c o* [ ]<Esc><<A
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " ----- vim-plug -----
@@ -116,7 +121,7 @@ Plug 'tpope/vim-obsession'
 "" Python
 " vim-flake8 - Python static syntax, style check, and complexity measures.
 Plug 'nvie/vim-flake8', { 'for': 'python' }
-Plug 'psf/black', { 'tag': '19.10b0' }
+" Plug 'psf/black'
 Plug 'davidhalter/jedi-vim'
 Plug 'alfredodeza/pytest.vim'
 
