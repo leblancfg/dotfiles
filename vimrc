@@ -53,14 +53,12 @@ vnoremap <C-k> :m '<-2<CR>gv=gv
 " Easier .vimrc refresh
 nmap <Leader><C-r> :so $MYVIMRC<CR>
 
+" TODO: probably just remove
 " Run tests from leader-space
 nmap <Leader><Space> :w<CR> :!pytest -qq<CR>
 
 " Handy way to insert UTC timestamp
 nmap <Leader>d :r! date "+\%Y-\%m-\%d"<CR>
-
-" Comment out line (hash)
-nnoremap <Leader><C-/> m00i# <Esc>`0
 
 " Search and replace word under cursor
 nnoremap <Leader>S :%s/\<<C-r><C-w>\>/
@@ -103,8 +101,8 @@ call plug#begin('~/.vim/plugged')
 " NERDtree - file explorer
 Plug 'scrooloose/nerdtree'
 
-" vim-sensible - Vim keybindings everyone can agree on.
-Plug 'tpope/vim-sensible'
+" Make splits fullscreen and back
+Plug 'itspriddle/ZoomWin'
 
 " AsyncRun - do stuff in the background
  Plug 'skywind3000/asyncrun.vim'
@@ -116,10 +114,10 @@ Plug 'godlygeek/tabular'
 Plug 'reedes/vim-wordy'
 
 " Tim Pope extravaganza
-Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-sensible'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-surround'
-Plug 'tpope/vim-obsession'
+Plug 'tpope/vim-commentary'
 
 "" Python
 " vim-flake8 - Python static syntax, style check, and complexity measures.
@@ -127,6 +125,9 @@ Plug 'nvie/vim-flake8', { 'for': 'python' }
 " Plug 'psf/black'
 Plug 'davidhalter/jedi-vim'
 Plug 'alfredodeza/pytest.vim'
+
+" Finder
+Plug 'kien/ctrlp.vim'
 
 " Add plugins to &runtimepath
 call plug#end()
@@ -157,6 +158,7 @@ nnoremap <F6> :Black<CR>
 " Run tests in tmux pane 1 from ctrl-leader-space
 nmap <Leader>t :wa<CR>:Pytest project -m "not slow"<CR>
 nmap <Leader>f :wa<CR>:Pytest file -m "not slow"<CR>
+nmap <Leader>F :Pytest session<CR>
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " MULTIPURPOSE TAB KEY
