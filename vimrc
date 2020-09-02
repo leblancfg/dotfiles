@@ -4,6 +4,9 @@
 set relativenumber
 set number
 
+" Show fancy glyphs
+set encoding=UTF-8
+
 " Feiltypes?
 filetype on
 filetype plugin on
@@ -128,6 +131,9 @@ Plug 'alfredodeza/pytest.vim'
 
 " Finder
 Plug 'kien/ctrlp.vim'
+
+" Fancy glyphs
+Plug 'ryanoasis/vim-devicons'
 
 " Add plugins to &runtimepath
 call plug#end()
