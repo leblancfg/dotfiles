@@ -42,6 +42,10 @@ command! -nargs=1 Silent execute ':silent !'.<q-args> | execute ':redraw!'
 let mapleader=","
 let maplocalleader="\\"
 
+" Copy-paste, works with Cygwin and mouse-enabled X Server on Linux
+map <leader>y "+y
+map <leader>p "+p
+
 " Toggle Paste for Insert mode
 map <leader>p :set paste!<CR>
 
@@ -58,10 +62,11 @@ nmap <Leader><C-r> :so $MYVIMRC<CR>
 
 " TODO: probably just remove
 " Run tests from leader-space
-nmap <Leader><Space> :w<CR> :!pytest -qq<CR>
+" nmap <Leader><Space> :w<CR> :!pytest -qq<CR>
 
 " Handy way to insert UTC timestamp
 nmap <Leader>d :r! date "+\%Y-\%m-\%d"<CR>
+nmap <Leader>D o## <Esc>:r! date "+\%Y-\%m-\%d"<CR>0i<BS><Esc>
 
 " Search and replace word under cursor
 nnoremap <Leader>S :%s/\<<C-r><C-w>\>/
@@ -75,7 +80,7 @@ nmap <leader>x 0f[lsX<Esc>
 
 " Markdown to PDF and launch
 " TODO: probably broken
-map <Leader>z :w<CR> :AsyncRun pandoc % -o %:r.pdf --toc --highlight-style zenburn --variable urlcolor=cyan && start %:r.pdf<CR>
+" map <Leader>z :w<CR> :AsyncRun pandoc % -o %:r.pdf --toc --highlight-style zenburn --variable urlcolor=cyan && start %:r.pdf<CR>
 
 " Pandoc metadata block header
 let g:metadataBlock="---\n
