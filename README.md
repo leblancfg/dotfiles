@@ -2,11 +2,11 @@
 :briefcase: configuration files for terminal and tools, links directly to ~. Powered by [Dotbot](https://github.com/anishathalye/dotbot).
 
 ## Portable configuration files
-You could say I'm a *nix user stuck in Windows-land. I use Linux at home, I have a MacBook Pro laptop. ¯\\_(ツ)_/¯
+These days, most of my time is spent in MacOs, with my neglected home computer running Linux. My most used files are:
 
-I try to keep my dotfiles *not* tied to a specific OS, and use the venerable [Git-for-Windows](https://gitforwindows.org/) along with tmux for my day-to-day work in Windows. My most used files are:
-
-* `.bashrc`
+* `.aliases`, that feeds into either
+    - `.bashrc` on Linux, or
+    - `.zshrc` on MacOS
 * `.vimrc`
 * `.tmux.conf`
 
