@@ -93,9 +93,9 @@ dfpush() {
 }
 dfpull() {
     (
-        cd ~/dotfiles
+    cd ~/dotfiles
 	git pull --ff-only
-	bash install  2>&1 >/dev/null
+	./install  2>&1 >/dev/null
     )
 }
 
