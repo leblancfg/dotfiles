@@ -20,6 +20,8 @@
       path: vimrc
     ~/Templates:
       path: Templates
+    ~/.zshrc:
+      path: zshrc
 
 - shell:
   - [git submodule update --init --recursive, Installing submodules]
