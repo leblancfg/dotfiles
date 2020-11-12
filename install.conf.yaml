@@ -6,6 +6,8 @@
 - clean: ['~']
 
 - link:
+    ~/.aliases:
+      path: aliases
     ~/.bash_profile:
       path: bash_profile
     ~/.bashrc:
@@ -18,12 +20,6 @@
       path: vimrc
     ~/Templates:
       path: Templates
-    ~/.xmodmap:
-      path: xmodmap
-    ~/xscreensaver:
-      path: xscreensaver
-    ~/xsession:
-      path: xsession
 
 - shell:
   - [git submodule update --init --recursive, Installing submodules]

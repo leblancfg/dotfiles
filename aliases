@@ -1,0 +1,111 @@
+## Unix
+# Find and replace on Python files
+function find_replace() {
+    grep -ilr "$1" * | xargs -I@ sed -i '' 's/"$1"/"$2"/g' @
+}
+
+function ss() {
+    grep -Irl "$1" .
+}
+
+## Pytest
+alias watch='rm -f .testmondata && ptw --runner "pytest --testmon -s -p no:warnings tests/"'
+alias install-watch='pip install pytest-watch pytest-testmon'
+
+## Jupyter Notebook
+alias jn="cd && jupyter notebook &> /dev/null &"
+alias jnk='ps -ax | grep "jupyter-notebook" | awk "{print \$1}" | xargs kill'
+
+### Install `jupyter-vim-binding`
+function install-jupyter-vim() {
+    if [ command -v jupyter --version ]
+        then
+            # Create required directory in case (optional)
+            mkdir -p $(jupyter --data-dir)/nbextensions
+            # Clone the repository
+            cd $(jupyter --data-dir)/nbextensions
+            git clone https://github.com/lambdalisue/jupyter-vim-binding vim_binding
+            # Activate the extension
+            jupyter nbextension enable vim_binding/vim_binding
+        else
+        echo "Please make sure Jupyter is installed"
+            exit 1
+    fi
+}
+
+## Git
+# Add, commit, and push to master.
+function gitc () { git add --all && git commit -m "$@" ; }
+
+# Add, commit, and push to master.
+function gitp () { git add --all && git commit -m "$@" && git push origin master ; }
+
+# Git squash last n commits
+function gits () {
+NUM_COMMITS="$1"
+COMMIT_MSG="${@:2}"
+git reset --soft HEAD~$NUM_COMMITS && git commit -m $COMMIT_MSG; }
+
+# git recursively pull all subdirectories
+alias gitr="find . -name ".git" -type d | sed 's/\/.git//' |  xargs -P10 -I{} git -C {} pull"
+# Re-apply gitignore
+alias giti="git rm -r --cached . && git add . && git commit -m 're-applied .gitignore'"
+
+# I must type this 100 times a day; shorten it
+alias gs="git status"
+
+## Black
+function blacken () {
+    git status --porcelain | cut -d ' ' -f3 | xargs black
+}
+
+## Pandoc
+function panstrap () {
+	DIR="$HOME/Templates"
+	if [ "$#" -eq 2 ]
+        then
+            pandoc "$1" -o "$2" --template $DIR/template.html --css $DIR/template.css --self-contained --toc --toc-depth 3 --quiet
+	elif [ "$#" -eq 1 ]
+        then
+            filename=$(basename -- "$1")
+            filename="${filename%.*}"
+            OUTPUT_FILENAME="$filename.html"
+            pandoc "$1" -o "$OUTPUT_FILENAME" --template $DIR/template.html --css $DIR/template.css --self-contained --toc --toc-depth 3
+        else
+	    echo "Illegal number of parameters: need at least input filename and optional output filename"
+            exit 1
+	fi
+}
+
+## Moving around
+alias siphon="cd ~/src/github.com/ShopifyPeopleAnalytics/siphon"
+alias analysis="cd ~/src/github.com/ShopifyPeopleAnalytics/analysis"
+
+## Dotfiles
+# Update dotfiles
+dfpush() {
+    (
+        cd ~/dotfiles
+	git add .
+	git commit -m 'autoupdate'
+	git push origin master
+    )
+}
+dfpull() {
+    (
+        cd ~/dotfiles
+	git pull --ff-only
+	bash install  2>&1 >/dev/null
+    )
+}
+
+## Etc
+alias shrug="echo '¯\\_(ツ)_/¯' | pbcopy"
+
+## Installs
+[ -f /opt/dev/dev.sh ] && source /opt/dev/dev.sh
+
+### The next line updates PATH for the Google Cloud SDK.
+if [ -f '/Users/leblancfg/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/leblancfg/google-cloud-sdk/path.zsh.inc'; fi
+# The next line enables shell command completion for gcloud.
+if [ -f '/Users/leblancfg/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/leblancfg/google-cloud-sdk/completion.zsh.inc'; fi

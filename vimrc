@@ -36,6 +36,10 @@ filetype plugin indent on
 " Silent Running
 command! -nargs=1 Silent execute ':silent !'.<q-args> | execute ':redraw!'
 
+" I'd rather not use a color scheme, but can't get decent colors when I run in
+" tmux+iterm2
+colorscheme peachpuff
+
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Set custom maps
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -50,12 +54,12 @@ map <leader>p "+p
 map <leader>p :set paste!<CR>
 
 " Map Ctrl-j & Ctrl-k to move lines around
-nnoremap <C-j> :m .+1<CR>==
-nnoremap <C-k> :m .-2<CR>==
-inoremap <C-j> <Esc>:m .+1<CR>==gi
-inoremap <C-k> <Esc>:m .-2<CR>==gi
-vnoremap <C-j> :m '>+1<CR>gv=gv
-vnoremap <C-k> :m '<-2<CR>gv=gv
+" nnoremap <C-j> :m .+1<CR>==
+" nnoremap <C-k> :m .-2<CR>==
+" inoremap <C-j> <Esc>:m .+1<CR>==gi
+" inoremap <C-k> <Esc>:m .-2<CR>==gi
+" vnoremap <C-j> :m '>+1<CR>gv=gv
+" vnoremap <C-k> :m '<-2<CR>gv=gv
 
 " Easier .vimrc refresh
 nmap <Leader><C-r> :so $MYVIMRC<CR>
@@ -140,6 +144,9 @@ Plug 'kien/ctrlp.vim'
 " Fancy glyphs
 Plug 'ryanoasis/vim-devicons'
 
+" vim-tmux-navigator
+Plug 'christoomey/vim-tmux-navigator'
+
 " Add plugins to &runtimepath
 call plug#end()
 
@@ -185,4 +192,3 @@ function! InsertTabWrapper()
 endfunction
 inoremap <expr> <tab> InsertTabWrapper()
 inoremap <s-tab> <c-n>
-
