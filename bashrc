@@ -120,71 +120,6 @@ if ! shopt -oq posix; then
     . /etc/bash_completion
   fi
 fi
-#
-# Custom ~/.bashrc. To be refactored to `.bash_aliases` eventually
-#
-
-# ls aliases
-alias la="ls -A"
-alias ll="ls -l"
-alias l='ls'
-
-## Jupyter Notebook
-alias jn="cd && jupyter notebook &> /dev/null &"
-alias jnk='ps -ax | grep "jupyter-notebook" | awk "{print \$1}" | xargs kill'
-
-## Git
-# Add, commit, and push to master.
-function gitp () { git add --all && git commit -m "$@" && git push origin master ; }
-# git recursively pull all subdirectories
-alias gitr="find . -name ".git" -type d | sed 's/\/.git//' |  xargs -P10 -I{} git -C {} pull"
-# Re-apply gitignore
-alias giti="git rm -r --cached . && git add . && git commit -m 're-applied .gitignore'"
-
-## Pandoc
-function panstrap () {
-	DIR="$HOME/Templates"
-	if [ "$#" -eq 2 ]
-        then
-            pandoc "$1" -o "$2" --template $DIR/template.html --css $DIR/template.css --self-contained --toc --toc-depth 2
-	elif [ "$#" -eq 1 ]
-        then
-            filename=$(basename -- "$1")
-            filename="${filename%.*}"
-            OUTPUT_FILENAME="$filename.html"
-            pandoc "$1" -o "$OUTPUT_FILENAME" --template $DIR/template.html --css $DIR/template.css --self-contained --toc --toc-depth 2
-        else
-	    echo "Illegal number of parameters: need at least input filename and optional output filename"
-            exit 1
-	fi
-}
-
-## Dotfiles
-# Update dotfiles
-dfpush() {
-    (
-        cd ~/dotfiles
-	git add .
-	git commit -m 'autoupdate'
-	git push origin master
-    )
-}
-dfpull() {
-    (
-        cd ~/dotfiles
-	git pull --ff-only
-	bash install  2>&1 >/dev/null
-    )
-}
-
-## Etc
-alias shrug="echo '¯\\_(ツ)_/¯' > /dev/clipboard"
-alias az="az.cmd"
-alias vi="vim"
-
-## Anaconda
-# export PATH="$HOME/anaconda3/bin:$PATH"  # commented out by conda initialize
-
 
 # >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init' !!
@@ -199,11 +134,14 @@ else
     fi
 fi
 unset __conda_setup
-# <<< conda initialize <<<
-
 
 # The next line updates PATH for the Google Cloud SDK.
 if [ -f '/home/leblancfg/google-cloud-sdk/path.bash.inc' ]; then . '/home/leblancfg/google-cloud-sdk/path.bash.inc'; fi
 
 # The next line enables shell command completion for gcloud.
 if [ -f '/home/leblancfg/google-cloud-sdk/completion.bash.inc' ]; then . '/home/leblancfg/google-cloud-sdk/completion.bash.inc'; fi
+
+#
+# Load the rest of the aliases
+#
+source ~/.aliases
