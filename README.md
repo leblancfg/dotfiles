@@ -1,5 +1,5 @@
 # dotfiles
-:briefcase: configuration files for terminal and tools, links directly to `$HOME`. Powered by [Dotbot](https://github.com/anishathalye/dotbot).
+:briefcase: configuration files for terminal and tools, links directly to `~`. Powered by [Dotbot](https://github.com/anishathalye/dotbot).
 
 ## Portable configuration files
 These days, most of my time is spent in MacOs, with my neglected home computer running Linux. My most used files are:
