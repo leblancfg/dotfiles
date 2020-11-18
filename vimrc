@@ -133,8 +133,9 @@ Plug 'tpope/vim-commentary'
 
 "" Python
 " vim-flake8 - Python static syntax, style check, and complexity measures.
-Plug 'nvie/vim-flake8', { 'for': 'python' }
+" Plug 'nvie/vim-flake8', { 'for': 'python' }
 " Plug 'psf/black'
+Plug 'vim-syntastic/syntastic'
 Plug 'davidhalter/jedi-vim'
 Plug 'alfredodeza/pytest.vim'
 
@@ -177,6 +178,16 @@ nnoremap <F6> :Black<CR>
 nmap <Leader>t :wa<CR>:Pytest project -m "not slow"<CR>
 nmap <Leader>f :wa<CR>:Pytest file -m "not slow"<CR>
 nmap <Leader>F :Pytest session<CR>
+
+" Syntastic on-ramp
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " MULTIPURPOSE TAB KEY
