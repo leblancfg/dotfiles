@@ -1,7 +1,7 @@
 ## Unix
 # Find and replace on Python files
 function find_replace() {
-    grep -ilr "$1" * | xargs -I@ sed -i '' 's/"$1"/"$2"/g' @
+    LC_ALL=C sed -i '' -- 's/"$1"/"$2"/g' **/*(D.)
 }
 
 function ss() {
