@@ -12,6 +12,8 @@
       path: bash_profile
     ~/.bashrc:
       path: bashrc
+	~/.gitignore:
+	  path: gitignore
     ~/.inputrc:
       path: inputrc
     ~/.tmux.conf:

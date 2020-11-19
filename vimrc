@@ -135,8 +135,8 @@ Plug 'tpope/vim-commentary'
 " vim-flake8 - Python static syntax, style check, and complexity measures.
 " Plug 'nvie/vim-flake8', { 'for': 'python' }
 " Plug 'psf/black'
-Plug 'vim-syntastic/syntastic'
-Plug 'davidhalter/jedi-vim'
+Plug 'dense-analysis/ale'
+"Plug 'davidhalter/jedi-vim'
 Plug 'alfredodeza/pytest.vim'
 
 " Finder
@@ -179,16 +179,17 @@ nmap <Leader>t :wa<CR>:Pytest project -m "not slow"<CR>
 nmap <Leader>f :wa<CR>:Pytest file -m "not slow"<CR>
 nmap <Leader>F :Pytest session<CR>
 
-" Syntastic on-ramp
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
+" ALE
+let g:ale_linters = {
+\   'python': ['flake8'],
+\   'javascript': ['jshint', 'eslint'],
+\   'typescript': ['eslint', 'tslint'],
+\}
 
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 1
-let g:syntastic_check_on_open = 1
-let g:syntastic_check_on_wq = 0
-
+let g:ale_fixers = {
+\   'python': ['autopep8', 'black'],
+\}
+let g:ale_fix_on_save=1
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " MULTIPURPOSE TAB KEY
 " Indent if we're at the beginning of a line. Else, do completion.
