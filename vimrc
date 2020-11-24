@@ -135,9 +135,10 @@ Plug 'tpope/vim-commentary'
 " vim-flake8 - Python static syntax, style check, and complexity measures.
 " Plug 'nvie/vim-flake8', { 'for': 'python' }
 " Plug 'psf/black'
-Plug 'dense-analysis/ale'
 "Plug 'davidhalter/jedi-vim'
+Plug 'dense-analysis/ale'
 Plug 'alfredodeza/pytest.vim'
+let g:ale_completion_enabled = 1
 
 " Finder
 Plug 'kien/ctrlp.vim'
@@ -182,8 +183,6 @@ nmap <Leader>F :Pytest session<CR>
 " ALE
 let g:ale_linters = {
 \   'python': ['flake8'],
-\   'javascript': ['jshint', 'eslint'],
-\   'typescript': ['eslint', 'tslint'],
 \}
 
 let g:ale_fixers = {
