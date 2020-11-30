@@ -35,6 +35,10 @@ function install-jupyter-vim() {
 }
 
 ## Git
+# Better checkout
+
+function gch() { git checkout "$(git branch | fzf | tr -d '[:space:]')" }
+
 # Add, commit, and push to master.
 function gitc () { git add --all && git commit -m "$@" ; }
 
