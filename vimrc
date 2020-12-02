@@ -110,9 +110,6 @@ endif
 " Start plugin manager section
 call plug#begin('~/.vim/plugged')
 
-" Open test files at the same time EXPERIMENT
-Plug 'donaldducky/related.vim'
-
 " NERDtree - file explorer
 Plug 'scrooloose/nerdtree'
 
