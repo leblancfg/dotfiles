@@ -205,7 +205,7 @@ let g:tagbar_show_linenumbers=1
 "lightline
 set noshowmode
 let g:lightline = {
-      \ 'colorscheme': '16color',
+      \ 'colorscheme': 'wombat',
       \ }
 " I'd rather not use a color scheme, but can't get decent colors when I run in
 " tmux+iterm2
