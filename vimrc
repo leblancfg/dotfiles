@@ -43,10 +43,6 @@ filetype plugin indent on
 " Silent Running
 command! -nargs=1 Silent execute ':silent !'.<q-args> | execute ':redraw!'
 
-" I'd rather not use a color scheme, but can't get decent colors when I run in
-" tmux+iterm2
-colorscheme peachpuff
-
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Set custom maps
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -160,6 +156,7 @@ Plug 'ryanoasis/vim-devicons'
 Plug 'christoomey/vim-tmux-navigator'
 
 " Auto CTags
+Plug 'itchyny/lightline.vim'
 Plug 'majutsushi/tagbar'
 
 " Add plugins to &runtimepath
@@ -203,6 +200,15 @@ let g:ale_fix_on_save=1
 
 " tagbar
 map <leader>t :TagbarToggle<CR>
+
+"lightline
+set noshowmode
+let g:lightline = {
+      \ 'colorscheme': 'wombat',
+      \ }
+" I'd rather not use a color scheme, but can't get decent colors when I run in
+" tmux+iterm2
+colorscheme peachpuff
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " MULTIPURPOSE TAB KEY
