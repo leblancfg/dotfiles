@@ -110,6 +110,9 @@ endif
 " Start plugin manager section
 call plug#begin('~/.vim/plugged')
 
+" Another attempt at automatically opening test files
+Plug 'inkarkat/vim-EditSimilar'
+
 " NERDtree - file explorer
 Plug 'scrooloose/nerdtree'
 
@@ -117,7 +120,7 @@ Plug 'scrooloose/nerdtree'
 Plug 'itspriddle/ZoomWin'
 
 " AsyncRun - do stuff in the background
- Plug 'skywind3000/asyncrun.vim'
+Plug 'skywind3000/asyncrun.vim'
 
 " Prose and Markdown
 Plug 'reedes/vim-pencil'
