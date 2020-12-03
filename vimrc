@@ -200,6 +200,7 @@ let g:ale_fix_on_save=1
 
 " tagbar
 map <leader>t :TagbarToggle<CR>
+let g:tagbar_show_linenumbers=1
 
 "lightline
 set noshowmode
