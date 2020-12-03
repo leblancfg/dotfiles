@@ -1,4 +1,3 @@
-" leblancfg, Aug 2016.
 
 " Show hybrid relative line numbers
 set relativenumber
@@ -6,6 +5,14 @@ set number
 
 " Show fancy glyphs
 set encoding=UTF-8
+
+" Mouse
+set mouse=a
+if has("mouse_sgr")
+    set ttymouse=sgr
+else
+    set ttymouse=xterm2
+end
 
 " Feiltypes?
 filetype on
@@ -152,6 +159,9 @@ Plug 'ryanoasis/vim-devicons'
 " vim-tmux-navigator
 Plug 'christoomey/vim-tmux-navigator'
 
+" Auto CTags
+Plug 'majutsushi/tagbar'
+
 " Add plugins to &runtimepath
 call plug#end()
 
@@ -178,10 +188,8 @@ nnoremap <F5> :let _s=@/<Bar>:%s/\s\+$//e<Bar>:let @/=_s<Bar><CR>
 nnoremap <F6> :Black<CR>
 
 " Testing pytest.vim
-" Run tests in tmux pane 1 from ctrl-leader-space
-nmap <Leader>t :wa<CR>:Pytest project -m "not slow"<CR>
 nmap <Leader>f :wa<CR>:Pytest file -m "not slow"<CR>
-nmap <Leader>F :Pytest session<CR>
+nmap <Leader>F :wa<CR>:Pytest session<CR>
 
 " ALE
 let g:ale_linters = {
@@ -192,6 +200,10 @@ let g:ale_fixers = {
 \   'python': ['black'],
 \}
 let g:ale_fix_on_save=1
+
+" tagbar
+map <leader>t :TagbarToggle<CR>
+
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " MULTIPURPOSE TAB KEY
 " Indent if we're at the beginning of a line. Else, do completion.
