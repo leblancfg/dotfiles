@@ -50,6 +50,9 @@ let maplocalleader="\\"
 map <leader>y "+y
 map <leader>p "+p
 
+" Switch between previous buffer
+nnoremap <leader><leader> <c-^>
+
 " Toggle Paste for Insert mode
 map <leader>p :set paste!<CR>
 
@@ -203,3 +206,28 @@ function! InsertTabWrapper()
 endfunction
 inoremap <expr> <tab> InsertTabWrapper()
 inoremap <s-tab> <c-n>
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" SWITCH BETWEEN TEST AND PRODUCTION CODE
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+function! OpenTestAlternate()
+  let new_file = AlternateForCurrentFile()
+  exec ':e ' . new_file
+endfunction
+function! AlternateForCurrentFile()
+  let current_file = expand("%")
+  let current_path = expand("%:h")
+  let new_file = expand("%:t")
+  let in_tests = match(current_file, '^tests/') != -1
+  let going_to_tests = !in_tests
+  if going_to_tests
+    let new_file = substitute(new_file, '^', 'test_', '')
+    let new_file = 'tests/' . current_path . '/' . new_file
+  else
+    let new_file = substitute(new_file, 'test_', '', '')
+    let new_path = substitute(current_path, '^tests/', '', '')
+    let new_file = new_path . '/' . new_file
+  endif
+  return new_file
+endfunction
+nnoremap <leader>. :call OpenTestAlternate()<cr>
