@@ -184,9 +184,9 @@ nmap <Leader>f :wa<CR>:Pytest file -m "not slow"<CR>
 nmap <Leader>F :Pytest session<CR>
 
 " ALE
-" let g:ale_linters = {
-" \   'python': ['flake8'],
-" \}
+let g:ale_linters = {
+\   'python': ['flake8'],
+\}
 
 let g:ale_fixers = {
 \   'python': ['black'],
