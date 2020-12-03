@@ -110,9 +110,6 @@ endif
 " Start plugin manager section
 call plug#begin('~/.vim/plugged')
 
-" Another attempt at automatically opening test files
-Plug 'inkarkat/vim-EditSimilar'
-
 " NERDtree - file explorer
 Plug 'scrooloose/nerdtree'
 
