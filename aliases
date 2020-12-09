@@ -43,7 +43,7 @@ function gch() { git checkout "$(git branch | fzf | tr -d '[:space:]')" }
 function gitc () { git add --all && git commit -m "$@" ; }
 
 # Add, commit, and push to master.
-function gitp () { git push origin $(git branch --show-current) ; }
+function gitp () { git push origin $(git branch --show-current) $@; }
 
 # Git squash last n commits
 function gits () {

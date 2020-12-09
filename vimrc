@@ -43,6 +43,9 @@ filetype plugin indent on
 " Silent Running
 command! -nargs=1 Silent execute ':silent !'.<q-args> | execute ':redraw!'
 
+" Always reload the newest file, even if that means overwriting
+set autoread
+
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Set custom maps
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -103,6 +106,9 @@ map <Leader>m ggm`O<ESC> :put =metadataBlock<CR> ggd2djfI
 " New checkmarked line
 nmap <leader>c o* [ ]<Esc><<A
 
+" Force reload all windows (e.g. on changing git branches)
+nmap <leader>b :silent! windo! e<CR>
+
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " ----- vim-plug -----
 " See if it's installed, else fetch it
@@ -145,6 +151,7 @@ Plug 'tpope/vim-commentary'
 Plug 'dense-analysis/ale'
 Plug 'alfredodeza/pytest.vim'
 let g:ale_completion_enabled = 1
+let g:ale_completion_autoimport = 1
 
 " Finder
 Plug 'kien/ctrlp.vim'
@@ -190,13 +197,15 @@ nmap <Leader>F :wa<CR>:Pytest session<CR>
 
 " ALE
 let g:ale_linters = {
-\   'python': ['flake8'],
+\   'python': ['pylint'],
 \}
 
-let g:ale_fixers = {
-\   'python': ['black'],
-\}
+" let g:ale_fixers = {
+" \   'python': ['black'],
+" \}
 let g:ale_fix_on_save=1
+map <silent> <leader>aj :ALENext<cr>
+nmap <silent> <leader>ak :ALEPrevious<cr>
 
 " tagbar
 map <leader>t :TagbarToggle<CR>
