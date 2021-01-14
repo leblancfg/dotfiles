@@ -6,11 +6,19 @@ function find_replace() {
 }
 
 function ss() {
-    grep -Irl "$1" .
+    grep -Irl "$1" --exclude-dir={env,dist,build} .
 }
 
 ## Pytest
-alias watch='rm -f .testmondata && ptw --runner "pytest --testmon -s -p no:warnings tests/"'
+function watch_tests() {
+	CATCH_WARNINGS=" no:warnings"
+	if [ "$(basename "$(git rev-parse --show-toplevel)")" = "siphon" ]
+	then
+		CATCH_WARNINGS=""
+	fi
+	export PYTHON_ENV="test"
+	rm -f .testmondata && ptw --runner "pytest --testmon -s -p$CATCH_WARNINGS tests"
+}
 alias install-watch='pip install pytest-watch pytest-testmon'
 
 ## Jupyter Notebook

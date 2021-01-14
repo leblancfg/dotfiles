@@ -142,6 +142,7 @@ Plug 'tpope/vim-sensible'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-commentary'
+Plug 'tpope/vim-fugitive'
 
 "" Python
 " vim-flake8 - Python static syntax, style check, and complexity measures.
@@ -161,6 +162,9 @@ Plug 'ryanoasis/vim-devicons'
 
 " vim-tmux-navigator
 Plug 'christoomey/vim-tmux-navigator'
+
+" Auto resize the panes based on pointer
+Plug 'roman/golden-ratio'
 
 " Auto CTags
 Plug 'itchyny/lightline.vim'
