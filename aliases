@@ -43,6 +43,8 @@ function install-jupyter-vim() {
 }
 
 ## Git
+# Create a better gitignore
+alias get_gitignore="curl https://www.toptal.com/developers/gitignore/api/jupyternotebooks,python,macos,windows,linux,zsh > .gitignore"
 # Better checkout
 
 function gch() { git checkout "$(git branch | fzf | tr -d '[:space:]')" }
