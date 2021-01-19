@@ -201,12 +201,12 @@ nmap <Leader>F :wa<CR>:Pytest session<CR>
 
 " ALE
 let g:ale_linters = {
-\   'python': ['pylint'],
+\   'python': ['pylint', 'mypy'],
 \}
 
-" let g:ale_fixers = {
-" \   'python': ['black'],
-" \}
+let g:ale_fixers = {
+\   'python': ['black'],
+\}
 let g:ale_fix_on_save=1
 map <silent> <leader>aj :ALENext<cr>
 nmap <silent> <leader>ak :ALEPrevious<cr>
