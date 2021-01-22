@@ -105,3 +105,6 @@ source ~/.aliases
 
 [ -f /opt/dev/dev.sh ] && source /opt/dev/dev.sh
 if [ -e /Users/leblancfg/.nix-profile/etc/profile.d/nix.sh ]; then . /Users/leblancfg/.nix-profile/etc/profile.d/nix.sh; fi # added by Nix installer
+
+# Poetry Python package management
+export PATH="$HOME/.poetry/bin:$PATH"

@@ -109,6 +109,9 @@ nmap <leader>c o* [ ]<Esc><<A
 " Force reload all windows (e.g. on changing git branches)
 nmap <leader>b :silent! windo! e<CR>
 
+" Create new tab
+nmap <leader><space> :tabnew<CR>
+
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " ----- vim-plug -----
 " See if it's installed, else fetch it
@@ -201,12 +204,12 @@ nmap <Leader>F :wa<CR>:Pytest session<CR>
 
 " ALE
 let g:ale_linters = {
-\   'python': ['pylint', 'mypy'],
+\   'python': ['pylint'],
 \}
 
-let g:ale_fixers = {
-\   'python': ['black'],
-\}
+" let g:ale_fixers = {
+" \   'python': ['black'],
+" \}
 let g:ale_fix_on_save=1
 map <silent> <leader>aj :ALENext<cr>
 nmap <silent> <leader>ak :ALEPrevious<cr>
