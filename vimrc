@@ -1,4 +1,3 @@
-
 " Show hybrid relative line numbers
 set relativenumber
 set number
