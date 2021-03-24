@@ -145,3 +145,4 @@ if [ -f '/home/leblancfg/google-cloud-sdk/completion.bash.inc' ]; then . '/home/
 # Load the rest of the aliases
 #
 source ~/.aliases
+source "$HOME/.cargo/env"
