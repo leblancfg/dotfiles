@@ -118,12 +118,6 @@ dfpull() {
 
 ## Etc
 alias shrug="echo '¯\\_(ツ)_/¯' | pbcopy"
-notify() {
-    INCANTATION="$@"
-    COMMAND=$( echo "$INCANTATION" | cut -d " " -f1 )
-
-    "$INCANTATION" && terminal-notifier -title "$COMMAND" -message hey -contentImage "~/src/github.com/ShopifyPeopleAnalytics/siphon/siphon/assets/siphon.png"
-}
 
 ## Installs
 [ -f /opt/dev/dev.sh ] && source /opt/dev/dev.sh
