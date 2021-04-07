@@ -247,10 +247,16 @@ let g:lightline = {
 " tmux+iterm2
 colorscheme peachpuff
 
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" MULTIPURPOSE TAB KEY
-" Indent if we're at the beginning of a line. Else, do completion.
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Refresh all panes
+fun! PullAndRefresh()
+  set noconfirm
+  bufdo e!
+  set confirm
+endfun
+
+nmap <leader>e call PullAndRefresh()
+
+" Multipurpose tab key
 function! InsertTabWrapper()
     let col = col('.') - 1
     if !col || getline('.')[col - 1] !~ '\k'
