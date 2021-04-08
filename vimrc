@@ -203,7 +203,7 @@ nmap <Leader>F :wa<CR>:Pytest session<CR>
 
 " ALE
 let g:ale_linters = {
-\   'python': ['pylint'],
+\   'python': ['flake8'],
 \}
 
 let g:ale_fixers = {
