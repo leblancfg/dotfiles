@@ -68,7 +68,7 @@ DISABLE_UPDATE_PROMPT="true"
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git)
+plugins=(git shrink-path)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -108,3 +108,4 @@ if [ -e /Users/leblancfg/.nix-profile/etc/profile.d/nix.sh ]; then . /Users/lebl
 
 # Poetry Python package management
 export PATH="$HOME/.poetry/bin:$PATH"
+

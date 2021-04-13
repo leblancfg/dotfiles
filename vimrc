@@ -137,7 +137,6 @@ Plug 'skywind3000/asyncrun.vim'
 Plug 'reedes/vim-pencil'
 Plug 'plasticboy/vim-markdown'
 Plug 'godlygeek/tabular'
-Plug 'reedes/vim-wordy'
 
 " Tim Pope extravaganza
 Plug 'tpope/vim-sensible'
@@ -152,7 +151,6 @@ Plug 'tpope/vim-fugitive'
 " Plug 'psf/black'
 "Plug 'davidhalter/jedi-vim'
 Plug 'dense-analysis/ale'
-Plug 'alfredodeza/pytest.vim'
 let g:ale_completion_enabled = 1
 let g:ale_completion_autoimport = 1
 
@@ -172,6 +170,7 @@ Plug 'roman/golden-ratio'
 Plug 'itchyny/lightline.vim'
 Plug 'majutsushi/tagbar'
 
+
 " Add plugins to &runtimepath
 call plug#end()
 
@@ -179,6 +178,9 @@ call plug#end()
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Plug-in specific configs
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+" Gitignore CtrlP
+let g:ctrlp_user_command = ['.git/', 'git --git-dir=%s/.git ls-files -oc --exclude-standard']
 
 " No folding for MD files
 let g:vim_markdown_folding_disabled = 1
@@ -194,17 +196,16 @@ autocmd FileType nerdtree setlocal relativenumber
 " Remove trailing whitespace
 nnoremap <F5> :let _s=@/<Bar>:%s/\s\+$//e<Bar>:let @/=_s<Bar><CR>
 
-" Autoformat Python with Black
-nnoremap <F6> :Black<CR>
-
 " Testing pytest.vim
 nmap <Leader>f :wa<CR>:Pytest file -m "not slow"<CR>
 nmap <Leader>F :wa<CR>:Pytest session<CR>
 
-" ALE
+""" ALE
 let g:ale_linters = {
 \   'python': ['flake8'],
 \}
+
+let g:ale_python_flake8_options = '--ignore W503,E501'
 
 let g:ale_fixers = {
 \   'python': ['black'],
@@ -247,14 +248,23 @@ let g:lightline = {
 " tmux+iterm2
 colorscheme peachpuff
 
+" But fix vimdiff
+if &diff
+  " colorscheme evening
+  highlight DiffAdd    cterm=bold ctermfg=3 ctermbg=8 gui=none guifg=bg guibg=Red
+  highlight DiffDelete cterm=bold ctermfg=3 ctermbg=8 gui=none guifg=bg guibg=Red
+  highlight DiffChange cterm=bold ctermfg=3 ctermbg=8 gui=none guifg=bg guibg=Red
+  highlight DiffText   cterm=bold ctermfg=3 ctermbg=4 gui=none guifg=bg guibg=Red
+endif
+
 " Refresh all panes
-fun! PullAndRefresh()
+function! PullAndRefresh()
   set noconfirm
   bufdo e!
   set confirm
 endfun
 
-nmap <leader>e call PullAndRefresh()
+map <leader>e :call PullAndRefresh()<CR>
 
 " Multipurpose tab key
 function! InsertTabWrapper()
