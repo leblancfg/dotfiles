@@ -114,7 +114,7 @@ notify() {
     INCANTATION="$@"
     COMMAND=$( echo "$INCANTATION" | cut -d " " -f1 )
 
-    "$INCANTATION" && terminal-notifier -title "$COMMAND" -message hey -contentImage "~/src/github.com/ShopifyPeopleAnalytics/siphon/siphon/assets/siphon.png"
+    "$INCANTATION" && terminal-notifier -title "$COMMAND" -message "Task complete"
 }
 
 ## Installs
