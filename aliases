@@ -62,12 +62,12 @@ alias gs="git status"
 alias gl="git log"
 alias gp="git pull"
 
-## Black
+## Run black on files in git staging
 function blacken () {
     git status --porcelain | cut -d ' ' -f3 | xargs black
 }
 
-## Pandoc
+## Pandoc - generate Bootstrap HTML
 function panstrap () {
 	DIR="$HOME/Templates"
 	if [ "$#" -eq 2 ]
