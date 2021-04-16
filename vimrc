@@ -61,20 +61,8 @@ nnoremap <leader><leader> <c-^>
 " Toggle Paste for Insert mode
 map <leader>p :set paste!<CR>
 
-" Map Ctrl-j & Ctrl-k to move lines around
-" nnoremap <C-j> :m .+1<CR>==
-" nnoremap <C-k> :m .-2<CR>==
-" inoremap <C-j> <Esc>:m .+1<CR>==gi
-" inoremap <C-k> <Esc>:m .-2<CR>==gi
-" vnoremap <C-j> :m '>+1<CR>gv=gv
-" vnoremap <C-k> :m '<-2<CR>gv=gv
-
 " Easier .vimrc refresh
 nmap <Leader><C-r> :so $MYVIMRC<CR>
-
-" TODO: probably just remove
-" Run tests from leader-space
-" nmap <Leader><Space> :w<CR> :!pytest -qq<CR>
 
 " Handy way to insert UTC timestamp
 nmap <Leader>d :r! date "+\%Y-\%m-\%d"<CR>
@@ -127,7 +115,7 @@ call plug#begin('~/.vim/plugged')
 " NERDtree - file explorer
 Plug 'scrooloose/nerdtree'
 
-" Make splits fullscreen and back
+" Make splits fullscreen and back with <ctrl>wo
 Plug 'itspriddle/ZoomWin'
 
 " AsyncRun - do stuff in the background
@@ -146,10 +134,6 @@ Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-fugitive'
 
 "" Python
-" vim-flake8 - Python static syntax, style check, and complexity measures.
-" Plug 'nvie/vim-flake8', { 'for': 'python' }
-" Plug 'psf/black'
-"Plug 'davidhalter/jedi-vim'
 Plug 'dense-analysis/ale'
 let g:ale_completion_enabled = 1
 let g:ale_completion_autoimport = 1
@@ -168,8 +152,6 @@ Plug 'roman/golden-ratio'
 
 " Auto CTags
 Plug 'itchyny/lightline.vim'
-Plug 'majutsushi/tagbar'
-
 
 " Add plugins to &runtimepath
 call plug#end()
@@ -179,7 +161,7 @@ call plug#end()
 " Plug-in specific configs
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-" Gitignore CtrlP
+" Gitignore CtrlP - loads faster
 let g:ctrlp_user_command = ['.git/', 'git --git-dir=%s/.git ls-files -oc --exclude-standard']
 
 " No folding for MD files
@@ -188,17 +170,9 @@ let g:vim_markdown_folding_disabled = 1
 " Open NERDTree with C-N
 map <C-n> :NERDTreeToggle<CR>
 
-" enable line numbers
+" Enable NERDline numbers
 let NERDTreeShowLineNumbers=1
-" make sure relative line numbers are used
 autocmd FileType nerdtree setlocal relativenumber
-
-" Remove trailing whitespace
-nnoremap <F5> :let _s=@/<Bar>:%s/\s\+$//e<Bar>:let @/=_s<Bar><CR>
-
-" Testing pytest.vim
-nmap <Leader>f :wa<CR>:Pytest file -m "not slow"<CR>
-nmap <Leader>F :wa<CR>:Pytest session<CR>
 
 """ ALE
 let g:ale_linters = {
@@ -213,10 +187,6 @@ let g:ale_fixers = {
 let g:ale_fix_on_save=1
 map <silent> <leader>aj :ALENext<cr>
 nmap <silent> <leader>ak :ALEPrevious<cr>
-
-" tagbar
-map <leader>t :TagbarToggle<CR>
-let g:tagbar_show_linenumbers=1
 
 "lightline
 set noshowmode
@@ -248,7 +218,7 @@ let g:lightline = {
 " tmux+iterm2
 colorscheme peachpuff
 
-" But fix vimdiff
+" Vimdiff colors are aweful
 if &diff
   " colorscheme evening
   highlight DiffAdd    cterm=bold ctermfg=3 ctermbg=8 gui=none guifg=bg guibg=Red
@@ -257,7 +227,7 @@ if &diff
   highlight DiffText   cterm=bold ctermfg=3 ctermbg=4 gui=none guifg=bg guibg=Red
 endif
 
-" Refresh all panes
+" Refresh all panes with <leader>e
 function! PullAndRefresh()
   set noconfirm
   bufdo e!
