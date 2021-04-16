@@ -25,9 +25,11 @@ As they're symlinks, changing your dotfiles from your home directory will in eff
     git commit -m 'updating dotfiles'
     git push origin master
 
-And conversely, to pull from the repo, run:
+Aliases to `dfpush`. And conversely, to pull from the repo, run:
     
     # Pull updates from dotfiles
     cd ~/dotfiles
     git pull --ff-only
     ./install -q
+
+aliased to `dfpull`.
