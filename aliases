@@ -1,15 +1,5 @@
 ## Unix
-# Find and replace on Python files
-function find_replace() {
-    # TODO: Find POSIX-compliant version. This is zsh-specific.
-    LC_ALL=C sed -i '' -- 's/"$1"/"$2"/g' **/*(D.)
-}
-
-function ss() {
-    grep -Irl "$1" --exclude-dir={env,dist,build} .
-}
-
-## Pytest
+## Pytest-watch
 function watch_tests() {
 	CATCH_WARNINGS=" no:warnings"
 	if [ "$(basename "$(git rev-parse --show-toplevel)")" = "siphon" ]
@@ -45,14 +35,14 @@ function install-jupyter-vim() {
 ## Git
 # Create a better gitignore
 alias get_gitignore="curl https://www.toptal.com/developers/gitignore/api/jupyternotebooks,python,macos,windows,linux,zsh > .gitignore"
-# Better checkout
 
+# Better checkout
 function gch() { git checkout "$(git branch | fzf | tr -d '[:space:]')" }
 
-# Add, commit, and push to master.
+# Add & commit
 function gitc () { git add --all && git commit -m "$@" ; }
 
-# Add, commit, and push to master.
+# Push to master
 function gitp () { git push origin $(git branch --show-current) $@; }
 
 # Git squash last n commits
@@ -69,6 +59,8 @@ alias giti="git rm -r --cached . && git add . && git commit -m 're-applied .giti
 
 # I must type this 100 times a day; shorten it
 alias gs="git status"
+alias gl="git log"
+alias gp="git pull"
 
 ## Black
 function blacken () {
