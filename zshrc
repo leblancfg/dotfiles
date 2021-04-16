@@ -73,6 +73,12 @@ source ~/.aliases
 [ -f /opt/dev/dev.sh ] && source /opt/dev/dev.sh
 if [ -e /Users/leblancfg/.nix-profile/etc/profile.d/nix.sh ]; then . /Users/leblancfg/.nix-profile/etc/profile.d/nix.sh; fi # added by Nix installer
 
-# Poetry Python package management
-export PATH="$HOME/.poetry/bin:$PATH"
+## Installs
+[ -f /opt/dev/dev.sh ] && source /opt/dev/dev.sh
+
+### The next line updates PATH for the Google Cloud SDK.
+if [ -f '/Users/leblancfg/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/leblancfg/google-cloud-sdk/path.zsh.inc'; fi
+# The next line enables shell command completion for gcloud.
+if [ -f '/Users/leblancfg/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/leblancfg/google-cloud-sdk/completion.zsh.inc'; fi
+eval "$(pyenv virtualenv-init -)"
 
