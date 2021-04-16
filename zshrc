@@ -82,3 +82,6 @@ if [ -f '/Users/leblancfg/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/lebla
 if [ -f '/Users/leblancfg/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/leblancfg/google-cloud-sdk/completion.zsh.inc'; fi
 eval "$(pyenv virtualenv-init -)"
 
+# Oh and screw MacOS sed
+export PATH="/usr/local/opt/gnu-sed/libexec/gnubin:$PATH"
+

@@ -147,10 +147,13 @@ Plug 'ryanoasis/vim-devicons'
 " vim-tmux-navigator
 Plug 'christoomey/vim-tmux-navigator'
 
+" Pair parens, etc.
+Plug 'jiangmiao/auto-pairs'
+
 " Auto resize the panes based on pointer
 Plug 'roman/golden-ratio'
 
-" Auto CTags
+" Better tabs 
 Plug 'itchyny/lightline.vim'
 
 " Add plugins to &runtimepath
