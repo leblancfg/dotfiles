@@ -85,3 +85,4 @@ eval "$(pyenv virtualenv-init -)"
 # Oh and screw MacOS sed
 export PATH="/usr/local/opt/gnu-sed/libexec/gnubin:$PATH"
 
+autoload -U compinit; compinit

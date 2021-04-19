@@ -91,7 +91,7 @@ let g:metadataBlock="---\n
 map <Leader>m ggm`O<ESC> :put =metadataBlock<CR> ggd2djfI
 
 " New checkmarked line
-nmap <leader>c o* [ ]<Esc><<A
+nmap <leader>c o* [ ] <Esc><<A
 
 " Force reload all windows (e.g. on changing git branches)
 nmap <leader>b :silent! windo! e<CR>

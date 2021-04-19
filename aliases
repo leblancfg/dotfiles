@@ -114,7 +114,7 @@ notify() {
     INCANTATION="$@"
     COMMAND=$( echo "$INCANTATION" | cut -d " " -f1 )
 
-    "$INCANTATION" && terminal-notifier -title "$COMMAND" -message "Task complete"
+    "$INCANTATION" && terminal-notifier -title "$COMMAND" -message "Task complete" -contentImage "https://cdn4.iconfinder.com/data/icons/logos-brands-5/24/shopify-128.png"
 }
 #
 # Poetry Python package management
