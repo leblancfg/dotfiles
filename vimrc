@@ -80,7 +80,7 @@ nmap <leader>x 0f[lsX<Esc>
 
 " Markdown to PDF and launch
 " TODO: probably broken
-" map <Leader>z :w<CR> :AsyncRun pandoc % -o %:r.pdf --toc --highlight-style zenburn --variable urlcolor=cyan && start %:r.pdf<CR>
+map <Leader>z :w<CR> :AsyncRun pandoc % -o %:r.pdf --toc --highlight-style zenburn --variable urlcolor=cyan && open %:r.pdf<CR>
 
 " Pandoc metadata block header
 let g:metadataBlock="---\n
@@ -186,6 +186,7 @@ let g:ale_python_flake8_options = '--ignore W503,E501'
 
 let g:ale_fixers = {
 \   'python': ['black'],
+\   'yaml': ['yamlfix'],
 \}
 let g:ale_fix_on_save=1
 map <silent> <leader>aj :ALENext<cr>
