@@ -109,7 +109,8 @@ dfpull() {
 }
 
 ## Etc
-# Add scripts to PATH
+# Install dependencies
+pip install --user wheel pandas clipboard
 
 # More user stuff
 alias shrug="echo '¯\\_(ツ)_/¯' | pbcopy"
@@ -120,7 +121,7 @@ notify() {
     "$INCANTATION" && terminal-notifier -title "$COMMAND" -message "Task complete" -contentImage "https://cdn4.iconfinder.com/data/icons/logos-brands-5/24/shopify-128.png"
 }
 alias clip='python $HOME/dotfiles/scripts/clipboard_md.py'
-#
+
 # Poetry Python package management
 export PATH="$HOME/.poetry/bin:$PATH"
 
