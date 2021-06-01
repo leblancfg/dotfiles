@@ -5,14 +5,14 @@ import pandas as pd
 
 
 def tsv_clipboard():
-    # try:
-    df = pd.read_clipboard()
-    text = df.to_markdown(index=False)
-    clipboard.copy(text)
-    return text
-    # except:  # noqa
-    #     print('😞 No dice. Make sure your clipboard contains readable data.')
-    #     sys.exit(1)
+    try:
+        df = pd.read_clipboard()
+        text = df.to_markdown(index=False)
+        clipboard.copy(text)
+        return text
+    except:  # noqa
+        print('😞 No dice. Make sure your clipboard contains readable data.')
+        sys.exit(1)
 
 
 if __name__ == '__main__':
