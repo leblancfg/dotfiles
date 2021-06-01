@@ -110,7 +110,7 @@ dfpull() {
 
 ## Etc
 # Install dependencies
-pip install --user wheel pandas clipboard
+pip install --user wheel pandas clipboard tabulate
 
 # More user stuff
 alias shrug="echo '¯\\_(ツ)_/¯' | pbcopy"
