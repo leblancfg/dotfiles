@@ -114,6 +114,11 @@ call plug#begin('~/.vim/plugged')
 
 " NERDtree - file explorer
 Plug 'scrooloose/nerdtree'
+" Finder
+Plug 'kien/ctrlp.vim'
+" FZF
+Plug 'junegunn/fzf', { 'do': { -> fzf#install()  }  }
+Plug 'junegunn/fzf.vim'
 
 " Make splits fullscreen and back with <ctrl>wo
 Plug 'itspriddle/ZoomWin'
@@ -137,9 +142,6 @@ Plug 'tpope/vim-fugitive'
 Plug 'dense-analysis/ale'
 let g:ale_completion_enabled = 1
 let g:ale_completion_autoimport = 1
-
-" Finder
-Plug 'kien/ctrlp.vim'
 
 " Fancy glyphs
 Plug 'ryanoasis/vim-devicons'
@@ -170,8 +172,11 @@ let g:ctrlp_user_command = ['.git/', 'git --git-dir=%s/.git ls-files -oc --exclu
 " No folding for MD files
 let g:vim_markdown_folding_disabled = 1
 
-" Open NERDTree with C-N
+" Open NERDTree with Ctrl-N
 map <C-n> :NERDTreeToggle<CR>
+
+" Open FZF-RG with Ctrl-F
+map <C-f> :Rg<CR>
 
 " Enable NERDline numbers
 let NERDTreeShowLineNumbers=1
