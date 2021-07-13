@@ -115,7 +115,7 @@ call plug#begin('~/.vim/plugged')
 " NERDtree - file explorer
 Plug 'scrooloose/nerdtree'
 " Finder
-Plug 'kien/ctrlp.vim'
+" Plug 'kien/ctrlp.vim'
 " FZF
 Plug 'junegunn/fzf', { 'do': { -> fzf#install()  }  }
 Plug 'junegunn/fzf.vim'
@@ -167,16 +167,16 @@ call plug#end()
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 " Gitignore CtrlP - loads faster
-let g:ctrlp_user_command = ['.git/', 'git --git-dir=%s/.git ls-files -oc --exclude-standard']
-
+" let g:ctrlp_user_command = ['.git/', 'git --git-dir=%s/.git ls-files -oc --exclude-standard']
 " No folding for MD files
 let g:vim_markdown_folding_disabled = 1
 
 " Open NERDTree with Ctrl-N
 map <C-n> :NERDTreeToggle<CR>
 
-" Open FZF-RG with Ctrl-F
+" Open FZF
 map <C-f> :Rg<CR>
+map <C-p> :GitFiles<CR>
 
 " Enable NERDline numbers
 let NERDTreeShowLineNumbers=1
@@ -190,9 +190,9 @@ let g:ale_linters = {
 let g:ale_python_flake8_options = '--ignore W503,E501'
 
 let g:ale_fixers = {
-\   'python': ['black'],
 \   'yaml': ['yamlfix'],
 \}
+" \   'python': ['black'],
 let g:ale_fix_on_save=1
 map <silent> <leader>aj :ALENext<cr>
 nmap <silent> <leader>ak :ALEPrevious<cr>
