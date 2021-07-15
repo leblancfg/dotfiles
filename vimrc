@@ -186,14 +186,16 @@ autocmd FileType nerdtree setlocal relativenumber
 let g:ale_linters = {
 \   'python': ['flake8'],
 \}
-
 let g:ale_python_flake8_options = '--ignore W503,E501'
 
 let g:ale_fixers = {
 \   'yaml': ['yamlfix'],
+\   'python': ['black'],
+\   'sql': ['pgformatter'],
 \}
-" \   'python': ['black'],
+let b:ale_sql_pgformatter_options = '--function-case 1 --keyword-case 2 --spaces 2 --no-extra-line'
 let g:ale_fix_on_save=1
+
 map <silent> <leader>aj :ALENext<cr>
 nmap <silent> <leader>ak :ALEPrevious<cr>
 
