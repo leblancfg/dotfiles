@@ -92,6 +92,10 @@ alias analysis="cd ~/src/github.com/ShopifyPeopleAnalytics/analysis"
 pg_pw() {
     cat $HOME/src/github.com/ShopifyPeopleAnalytics/siphon/config/sources.production.json | jq -r '.read_database' | cut -f3-3 -d":" | cut -f1 -d"@" | tr -d '[:space:]' | pbcopy
 }
+db () {
+    pg_pw
+    gcloud beta sql connect people-analytics --user=postgres --database=hr
+}
 
 ## Dotfiles
 # Update dotfiles
