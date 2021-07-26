@@ -87,3 +87,5 @@ export PATH="/usr/local/opt/gnu-sed/libexec/gnubin:$PATH"
 
 # Autocomplete
 # autoload -U compinit; compinit
+
+[[ -f /opt/dev/sh/chruby/chruby.sh ]] && type chruby >/dev/null 2>&1 || chruby () { source /opt/dev/sh/chruby/chruby.sh; chruby "$@"; }

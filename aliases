@@ -1,4 +1,4 @@
-## Unix
+# Unix
 ## Pytest-watch
 function watch_tests() {
 	CATCH_WARNINGS=" no:warnings"
@@ -38,6 +38,9 @@ alias get_gitignore="curl https://www.toptal.com/developers/gitignore/api/jupyte
 
 # Better checkout
 function gch() { git checkout "$(git branch | fzf | tr -d '[:space:]')" }
+
+# Amend commit
+function gca() {git add . && git commit --amend --no-edit}
 
 # Add & commit
 function gitc () { git add --all && git commit -m "$@" ; }
