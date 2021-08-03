@@ -63,12 +63,6 @@ if [[ -r "$(brew --prefix)/opt/mcfly/mcfly.zsh" ]]; then
       source "$(brew --prefix)/opt/mcfly/mcfly.zsh"
 fi
 
-# Set personal aliases, overriding those provided by oh-my-zsh libs, plugins,
-# and themes. Aliases can be placed here, though oh-my-zsh users are encouraged
-# to define aliases within the ZSH_CUSTOM folder.  For a full list of active
-# aliases, run `alias`.
-source ~/.aliases
-
 # Nix installer
 [ -f /opt/dev/dev.sh ] && source /opt/dev/dev.sh
 if [ -e /Users/leblancfg/.nix-profile/etc/profile.d/nix.sh ]; then . /Users/leblancfg/.nix-profile/etc/profile.d/nix.sh; fi # added by Nix installer
@@ -89,3 +83,10 @@ export PATH="/usr/local/opt/gnu-sed/libexec/gnubin:$PATH"
 # autoload -U compinit; compinit
 
 [[ -f /opt/dev/sh/chruby/chruby.sh ]] && type chruby >/dev/null 2>&1 || chruby () { source /opt/dev/sh/chruby/chruby.sh; chruby "$@"; }
+#
+# Set personal aliases, overriding those provided by oh-my-zsh libs, plugins,
+# and themes. Aliases can be placed here, though oh-my-zsh users are encouraged
+# to define aliases within the ZSH_CUSTOM folder.  For a full list of active
+# aliases, run `alias`.
+source ~/.aliases
+
