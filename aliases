@@ -99,6 +99,7 @@ db () {
     pg_pw
     gcloud beta sql connect people-analytics --user=postgres --database=hr
 }
+alias bullet='pbpaste | sed "s/^.\{6\}//g" | pbcopy'
 
 ## Dotfiles
 # Update dotfiles
@@ -131,6 +132,19 @@ notify() {
     "$INCANTATION" && terminal-notifier -title "$COMMAND" -message "Task complete" -contentImage "https://cdn4.iconfinder.com/data/icons/logos-brands-5/24/shopify-128.png"
 }
 alias clip='python $HOME/dotfiles/scripts/clipboard_md.py'
+
+syn() {
+    WORD="$1"
+    python $HOME/dotfiles/scripts/dict.py syn "$WORD"
+}
+def() {
+    WORD="$1"
+    python $HOME/dotfiles/scripts/dict.py def "$WORD"
+}
+ant() {
+    WORD="$1"
+    python $HOME/dotfiles/scripts/dict.py ant "$WORD"
+}
 
 # Poetry Python package management
 export PATH="$HOME/.poetry/bin:$PATH"

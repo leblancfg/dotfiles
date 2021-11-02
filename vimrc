@@ -6,12 +6,12 @@ set number
 set encoding=UTF-8
 
 " Mouse
-set mouse=a
-if has("mouse_sgr")
-    set ttymouse=sgr
-else
-    set ttymouse=xterm2
-end
+" set mouse=a
+" if has("mouse_sgr")
+"     set ttymouse=sgr
+" else
+"     set ttymouse=xterm2
+" end
 
 " Feiltypes?
 filetype on
@@ -80,7 +80,7 @@ nmap <leader>x 0f[lsX<Esc>
 
 " Markdown to PDF and launch
 " TODO: probably broken
-map <Leader>z :w<CR> :AsyncRun pandoc % -o %:r.pdf --toc --highlight-style zenburn --variable urlcolor=cyan && open %:r.pdf<CR>
+map <Leader>z :w<CR> :AsyncRun pandoc % -o %:r.pdf --highlight-style zenburn --variable urlcolor=cyan && open %:r.pdf<CR>
 
 " Pandoc metadata block header
 let g:metadataBlock="---\n
@@ -137,6 +137,7 @@ Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-fugitive'
+Plug 'github/copilot.vim'
 
 "" Python
 Plug 'dense-analysis/ale'
@@ -150,10 +151,13 @@ Plug 'ryanoasis/vim-devicons'
 Plug 'christoomey/vim-tmux-navigator'
 
 " Pair parens, etc.
-Plug 'jiangmiao/auto-pairs'
+" Plug 'jiangmiao/auto-pairs'
 
 " Auto resize the panes based on pointer
 Plug 'roman/golden-ratio'
+
+" Replace with register
+Plug 'vim-scripts/ReplaceWithRegister'
 
 " Better tabs 
 Plug 'itchyny/lightline.vim'
@@ -191,9 +195,9 @@ let g:ale_python_flake8_options = '--ignore W503,E501'
 let g:ale_fixers = {
 \   'yaml': ['yamlfix'],
 \   'python': ['black'],
+\   'sql': ['pgformatter'],
 \}
-" \   'sql': ['pgformatter'],
-" let b:ale_sql_pgformatter_options = '--function-case 2 --keyword-case 2 --spaces 2 --no-extra-line'
+let b:ale_sql_pgformatter_options = '--function-case 2 --keyword-case 2 --spaces 2 --no-extra-line'
 let g:ale_fix_on_save=1
 
 map <silent> <leader>aj :ALENext<cr>

@@ -90,3 +90,5 @@ export PATH="/usr/local/opt/gnu-sed/libexec/gnubin:$PATH"
 # aliases, run `alias`.
 source ~/.aliases
 
+
+[[ -x /usr/local/bin/brew ]] && eval $(/usr/local/bin/brew shellenv)
