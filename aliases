@@ -100,7 +100,7 @@ pg_pw() {
 }
 db () {
     pg_pw
-    gcloud beta sql connect people-analytics --user=postgres --database=hr
+    gcloud sql connect people-analytics --user=postgres --database=hr
 }
 alias bullet='pbpaste | sed "s/^.\{6\}//g" | pbcopy'
 
