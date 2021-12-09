@@ -1,3 +1,6 @@
+" No search highlight
+set nohls
+
 " Show hybrid relative line numbers
 set relativenumber
 set number
@@ -197,8 +200,8 @@ let g:ale_python_flake8_options = '--ignore W503,E501'
 let g:ale_fixers = {
 \   'yaml': ['yamlfix'],
 \   'sql': ['pgformatter'],
+\   'python': ['black'],
 \}
-" \   'python': ['black'],
 let b:ale_sql_pgformatter_options = '--function-case 2 --keyword-case 2 --spaces 2 --no-extra-line'
 " let g:ale_fix_on_save=1
 

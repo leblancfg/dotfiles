@@ -1,3 +1,9 @@
 
 # 2021-11-05 08:29:09.242720
 +\q
+
+# 2021-12-09 14:14:28.938759
++SELECT manager_email_hierarchy FROM hr.dim_worker_identifiers LIMIT 5;
+
+# 2021-12-09 14:15:13.929561
++\q

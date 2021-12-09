@@ -149,6 +149,10 @@ ant() {
     python $HOME/dotfiles/scripts/dict.py ant "$WORD"
 }
 
+tomato() {
+    termdown 25m -T "🍅" --no-figlet && say "ding"
+}
+
 # Poetry Python package management
 export PATH="$HOME/.poetry/bin:$PATH"
 
