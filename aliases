@@ -15,7 +15,10 @@ alias install-watch='pip install pytest-watch pytest-testmon'
 alias jn="cd && jupyter notebook &> /dev/null &"
 alias jnk='ps -ax | grep "jupyter-notebook" | awk "{print \$1}" | xargs kill'
 
-### Install `jupyter-vim-binding`
+### Vim everywhere
+# But actually, neovim
+alias vi=nvim
+alias vim=nvim
 function install-jupyter-vim() {
     if [ command -v jupyter --version ]
         then
