@@ -135,7 +135,7 @@ Plug 'skywind3000/asyncrun.vim'
 Plug 'reedes/vim-pencil'
 Plug 'plasticboy/vim-markdown'
 Plug 'godlygeek/tabular'
-
+ 
 " Tim Pope extravaganza
 Plug 'tpope/vim-sensible'
 Plug 'tpope/vim-repeat'
