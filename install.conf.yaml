@@ -27,6 +27,8 @@
       path: zshrc
     ~/.config/pgcli:
       path: config/pgcli
+    ~/.config/nvim:
+      path: config/nvim
 
 - shell:
     - [git submodule update --init --recursive, Installing submodules]
