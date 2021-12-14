@@ -6,6 +6,10 @@
 
 - clean: ['~']
 
+- create:
+    - ~/.config/pgcli
+    - ~/.config/nvim
+
 - link:
     ~/.aliases:
       path: aliases
@@ -29,10 +33,6 @@
       path: pgcli/config
     ~/.config/nvim/init.vim:
       path: init.vim
-
-- create:
-  - ~/.config/pgcli
-  - ~/.config/nvim
 
 - shell:
     - [git submodule update --init --recursive, Installing submodules]
