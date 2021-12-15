@@ -148,6 +148,8 @@ Plug 'github/copilot.vim'
 Plug 'dense-analysis/ale'
 let g:ale_completion_enabled = 1
 let g:ale_completion_autoimport = 1
+Plug 'AndrewRadev/splitjoin.vim'
+let g:splitjoin_python_brackets_on_separate_lines = 1
 
 " Fancy glyphs
 Plug 'ryanoasis/vim-devicons'

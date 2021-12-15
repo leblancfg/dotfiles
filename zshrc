@@ -74,10 +74,17 @@ if [ -e /Users/leblancfg/.nix-profile/etc/profile.d/nix.sh ]; then . /Users/lebl
 if [ -f '/Users/leblancfg/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/leblancfg/google-cloud-sdk/path.zsh.inc'; fi
 # The next line enables shell command completion for gcloud.
 if [ -f '/Users/leblancfg/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/leblancfg/google-cloud-sdk/completion.zsh.inc'; fi
-eval "$(pyenv virtualenv-init -)"
 
 # Oh and screw MacOS sed
 export PATH="/usr/local/opt/gnu-sed/libexec/gnubin:$PATH"
+
+# Use that brew stuff
+[[ -x /usr/local/bin/brew ]] && eval $(/usr/local/bin/brew shellenv)
+[[ -x /opt/homebrew/bin/brew ]] && eval $(/opt/homebrew/bin/brew shellenv)
+
+# And make sure pyenv takes over system python
+eval "$(pyenv init -)"
+eval "$(pyenv virtualenv-init -)"
 
 # Autocomplete
 # autoload -U compinit; compinit
@@ -89,8 +96,3 @@ export PATH="/usr/local/opt/gnu-sed/libexec/gnubin:$PATH"
 # to define aliases within the ZSH_CUSTOM folder.  For a full list of active
 # aliases, run `alias`.
 source ~/.aliases
-
-
-[[ -x /usr/local/bin/brew ]] && eval $(/usr/local/bin/brew shellenv)
-
-[[ -x /opt/homebrew/bin/brew ]] && eval $(/opt/homebrew/bin/brew shellenv)
