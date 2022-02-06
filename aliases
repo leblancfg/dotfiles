@@ -158,4 +158,4 @@ tomato() {
 
 # Poetry Python package management
 export PATH="$HOME/.poetry/bin:$PATH"
-
+eval "$(pyenv init -)"
