@@ -83,6 +83,7 @@ export PATH="/usr/local/opt/gnu-sed/libexec/gnubin:$PATH"
 [[ -x /opt/homebrew/bin/brew ]] && eval $(/opt/homebrew/bin/brew shellenv)
 
 # And make sure pyenv takes over system python
+export PATH="$(pyenv root)/shims:$PATH"
 eval "$(pyenv init -)"
 eval "$(pyenv virtualenv-init -)"
 

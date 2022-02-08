@@ -71,6 +71,9 @@ alias gs="git status"
 alias gl="git log"
 alias gp="git pull"
 
+# Auto-merge branch when checks pass
+alias merge="gh pr merge --squash --auto $(git rev-parse --abbrev-ref HEAD)"
+
 ## Run black on files in git staging
 function blacken () {
     git status --porcelain | cut -d ' ' -f3 | xargs black
