@@ -2,12 +2,12 @@
 ## Pytest-watch
 function watch_tests() {
 	CATCH_WARNINGS=" no:warnings"
-	if [ "$(basename "$(git rev-parse --show-toplevel)")" = "siphon" ]
-	then
-		CATCH_WARNINGS=""
-	fi
-	export PYTHON_ENV="test"
-	rm -f .testmondata && ptw --runner "pytest --testmon -s -p$CATCH_WARNINGS tests"
+    REPO="$(basename "$(git rev-parse --show-toplevel)")"
+	if [[ $REPO =~ ^(siphon|surfvey)$ ]];
+        then
+            CATCH_WARNINGS=""
+    fi
+	PYTHON_ENV="test" rm -f .testmondata && ptw --runner "pytest --testmon -s -p$CATCH_WARNINGS tests"
 }
 alias install-watch='pip install pytest-watch pytest-testmon'
 
@@ -133,7 +133,11 @@ dfpull() {
 alias install-pip="pip install --user wheel pandas clipboard tabulate"
 
 # More user stuff
+export PATH="$HOME/.poetry/bin:$PATH"
+eval "$(pyenv init -)"
+export EDITOR="nvim"
 alias shrug="echo '¯\\_(ツ)_/¯' | pbcopy"
+
 notify() {
     INCANTATION="$@"
     COMMAND=$( echo "$INCANTATION" | cut -d " " -f1 )
@@ -159,6 +163,3 @@ tomato() {
     termdown 25m -T "🍅" --no-figlet && say "ding"
 }
 
-# Poetry Python package management
-export PATH="$HOME/.poetry/bin:$PATH"
-eval "$(pyenv init -)"
