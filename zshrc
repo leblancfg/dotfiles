@@ -58,11 +58,6 @@ source $ZSH/oh-my-zsh.sh
 
 ### User configuration
 
-# Hook up smarter Ctrl-R
-if [[ -r "$(brew --prefix)/opt/mcfly/mcfly.zsh" ]]; then
-      source "$(brew --prefix)/opt/mcfly/mcfly.zsh"
-fi
-
 # Nix installer
 [ -f /opt/dev/dev.sh ] && source /opt/dev/dev.sh
 if [ -e /Users/leblancfg/.nix-profile/etc/profile.d/nix.sh ]; then . /Users/leblancfg/.nix-profile/etc/profile.d/nix.sh; fi # added by Nix installer

@@ -101,10 +101,10 @@ function panstrap () {
 alias si="cd ~/src/github.com/ShopifyPeopleAnalytics/siphon"
 alias ia="cd ~/src/github.com/ShopifyPeopleAnalytics/impulse-api"
 alias analysis="cd ~/src/github.com/ShopifyPeopleAnalytics/analysis"
-pg_pw() {
+function pg_pw() {
     cat $HOME/src/github.com/ShopifyPeopleAnalytics/siphon/config/sources.production.json | jq -r '.read_database' | cut -f3-3 -d":" | cut -f1 -d"@" | tr -d '[:space:]' | pbcopy
 }
-db () {
+function db () {
     pg_pw
     gcloud sql connect people-analytics --user=postgres --database=hr
 }
@@ -112,7 +112,7 @@ alias bullet='pbpaste | sed "s/^.\{6\}//g" | pbcopy'
 
 ## Dotfiles
 # Update dotfiles
-dfpush() {
+function dfpush() {
     (
     cd ~/dotfiles
 	git add .
@@ -120,7 +120,7 @@ dfpush() {
 	git push origin master
     )
 }
-dfpull() {
+function dfpull() {
     (
     cd ~/dotfiles
 	git pull --ff-only
@@ -138,7 +138,7 @@ eval "$(pyenv init -)"
 export EDITOR="nvim"
 alias shrug="echo '¯\\_(ツ)_/¯' | pbcopy"
 
-notify() {
+function notify() {
     INCANTATION="$@"
     COMMAND=$( echo "$INCANTATION" | cut -d " " -f1 )
 
@@ -146,20 +146,19 @@ notify() {
 }
 alias clip='python $HOME/dotfiles/scripts/clipboard_md.py'
 
-syn() {
+function syn() {
     WORD="$1"
     python $HOME/dotfiles/scripts/dict.py syn "$WORD"
 }
-def() {
+function def() {
     WORD="$1"
     python $HOME/dotfiles/scripts/dict.py def "$WORD"
 }
-ant() {
+function ant() {
     WORD="$1"
     python $HOME/dotfiles/scripts/dict.py ant "$WORD"
 }
 
-tomato() {
+function tomato() {
     termdown 25m -T "🍅" --no-figlet && say "ding"
 }
-
