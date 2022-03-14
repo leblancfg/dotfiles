@@ -53,7 +53,7 @@ function gitc () { git add --all && git commit -m "$@" ; }
 function gitp () { git push origin $(git branch --show-current) $@; }
 
 # Back to master and pull
-function gmp () { git checkout master && git pull origin master; }
+function gmp () { git checkout master && git fetch && git pull origin master; }
 
 # Git squash last n commits
 function gits () {
