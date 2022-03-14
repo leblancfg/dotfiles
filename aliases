@@ -1,4 +1,5 @@
-# Unix
+# Python
+export PIP_REQUIRE_VIRTUALENV=true
 ## Pytest-watch
 function watch_tests() {
 	CATCH_WARNINGS=" no:warnings"
@@ -62,7 +63,7 @@ function gits () {
     }
 
 # git recursively pull all subdirectories
-alias gitr="find . -name ".git" -type d | sed 's/\/.git//' |  xargs -P10 -I{} git -C {} pull"
+alias gitr="find . -name '.git' -type d | sed 's/\/.git//' |  xargs -P10 -I{} git -C {} pull"
 # Re-apply gitignore
 alias giti="git rm -r --cached . && git add . && git commit -m 're-applied .gitignore'"
 
