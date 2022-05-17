@@ -146,6 +146,7 @@ Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-abolish'
+Plug 'tpope/vim-fugitive'
 Plug 'github/copilot.vim'
 let g:copilot_filetypes = {
             \ 'markdown': ['markdown', 'gfm', 'md', 'mkd', 'mkdn', 'mdwn', 'mdown', 'mdtxt', 'mdtext', 'mdx', 'mk', 'ron', 'textile', 'txt'],
@@ -175,6 +176,9 @@ Plug 'vim-scripts/ReplaceWithRegister'
 
 " Better tabs 
 Plug 'itchyny/lightline.vim'
+
+" Better TODOs
+Plug 'dewyze/vim-tada'
 
 " Add plugins to &runtimepath
 call plug#end()
