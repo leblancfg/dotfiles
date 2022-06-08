@@ -2,13 +2,13 @@
 export PIP_REQUIRE_VIRTUALENV=true
 ## Pytest-watch
 function watch_tests() {
-	CATCH_WARNINGS=" no:warnings"
+	CATCH_WARNINGS="-p no:warnings"
     REPO="$(basename "$(git rev-parse --show-toplevel)")"
 	if [[ $REPO =~ ^(siphon|surfvey)$ ]];
         then
             CATCH_WARNINGS=""
     fi
-	PYTHON_ENV="test" rm -f .testmondata && ptw --runner "pytest --testmon -s -p$CATCH_WARNINGS tests"
+	PYTHON_ENV="test" rm -f .testmondata && ptw --runner "pytest --testmon -s $CATCH_WARNINGS tests"
 }
 alias install-watch='pip install pytest-watch pytest-testmon'
 
