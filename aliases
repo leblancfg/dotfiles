@@ -8,7 +8,7 @@ function watch_tests() {
         then
             CATCH_WARNINGS=""
     fi
-	PYTHON_ENV="test" rm -f .testmondata && ptw --runner "pytest --testmon -s $CATCH_WARNINGS tests"
+	PYTHON_ENV=test rm -f .testmondata && ptw --runner "pytest --testmon -s $CATCH_WARNINGS tests"
 }
 alias install-watch='pip install pytest-watch pytest-testmon'
 
