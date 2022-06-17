@@ -53,7 +53,10 @@ function gitc () { git add --all && git commit -m "$@" ; }
 function gitp () { git push origin $(git branch --show-current) $@; }
 
 # Back to master and pull
-function gmp () { git checkout master && git fetch && git pull origin master; }
+function gmp () {
+    MAIN_BRANCH=$(git symbolic-ref refs/remotes/origin/HEAD | xargs basename)
+    git checkout $MAIN_BRANCH && git fetch && git pull origin $MAIN_BRANCH;
+    }
 
 # Git squash last n commits
 function gits () {
