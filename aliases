@@ -86,6 +86,7 @@ function blacken () {
 ## Pandoc - generate Bootstrap HTML
 function panstrap () {
 	DIR="$HOME/Templates"
+    # If there's a second argument, use that as the output filename
 	if [ "$#" -eq 2 ]
         then
             pandoc "$1" -o "$2" --template $DIR/template.html --css $DIR/template.css --self-contained --toc --toc-depth 3 --quiet

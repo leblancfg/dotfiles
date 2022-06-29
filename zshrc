@@ -1,4 +1,4 @@
-# If you come from bash you might have to change your $PATH.
+## If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
 # Path to your oh-my-zsh installation.
@@ -27,7 +27,7 @@ HYPHEN_INSENSITIVE="true"
 # DISABLE_AUTO_UPDATE="true"
 
 # Uncomment the following line to automatically update without prompting.
-DISABLE_UPDATE_PROMPT="true"
+# DISABLE_UPDATE_PROMPT="true"
 
 # Uncomment the following line to change how often to auto-update (in days).
 # export UPDATE_ZSH_DAYS=13
@@ -65,7 +65,7 @@ if [ -e /Users/leblancfg/.nix-profile/etc/profile.d/nix.sh ]; then . /Users/lebl
 ## Installs
 [ -f /opt/dev/dev.sh ] && source /opt/dev/dev.sh
 
-### The next line updates PATH for the Google Cloud SDK.
+# The next line updates PATH for the Google Cloud SDK.
 if [ -f '/Users/leblancfg/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/leblancfg/google-cloud-sdk/path.zsh.inc'; fi
 # The next line enables shell command completion for gcloud.
 if [ -f '/Users/leblancfg/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/leblancfg/google-cloud-sdk/completion.zsh.inc'; fi
@@ -86,7 +86,7 @@ eval "$(pyenv virtualenv-init -)"
 # autoload -U compinit; compinit
 
 [[ -f /opt/dev/sh/chruby/chruby.sh ]] && type chruby >/dev/null 2>&1 || chruby () { source /opt/dev/sh/chruby/chruby.sh; chruby "$@"; }
-#
+
 # Set personal aliases, overriding those provided by oh-my-zsh libs, plugins,
 # and themes. Aliases can be placed here, though oh-my-zsh users are encouraged
 # to define aliases within the ZSH_CUSTOM folder.  For a full list of active
