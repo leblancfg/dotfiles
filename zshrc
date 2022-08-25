@@ -82,6 +82,18 @@ export PATH="$(pyenv root)/shims:$PATH"
 eval "$(pyenv init -)"
 eval "$(pyenv virtualenv-init -)"
 
+# Always do these steps when opening up interactive Python shells
+if [ -f $PYTHONSTARTUP ]; then
+   export PYTHONSTARTUP
+else
+   PYTHONSTARTUP="$HOME/.ipython/profile_default/startup/pyrc.py"
+   if [ -f $PYTHONSTARTUP ]; then
+      export PYTHONSTARTUP
+   else
+      echo "Not able to set PYTHONSTARTUP"
+   fi
+fi
+
 # Autocomplete
 # autoload -U compinit; compinit
 

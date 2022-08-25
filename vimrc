@@ -122,7 +122,8 @@ endif
 call plug#begin('~/.vim/plugged')
 
 " NERDtree - file explorer
-Plug 'scrooloose/nerdtree'
+Plug 'preservim/nerdtree'
+Plug 'PhilRunninger/nerdtree-visual-selection'
 " Finder
 " Plug 'kien/ctrlp.vim'
 " FZF
@@ -193,16 +194,15 @@ call plug#end()
 " No folding for MD files
 let g:vim_markdown_folding_disabled = 1
 
-" Open NERDTree with Ctrl-N
+" NERDTree
 map <C-n> :NERDTreeToggle<CR>
+let NERDTreeShowLineNumbers=1
+autocmd FileType nerdtree setlocal relativenumber
+let g:nerdtree_vis_confirm_open = 0
 
 " Open FZF
 map <C-f> :Rg<CR>
 map <C-p> :GitFiles<CR>
-
-" Enable NERDline numbers
-let NERDTreeShowLineNumbers=1
-autocmd FileType nerdtree setlocal relativenumber
 
 """ ALE
 let g:ale_linters = {
