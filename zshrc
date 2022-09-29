@@ -52,7 +52,7 @@ HYPHEN_INSENSITIVE="true"
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(ripgrep)
+plugins=(git ripgrep)
 
 source $ZSH/oh-my-zsh.sh
 

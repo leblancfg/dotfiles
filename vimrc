@@ -66,6 +66,9 @@ nnoremap <leader><leader> <c-^>
 " Toggle Paste for Insert mode
 map <leader>p :set paste!<CR>
 
+" Insert `breakpoint()`
+nmap <leader>b obreakpoint()<esc>^
+
 " Easier .vimrc refresh
 nmap <Leader><C-r> :so $MYVIMRC<CR>
 
@@ -97,9 +100,6 @@ map <Leader>m ggm`O<ESC> :put =metadataBlock<CR> ggd2djfI
 
 " New checkmarked line
 nmap <leader>c o* [ ] <Esc><<A
-
-" Force reload all windows (e.g. on changing git branches)
-nmap <leader>b :silent! windo! e<CR>
 
 " Create new tab
 nmap <leader><space> :tabnew<CR>
