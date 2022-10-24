@@ -66,8 +66,11 @@ nnoremap <leader><leader> <c-^>
 " Toggle Paste for Insert mode
 map <leader>p :set paste!<CR>
 
-" Insert `breakpoint()`
-nmap <leader>b obreakpoint()<esc>^
+" Insert breakpoint
+let g:breakpoint_str="# fmt: off\n
+\import ipdb; ipdb.set_trace()  # noqa: E702, E402\n
+\# fmt: on\n"
+map <Leader>b m`O<ESC> :put =breakpoint_str<CR> 4kd2d2j0<Esc>
 
 " Easier .vimrc refresh
 nmap <Leader><C-r> :so $MYVIMRC<CR>
