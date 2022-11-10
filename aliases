@@ -42,7 +42,7 @@ function delswp() { find . -type f -name "*.sw[klmnop]" -delete }
 alias get_gitignore="curl https://www.toptal.com/developers/gitignore/api/jupyternotebooks,python,macos,windows,linux,zsh > .gitignore"
 
 # Better checkout
-function gch() { git checkout "$(git branch | fzf | tr -d '[:space:]')" }
+function gch() { git for-each-ref --format='%(refname:short)' refs/heads | fzf | xargs git checkout }
 
 # Amend commit
 function gca() {git add . && git commit --amend --no-edit}
