@@ -163,6 +163,9 @@ Plug 'dense-analysis/ale'
 let g:ale_completion_enabled = 1
 let g:ale_completion_autoimport = 1
 
+"" SQL
+Plug 'erhickey/bigquery-vim'
+
 " Fancy glyphs
 Plug 'ryanoasis/vim-devicons'
 
@@ -179,7 +182,7 @@ Plug 'vim-scripts/ReplaceWithRegister'
 Plug 'itchyny/lightline.vim'
 
 " Better TODOs
-Plug 'dewyze/vim-tada'
+" Plug 'dewyze/vim-tada'
 
 " Add plugins to &runtimepath
 call plug#end()
@@ -207,12 +210,13 @@ map <C-p> :GitFiles<CR>
 """ ALE
 let g:ale_linters = {
 \   'python': ['flake8'],
+\   'sql': ['sqlint'],
 \}
 let g:ale_python_flake8_options = '--ignore W503,E501'
 
 let g:ale_fixers = {
 \   'yaml': ['yamlfix'],
-\   'sql': ['pgformatter'],
+\   'sql': ['sqlfmt'],
 \   'python': ['black'],
 \}
 let b:ale_sql_pgformatter_options = '--function-case 2 --keyword-case 2 --spaces 2 --no-extra-line'
@@ -220,6 +224,12 @@ let g:ale_fix_on_save=1
 
 map <silent> <leader>aj :ALENext<cr>
 nmap <silent> <leader>ak :ALEPrevious<cr>
+
+" BigQuery
+" execute the visual selection
+vnoremap <buffer> <enter> :BQExecute<CR>
+" execute the current paragraph
+nnoremap <buffer> <enter> m'vap:BQExecute<CR>g`'
 
 "lightline
 set noshowmode
