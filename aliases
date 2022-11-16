@@ -75,6 +75,7 @@ alias giti="git rm -r --cached . && git add . && git commit -m 're-applied .giti
 alias gs="git status"
 alias gl="git log"
 alias gp="git pull"
+alias garp="git add . && git rebase --continue"
 
 # Auto-merge branch when checks pass
 alias merge="gh pr merge --squash --auto $(git rev-parse --abbrev-ref HEAD)"
@@ -107,6 +108,7 @@ function panstrap () {
 alias si="dev cd siphon"
 alias to="dev cd totally-radford"
 alias ia="dev cd impulse-api"
+alias os="dev cd os"
 alias analysis="dev cd analysis"
 function pg_pw() {
     cat $HOME/src/github.com/ShopifyPeopleAnalytics/siphon/config/sources.development.json | jq -r '.read_database' | cut -f3-3 -d":" | cut -f1 -d"@" | tr -d '[:space:]' | pbcopy
