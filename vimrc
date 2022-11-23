@@ -259,7 +259,7 @@ let g:lightline = {
 
 " I'd rather not use a color scheme, but can't get decent colors when I run in
 " tmux+iterm2
-colorscheme peachpuff
+" colorscheme peachpuff
 
 " Vimdiff colors are aweful
 if &diff

@@ -117,6 +117,7 @@ function db () {
     pg_pw
     gcloud sql connect people-analytics --user=postgres --database=hr
 }
+alias wds="gcloud scheduler jobs run worker_daily_snapshot"
 alias bullet='pbpaste | sed "s/^.\{6\}//g" | pbcopy'
 
 ## Dotfiles
