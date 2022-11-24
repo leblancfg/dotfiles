@@ -124,6 +124,9 @@ endif
 " Start plugin manager section
 call plug#begin('~/.vim/plugged')
 
+" colo
+Plug 'rubik/vim-base16-paraiso'
+
 " NERDtree - file explorer
 Plug 'preservim/nerdtree'
 Plug 'PhilRunninger/nerdtree-visual-selection'
@@ -259,7 +262,7 @@ let g:lightline = {
 
 " I'd rather not use a color scheme, but can't get decent colors when I run in
 " tmux+iterm2
-" colorscheme peachpuff
+colorscheme base16-paraiso
 
 " Vimdiff colors are aweful
 if &diff
