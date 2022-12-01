@@ -203,10 +203,10 @@ map <C-p> :GitFiles<CR>
 """ ALE
 let g:ale_fix_on_save=1
 let g:ale_linters = {
-\   'python': ['ruff'],
+\   'python': ['ruff', 'vulture'],
 \   'sql': ['sqlint'],
 \}
-let g:ale_python_ruff_options = '--ignore W503,E501'
+let g:ale_python_ruff_options = '--ignore E501'
 let g:ale_fixers = {
 \   'yaml': ['yamlfix'],
 \   'sql': ['sqlfmt'],

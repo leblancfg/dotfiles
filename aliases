@@ -105,6 +105,7 @@ function panstrap () {
 }
 
 ## Moving around
+alias t1="tree --dirsfirst -ChFL 1"
 alias si="dev cd siphon"
 alias to="dev cd totally-radford"
 alias ia="dev cd impulse-api"
