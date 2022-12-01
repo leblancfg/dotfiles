@@ -90,7 +90,6 @@ nmap <Leader>v :w<CR> :vsp ~/.vimrc<CR>
 nmap <leader>x 0f[lsX<Esc>
 
 " Markdown to PDF and launch
-" TODO: probably broken
 map <Leader>z :w<CR> :AsyncRun pandoc % -o %:r.pdf --highlight-style zenburn --variable urlcolor=cyan && open %:r.pdf<CR>
 
 " Pandoc metadata block header
@@ -124,28 +123,20 @@ endif
 " Start plugin manager section
 call plug#begin('~/.vim/plugged')
 
-" colo
+" IDE-like features
+Plug 'mhinz/vim-startify'
 Plug 'rubik/vim-base16-paraiso'
-
-" NERDtree - file explorer
 Plug 'preservim/nerdtree'
 Plug 'PhilRunninger/nerdtree-visual-selection'
-" Finder
-" Plug 'kien/ctrlp.vim'
-" FZF
 Plug 'junegunn/fzf', { 'do': { -> fzf#install()  }  }
 Plug 'junegunn/fzf.vim'
 
 " Make splits fullscreen and back with <ctrl>wo
 Plug 'itspriddle/ZoomWin'
 
-" AsyncRun - do stuff in the background
-Plug 'skywind3000/asyncrun.vim'
-
 " Prose and Markdown
-Plug 'reedes/vim-pencil'
+Plug 'reedes/vim-pencil', { 'for': 'markdown' }
 Plug 'plasticboy/vim-markdown'
-Plug 'godlygeek/tabular'
  
 " Tim Pope extravaganza
 Plug 'tpope/vim-sensible'
@@ -184,9 +175,6 @@ Plug 'vim-scripts/ReplaceWithRegister'
 " Better tabs 
 Plug 'itchyny/lightline.vim'
 
-" Better TODOs
-" Plug 'dewyze/vim-tada'
-
 " Add plugins to &runtimepath
 call plug#end()
 
@@ -194,9 +182,11 @@ call plug#end()
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Plug-in specific configs
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Startify
+let g:startify_custom_header = ['leblancfg']
+let g:startify_bookmarks = systemlist("cut -sd' ' -f 2- ~/.NERDTreeBookmarks")
 
-" Gitignore CtrlP - loads faster
-" let g:ctrlp_user_command = ['.git/', 'git --git-dir=%s/.git ls-files -oc --exclude-standard']
+
 " No folding for MD files
 let g:vim_markdown_folding_disabled = 1
 
@@ -211,24 +201,23 @@ map <C-f> :Rg<CR>
 map <C-p> :GitFiles<CR>
 
 """ ALE
+let g:ale_fix_on_save=1
 let g:ale_linters = {
-\   'python': ['flake8'],
+\   'python': ['ruff'],
 \   'sql': ['sqlint'],
 \}
-let g:ale_python_flake8_options = '--ignore W503,E501'
-
+let g:ale_python_ruff_options = '--ignore W503,E501'
 let g:ale_fixers = {
 \   'yaml': ['yamlfix'],
 \   'sql': ['sqlfmt'],
 \   'python': ['black'],
 \}
 let b:ale_sql_pgformatter_options = '--function-case 2 --keyword-case 2 --spaces 2 --no-extra-line'
-let g:ale_fix_on_save=1
-
 map <silent> <leader>aj :ALENext<cr>
 nmap <silent> <leader>ak :ALEPrevious<cr>
 
 " BigQuery
+" TODO: vmap to arbitrary filetypes
 " execute the visual selection
 vnoremap <buffer> <enter> :BQExecute<CR>
 " execute the current paragraph
@@ -263,33 +252,7 @@ let g:lightline = {
 " I'd rather not use a color scheme, but can't get decent colors when I run in
 " tmux+iterm2
 colorscheme base16-paraiso
-
-" Vimdiff colors are aweful
-if &diff
-  " colorscheme evening
-  highlight DiffAdd    cterm=bold ctermfg=3 ctermbg=8 gui=none guifg=bg guibg=Red
-  highlight DiffDelete cterm=bold ctermfg=3 ctermbg=8 gui=none guifg=bg guibg=Red
-  highlight DiffChange cterm=bold ctermfg=3 ctermbg=8 gui=none guifg=bg guibg=Red
-  highlight DiffText   cterm=bold ctermfg=3 ctermbg=4 gui=none guifg=bg guibg=Red
-endif
-
-" Refresh all panes with <leader>e
-function! PullAndRefresh()
-  set noconfirm
-  bufdo e!
-  set confirm
-endfun
-
-map <leader>e :call PullAndRefresh()<CR>
-
-" Multipurpose tab key
-" function! InsertTabWrapper()
-"     let col = col('.') - 1
-"     if !col || getline('.')[col - 1] !~ '\k'
-"         return "\<tab>"
-"     else
-"         return "\<c-p>"
-"     endif
-" endfunction
-" inoremap <expr> <tab> InsertTabWrapper()
-" inoremap <s-tab> <c-n>
+hi VertSplit guibg=NONE guifg=NONE ctermbg=NONE ctermfg=NONE
+set fillchars=vert:\│
+" Don't overwrite the background color
+hi Normal guibg=NONE ctermbg=NONE
