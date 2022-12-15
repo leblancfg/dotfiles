@@ -77,7 +77,9 @@ alias gl="git log"
 alias gp="git pull"
 alias garp="git add . && git rebase --continue"
 
-# Auto-merge branch when checks pass
+# Github cli
+alias gpc="gh pr create"
+# TODO: this doesn't wait for checks OR reviews to be done. Need to fix
 alias merge="gh pr merge --squash --auto $(git rev-parse --abbrev-ref HEAD)"
 
 ## Run black on files in git staging

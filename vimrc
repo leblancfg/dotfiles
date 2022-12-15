@@ -211,6 +211,7 @@ let g:ale_fixers = {
 \   'yaml': ['yamlfix'],
 \   'sql': ['sqlfmt'],
 \   'python': ['black'],
+\   'ruby': ['rubocop'],
 \}
 let b:ale_sql_pgformatter_options = '--function-case 2 --keyword-case 2 --spaces 2 --no-extra-line'
 map <silent> <leader>aj :ALENext<cr>
@@ -219,9 +220,9 @@ nmap <silent> <leader>ak :ALEPrevious<cr>
 " BigQuery
 " TODO: vmap to arbitrary filetypes
 " execute the visual selection
-vnoremap <buffer> <enter> :BQExecute<CR>
+vnoremap <buffer> <leader><enter> :BQExecute<CR>
 " execute the current paragraph
-nnoremap <buffer> <enter> m'vap:BQExecute<CR>g`'
+nnoremap <buffer> <leader><enter> m'vap:BQExecute<CR>g`'
 
 "lightline
 set noshowmode
