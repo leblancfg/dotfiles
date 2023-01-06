@@ -83,7 +83,7 @@ alias ghpr="gh pr create"
 alias ghm="gh pr checks --watch && gh pr merge --squash"
 
 # Common workflows
-alias gpm="gitp && gpc && sleep 5 && merge"
+alias gpm="gitp && ghpr -f && sleep 5 && ghm"
 
 ## Run black on files in git staging
 function blacken () {
