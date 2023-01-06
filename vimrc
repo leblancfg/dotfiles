@@ -174,6 +174,9 @@ Plug 'vim-scripts/ReplaceWithRegister'
 " Better tabs 
 Plug 'itchyny/lightline.vim'
 
+" Better browsing???
+Plug 'glacambre/firenvim'
+
 " Add plugins to &runtimepath
 call plug#end()
 
