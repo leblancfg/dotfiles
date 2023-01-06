@@ -60,7 +60,7 @@ function gmp () {
 }
 
 # Git rebase master branch
-function grm () {
+function grem () {
     MAIN_BRANCH=$(git symbolic-ref refs/remotes/origin/HEAD | xargs basename)
     git rebase $MAIN_BRANCH
 }
