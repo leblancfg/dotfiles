@@ -124,7 +124,6 @@ endif
 call plug#begin('~/.vim/plugged')
 
 " IDE-like features
-Plug 'mhinz/vim-startify'
 Plug 'rubik/vim-base16-paraiso'
 Plug 'preservim/nerdtree'
 Plug 'PhilRunninger/nerdtree-visual-selection'
@@ -182,10 +181,6 @@ call plug#end()
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Plug-in specific configs
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Startify
-let g:startify_custom_header = ['leblancfg']
-let g:startify_bookmarks = systemlist("cut -sd' ' -f 2- ~/.NERDTreeBookmarks")
-
 
 " No folding for MD files
 let g:vim_markdown_folding_disabled = 1
@@ -195,6 +190,7 @@ map <C-n> :NERDTreeToggle<CR>
 let NERDTreeShowLineNumbers=1
 autocmd FileType nerdtree setlocal relativenumber
 let g:nerdtree_vis_confirm_open = 0
+let NERDTreeIgnore=['\.git$', 'egg-info', 'dist-info', '__editable__', '__pycache__']
 
 " Open FZF
 map <C-f> :Rg<CR>
@@ -203,14 +199,14 @@ map <C-p> :GitFiles<CR>
 """ ALE
 let g:ale_fix_on_save=1
 let g:ale_linters = {
-\   'python': ['ruff', 'vulture'],
+\   'python': ['ruff', 'mypy'],
 \   'sql': ['sqlint'],
 \}
 let g:ale_python_ruff_options = '--ignore E501'
 let g:ale_fixers = {
 \   'yaml': ['yamlfix'],
 \   'sql': ['sqlfmt'],
-\   'python': ['black'],
+\   'python': ['black', 'isort'],
 \   'ruby': ['rubocop'],
 \}
 let b:ale_sql_pgformatter_options = '--function-case 2 --keyword-case 2 --spaces 2 --no-extra-line'
@@ -220,9 +216,9 @@ nmap <silent> <leader>ak :ALEPrevious<cr>
 " BigQuery
 " TODO: vmap to arbitrary filetypes
 " execute the visual selection
-vnoremap <buffer> <leader><enter> :BQExecute<CR>
+vnoremap <buffer> <enter> :BQExecute<CR>
 " execute the current paragraph
-nnoremap <buffer> <leader><enter> m'vap:BQExecute<CR>g`'
+nnoremap <buffer> <enter> m'vap:BQExecute<CR>g`'
 
 "lightline
 set noshowmode

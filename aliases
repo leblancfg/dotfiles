@@ -78,9 +78,12 @@ alias gp="git pull"
 alias garp="git add . && git rebase --continue"
 
 # Github cli
-alias gpc="gh pr create"
+alias ghpr="gh pr create"
 # TODO: this doesn't wait for checks OR reviews to be done. Need to fix
-alias merge="gh pr merge --squash --auto $(git rev-parse --abbrev-ref HEAD)"
+alias ghm="gh pr checks --watch && gh pr merge --squash"
+
+# Common workflows
+alias gpm="gitp && gpc && sleep 5 && merge"
 
 ## Run black on files in git staging
 function blacken () {
