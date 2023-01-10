@@ -99,6 +99,10 @@ fi
 
 [[ -f /opt/dev/sh/chruby/chruby.sh ]] && type chruby >/dev/null 2>&1 || chruby () { source /opt/dev/sh/chruby/chruby.sh; chruby "$@"; }
 
+# Spin completion
+autoload -Uz compinit && compinit
+source <(spin completion --shell=zsh)
+
 # Set personal aliases, overriding those provided by oh-my-zsh libs, plugins,
 # and themes. Aliases can be placed here, though oh-my-zsh users are encouraged
 # to define aliases within the ZSH_CUSTOM folder.  For a full list of active

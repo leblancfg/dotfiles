@@ -57,20 +57,14 @@ function gitp () { git push origin $(git branch --show-current) $@; }
 function gmp () {
     MAIN_BRANCH=$(git symbolic-ref refs/remotes/origin/HEAD | xargs basename)
     git checkout $MAIN_BRANCH && git fetch && git pull origin $MAIN_BRANCH;
-}
-
-# Git rebase master branch
-function grem () {
-    MAIN_BRANCH=$(git symbolic-ref refs/remotes/origin/HEAD | xargs basename)
-    git rebase $MAIN_BRANCH
-}
+    }
 
 # Git squash last n commits
 function gits () {
     NUM_COMMITS="$1"
     COMMIT_MSG="${@:2}"
     git reset --soft HEAD~$NUM_COMMITS && git commit -m $COMMIT_MSG;
-}
+    }
 
 # git recursively pull all subdirectories
 alias gitr="find . -name '.git' -type d | sed 's/\/.git//' |  xargs -P10 -I{} git -C {} pull"
@@ -81,7 +75,8 @@ alias giti="git rm -r --cached . && git add . && git commit -m 're-applied .giti
 alias gs="git status"
 alias gl="git log"
 alias gp="git pull"
-alias garp="git add . && git rebase --continue"
+alias grc="git rebase --continue"
+alias garp="git add . && grc"
 
 # Github cli
 alias ghpr="gh pr create"

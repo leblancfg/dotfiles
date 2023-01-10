@@ -200,7 +200,7 @@ map <C-f> :Rg<CR>
 map <C-p> :GitFiles<CR>
 
 """ ALE
-let g:ale_fix_on_save=1
+let g:ale_fix_on_save=0
 let g:ale_linters = {
 \   'python': ['ruff', 'mypy'],
 \   'sql': ['sqlint'],
