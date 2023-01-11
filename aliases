@@ -80,11 +80,10 @@ alias garp="git add . && grc"
 
 # Github cli
 alias ghpr="gh pr create"
-# TODO: this doesn't wait for checks OR reviews to be done. Need to fix
 alias ghm="gh pr checks --watch && gh pr merge --squash"
 
 # Common workflows
-alias gpm="gitp && ghpr -f && sleep 5 && ghm"
+alias gpm="gitp && ghpr -f && sleep 10 && ghm"
 
 ## Run black on files in git staging
 function blacken () {
