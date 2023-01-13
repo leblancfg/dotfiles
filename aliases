@@ -145,7 +145,7 @@ function dfpull() {
 }
 
 ## Etc
-# Play a sound; useful for `do_stuff & ding`
+alias cl="clear"
 alias ding="afplay /System/Library/Sounds/Funk.aiff"
 
 # Install dependencies
