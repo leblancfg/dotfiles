@@ -101,7 +101,10 @@ fi
 
 # Spin completion
 autoload -Uz compinit && compinit
-source <(spin completion --shell=zsh)
+# Check if it's in PATH first
+if [[ -f /usr/local/bin/spin ]]; then
+  source <(spin completion --shell=zsh)
+fi
 
 # Set personal aliases, overriding those provided by oh-my-zsh libs, plugins,
 # and themes. Aliases can be placed here, though oh-my-zsh users are encouraged
