@@ -54,8 +54,7 @@ set autoread
 " Set custom maps
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 let mapleader=","
-" let maplocalleader="\\"
-map <Bslash> gt
+let maplocalleader="\\"
 
 " Copy-paste, works with Cygwin and mouse-enabled X Server on Linux
 map <leader>y "+y
@@ -201,10 +200,11 @@ map <C-f> :Rg<CR>
 map <C-p> :GitFiles<CR>
 
 """ ALE
-let g:ale_fix_on_save=0
+let g:ale_fix_on_save=1
 let g:ale_linters = {
 \   'python': ['ruff', 'mypy'],
 \   'sql': ['sqlint'],
+\   'js': ['eslint'],
 \}
 let g:ale_python_ruff_options = '--ignore E501'
 let g:ale_fixers = {

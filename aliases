@@ -81,6 +81,8 @@ alias garp="git add . && grc"
 # Github cli
 alias ghpr="gh pr create"
 alias ghm="gh pr checks --watch && gh pr merge --squash"
+# Tag for review
+alias ghtfr="gh pr edit --add-reviewer stevenwu4,meganbarlow,nikodraca,MCDAngelo,ali-hdr2"
 
 # Common workflows
 alias gpm="gitp && ghpr -f && sleep 10 && ghm"
@@ -116,6 +118,7 @@ alias to="dev cd totally-radford"
 alias ia="dev cd impulse-api"
 alias os="dev cd os"
 alias analysis="dev cd analysis"
+alias tf="dev cd os; cd tools/frameworks"
 function pg_pw() {
     cat $HOME/src/github.com/ShopifyPeopleAnalytics/siphon/config/sources.development.json | jq -r '.read_database' | cut -f3-3 -d":" | cut -f1 -d"@" | tr -d '[:space:]' | pbcopy
 }
