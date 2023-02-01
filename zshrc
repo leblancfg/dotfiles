@@ -70,8 +70,9 @@ if [ -f '/Users/leblancfg/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/lebla
 # The next line enables shell command completion for gcloud.
 if [ -f '/Users/leblancfg/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/leblancfg/google-cloud-sdk/completion.zsh.inc'; fi
 
-# Oh and screw MacOS sed
+# Userland niceities
 export PATH="/usr/local/opt/gnu-sed/libexec/gnubin:$PATH"
+export PATH="$HOME/.local/bin:$PATH"
 
 # Use that brew stuff
 [[ -x /usr/local/bin/brew ]] && eval $(/usr/local/bin/brew shellenv)

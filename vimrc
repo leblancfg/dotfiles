@@ -54,7 +54,8 @@ set autoread
 " Set custom maps
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 let mapleader=","
-let maplocalleader="\\"
+" let maplocalleader="\\"
+map <Bslash> gt
 
 " Copy-paste, works with Cygwin and mouse-enabled X Server on Linux
 map <leader>y "+y
