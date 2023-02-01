@@ -83,6 +83,7 @@ alias ghpr="gh pr create"
 alias ghm="gh pr checks --watch && gh pr merge --squash"
 # Tag for review
 alias ghtfr="gh pr edit --add-reviewer stevenwu4,meganbarlow,nikodraca,MCDAngelo,ali-hdr2"
+alias ghtfros="gh pr edit --add-reviewer stevenwu4,meganbarlow,nikodraca,MCDAngelo,ali-hdr2,Senjai"
 
 # Common workflows
 alias gpm="gitp && ghpr -f && sleep 10 && ghm"
