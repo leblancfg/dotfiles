@@ -55,7 +55,7 @@ set autoread
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 let mapleader=","
 " let maplocalleader="\\"
-map <Bslash> gt
+map <Bslash> gtli
 
 " Copy-paste, works with Cygwin and mouse-enabled X Server on Linux
 map <leader>y "+y
@@ -158,7 +158,7 @@ let g:ale_completion_enabled = 1
 let g:ale_completion_autoimport = 1
 
 "" SQL
-Plug 'erhickey/bigquery-vim'
+Plug 'erhickey/bigquery-vim', { 'for': 'sql' }
 
 " Fancy glyphs
 Plug 'ryanoasis/vim-devicons'
