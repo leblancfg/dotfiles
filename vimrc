@@ -61,6 +61,10 @@ map <Bslash> gtli
 map <leader>y "+y
 map <leader>p "+p
 
+" Avoid RSI writing ERB files
+inoremap <C-l> <space><%=<space>
+inoremap <C-r> <space>%><space>
+
 " Switch between previous buffer
 nnoremap <leader><leader> <c-^>
 
