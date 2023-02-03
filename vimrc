@@ -63,7 +63,7 @@ map <leader>p "+p
 
 " Avoid RSI writing ERB files
 inoremap <C-l> <%<space>
-inoremap <C-L> %><space>
+inoremap <C-f> %><space>
 
 " Switch between previous buffer
 nnoremap <leader><leader> <c-^>
