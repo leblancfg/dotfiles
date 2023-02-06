@@ -122,6 +122,7 @@ alias os="dev cd os"
 alias analysis="dev cd analysis"
 alias tf="dev cd os; cd tools/frameworks"
 alias tb="dev cd os; cd tools/book"
+alias pp="dev cd party-parrots"
 function pg_pw() {
     cat $HOME/src/github.com/ShopifyPeopleAnalytics/siphon/config/sources.development.json | jq -r '.read_database' | cut -f3-3 -d":" | cut -f1 -d"@" | tr -d '[:space:]' | pbcopy
 }
