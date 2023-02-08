@@ -55,7 +55,7 @@ set autoread
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 let mapleader=","
 " let maplocalleader="\\"
-map <Bslash> gtli
+map <Bslash> gt
 
 " Copy-paste, works with Cygwin and mouse-enabled X Server on Linux
 map <leader>y "+y
