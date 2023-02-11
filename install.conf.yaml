@@ -13,10 +13,10 @@
 - link:
     ~/.aliases:
       path: aliases
-    ~/.bash_profile:
-      path: bash_profile
-    ~/.bashrc:
-      path: bashrc
+    # ~/.bash_profile:
+    #   path: bash_profile
+    # ~/.bashrc:
+    #   path: bashrc
     ~/.gitignore:
       path: gitignore
     ~/.inputrc:
