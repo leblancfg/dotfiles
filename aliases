@@ -151,6 +151,9 @@ function dfpull() {
     )
 }
 
+# Spin
+alias spinrmrf="spin destroy --all --force --quiet -y"
+
 ## Etc
 alias cl="clear"
 alias ding="afplay /System/Library/Sounds/Funk.aiff"

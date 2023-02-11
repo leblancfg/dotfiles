@@ -11,28 +11,28 @@
     - ~/.config/nvim
 
 - link:
-    ~/.aliases:
-      path: aliases
     # ~/.bash_profile:
     #   path: bash_profile
     # ~/.bashrc:
     #   path: bashrc
+    # ~/.config/pgcli/config:
+    #   path: pgcli/config
     ~/.gitignore:
       path: gitignore
+    ~/.aliases:
+      path: aliases
+    ~/.zshrc:
+      path: zshrc
     ~/.inputrc:
       path: inputrc
     ~/.tmux.conf:
       path: tmux.conf
     ~/.vimrc:
       path: vimrc
-    ~/Templates:
-      path: Templates
-    ~/.zshrc:
-      path: zshrc
-    ~/.config/pgcli/config:
-      path: pgcli/config
     ~/.config/nvim/init.vim:
       path: init.vim
+    ~/Templates:
+      path: Templates
 
 - shell:
     - [git submodule update --init --recursive, Installing submodules]
