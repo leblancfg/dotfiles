@@ -48,7 +48,7 @@ function gch() { git for-each-ref --format='%(refname:short)' refs/heads | fzf |
 function gca() {git add . && git commit --amend --no-edit}
 
 # Add & commit
-function gitc () { git add --all && git commit -m "$@" ; }
+function gitc () { git add --all && if [ $# -eq 0 ]; then git commit; else git commit -m "$@"; fi }
 
 # Push to master
 function gitp () { git push origin $(git branch --show-current) $@; }
