@@ -3,10 +3,11 @@
 
 # Path to your oh-my-zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
+export REPLACE_RC='no'  # Don't overwrite the zshrc if installing OMZ
 
 # First, install oh-my-zsh if it's not present
 if [ ! -d ~/.oh-my-zsh ];then
-  echo "oh-my-zsh not installed, installing..."
+  echo 'oh-my-zsh not installed, installing...'
   sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" ; 
 fi
 

@@ -14,8 +14,8 @@ git -C "${DOTBOT_DIR}" submodule sync --quiet --recursive
 git submodule update --init --recursive "${DOTBOT_DIR}"
 
 "${BASEDIR}/${DOTBOT_DIR}/${DOTBOT_BIN}" -d "${BASEDIR}" -c "${CONFIG}" "${@}"
-cd $PWD
+cd "$PWD"
 
 # Reload config files
-source ~/.bashrc
+source $HOME/.zshrc
 bind -f ~/.inputrc
