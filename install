@@ -17,5 +17,4 @@ git submodule update --init --recursive "${DOTBOT_DIR}"
 cd "$PWD"
 
 # Reload config files
-source $HOME/.zshrc
-bind -f ~/.inputrc
+zsh -i echo "Reloaded zshrc"

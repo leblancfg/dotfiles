@@ -65,10 +65,6 @@ source $ZSH/oh-my-zsh.sh
 
 ### User configuration
 
-# Nix installer
-[ -f /opt/dev/dev.sh ] && source /opt/dev/dev.sh
-if [ -e $HOME/.nix-profile/etc/profile.d/nix.sh ]; then . $HOME/.nix-profile/etc/profile.d/nix.sh; fi # added by Nix installer
-
 ## Installs
 [ -f /opt/dev/dev.sh ] && source /opt/dev/dev.sh
 
