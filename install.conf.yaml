@@ -7,16 +7,9 @@
 - clean: ['~']
 
 - create:
-    - ~/.config/pgcli
     - ~/.config/nvim
 
 - link:
-    # ~/.bash_profile:
-    #   path: bash_profile
-    # ~/.bashrc:
-    #   path: bashrc
-    # ~/.config/pgcli/config:
-    #   path: pgcli/config
     ~/.gitignore:
       path: gitignore
     ~/.aliases:
