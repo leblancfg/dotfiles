@@ -80,7 +80,7 @@ alias garp="git add . && grc"
 
 # Github cli
 alias ghpr="gh pr create"
-alias ghm="gh pr checks --watch && gh pr merge --squash"
+alias ghm="gh pr checks --watch && gh pr merge --rebase"
 # Tag for review
 alias ghtfr="gh pr edit --add-reviewer stevenwu4,meganbarlow,nikodraca,MCDAngelo,ali-hdr2"
 alias ghtfros="gh pr edit --add-reviewer stevenwu4,meganbarlow,nikodraca,MCDAngelo,ali-hdr2,Senjai"
