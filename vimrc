@@ -30,6 +30,7 @@ if has("autocmd")
 
     " Use actual tab chars in Makefiles.
     autocmd FileType make set tabstop=8 shiftwidth=8 softtabstop=0 noexpandtab
+    autocmd FileType cue set tabstop=4 shiftwidth=4 softtabstop=0 noexpandtab
 endif
 
 " For everything else, use a tab width of 4 space chars.
@@ -141,6 +142,12 @@ Plug 'itspriddle/ZoomWin'
 " Prose and Markdown
 Plug 'reedes/vim-pencil', { 'for': 'markdown' }
 Plug 'plasticboy/vim-markdown'
+
+" Cuelang
+Plug 'jjo/vim-cue'
+
+" MDX
+Plug 'jxnblk/vim-mdx-js'
  
 " Tim Pope extravaganza
 Plug 'tpope/vim-sensible'
@@ -261,4 +268,4 @@ colorscheme base16-paraiso
 hi VertSplit guibg=NONE guifg=NONE ctermbg=NONE ctermfg=NONE
 set fillchars=vert:\│
 " Don't overwrite the background color
-hi Normal guibg=NONE ctermbg=NONE
+hi Normal guibg=NONE ctermbg=NONE guifg=NONE
