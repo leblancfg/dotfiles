@@ -214,18 +214,19 @@ map <C-p> :GitFiles<CR>
 """ ALE
 let g:ale_fix_on_save=1
 let g:ale_linters = {
-\   'python': ['ruff', 'mypy'],
-\   'sql': ['sqlint'],
+\   'python': ['ruff'],
+\   'sql': ['sqlfluff'],
 \   'js': ['eslint'],
 \}
 let g:ale_python_ruff_options = '--ignore E501'
 let g:ale_fixers = {
 \   'yaml': ['yamlfix'],
-\   'sql': ['sqlfmt'],
+\   'sql': ['sqlfluff', 'remove_trailing_lines'],
 \   'python': ['black', 'isort'],
 \   'ruby': ['rubocop'],
 \}
 let b:ale_sql_pgformatter_options = '--function-case 2 --keyword-case 2 --spaces 2 --no-extra-line'
+let g:ale_sql_sqlfluff_options = '--dialect bigquery --templater jinja --ignore=templating'
 map <silent> <leader>aj :ALENext<cr>
 nmap <silent> <leader>ak :ALEPrevious<cr>
 
@@ -268,4 +269,4 @@ colorscheme base16-paraiso
 hi VertSplit guibg=NONE guifg=NONE ctermbg=NONE ctermfg=NONE
 set fillchars=vert:\│
 " Don't overwrite the background color
-hi Normal guibg=NONE ctermbg=NONE guifg=NONE
+hi Normal guibg=NONE ctermbg=NONE

@@ -121,6 +121,7 @@ alias ia="dev cd impulse-api"
 alias os="dev cd os"
 alias analysis="dev cd analysis"
 alias tf="dev cd os; cd tools/frameworks"
+alias tw="dev cd os; cd tools/web"
 alias tb="dev cd os; cd tools/book"
 alias pp="dev cd party-parrots"
 function pg_pw() {
