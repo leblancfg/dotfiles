@@ -268,5 +268,6 @@ let g:lightline = {
 colorscheme base16-paraiso
 hi VertSplit guibg=NONE guifg=NONE ctermbg=NONE ctermfg=NONE
 set fillchars=vert:\│
-" Don't overwrite the background color
+" Don't overwrite the background color, use black foreground instead
 hi Normal guibg=NONE ctermbg=NONE
+"guifg=black ctermfg=black
