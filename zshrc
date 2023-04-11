@@ -18,7 +18,7 @@ fi
 ZSH_THEME="agnoster"
 HYPHEN_INSENSITIVE="true"
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git ripgrep)
+plugins=(git ripgrep poetry)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -58,7 +58,8 @@ else
 fi
 
 # Autocomplete
-# autoload -U compinit; compinit
+mkdir -p $ZSH_CUSTOM/plugins/poetry
+poetry completions zsh > $ZSH_CUSTOM/plugins/poetry/_poetry
 
 [[ -f /opt/dev/sh/chruby/chruby.sh ]] && { type chruby >/dev/null 2>&1 || chruby () { source /opt/dev/sh/chruby/chruby.sh; chruby "$@"; } }
 
@@ -69,11 +70,12 @@ if [[ -f /usr/local/bin/spin ]]; then
   source <(spin completion --shell=zsh)
 fi
 
-# Copilot in vim
+# Copilot
 if [ -f /etc/spin/secrets/copilot_hosts.json ]; then
   mkdir -p "${HOME}/.config/github-copilot"
   cp /etc/spin/secrets/copilot_hosts.json "${HOME}/.config/github-copilot/hosts.json"
 fi
+eval "$(github-copilot-cli alias -- "$0")"
 
 # Set personal aliases, overriding those provided by oh-my-zsh libs, plugins,
 # and themes. Aliases can be placed here, though oh-my-zsh users are encouraged

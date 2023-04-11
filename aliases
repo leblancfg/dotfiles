@@ -154,7 +154,7 @@ function dfpull() {
 }
 
 # Spin
-alias spinrmrf="spin destroy --all --force --quiet -y"
+alias spinrmrf="spin destroy --all --quiet -y"
 alias spinreset="spin destroy --all -y && spin up os --no-snapshots --config os.branch=spin && spin ssh"
 
 ## Etc
