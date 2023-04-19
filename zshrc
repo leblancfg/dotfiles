@@ -59,7 +59,7 @@ fi
 
 # Autocomplete
 mkdir -p $ZSH_CUSTOM/plugins/poetry
-poetry completions zsh > $ZSH_CUSTOM/plugins/poetry/_poetry
+[ -x "$(command -v poetry)" ] && poetry completions zsh > $ZSH_CUSTOM/plugins/poetry/_poetry
 
 [[ -f /opt/dev/sh/chruby/chruby.sh ]] && { type chruby >/dev/null 2>&1 || chruby () { source /opt/dev/sh/chruby/chruby.sh; chruby "$@"; } }
 
