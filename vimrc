@@ -1,3 +1,6 @@
+" Swapfiles are more trouble than they're worth
+set noswapfile
+
 " No search highlight
 set nohls
 
@@ -269,4 +272,5 @@ colorscheme base16-paraiso
 hi VertSplit guibg=NONE guifg=NONE ctermbg=NONE ctermfg=NONE
 set fillchars=vert:\│
 " Don't overwrite the background color, use black foreground instead
-hi Normal guibg=NONE ctermbg=NONE guifg=black ctermfg=black
+hi Normal guibg=NONE ctermbg=NONE
+"guifg=black ctermfg=black

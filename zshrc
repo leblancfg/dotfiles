@@ -75,7 +75,7 @@ if [ -f /etc/spin/secrets/copilot_hosts.json ]; then
   mkdir -p "${HOME}/.config/github-copilot"
   cp /etc/spin/secrets/copilot_hosts.json "${HOME}/.config/github-copilot/hosts.json"
 fi
-eval "$(github-copilot-cli alias -- "$0")"
+# eval "$(github-copilot-cli alias -- "$0")"
 
 # Set personal aliases, overriding those provided by oh-my-zsh libs, plugins,
 # and themes. Aliases can be placed here, though oh-my-zsh users are encouraged
