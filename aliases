@@ -8,7 +8,7 @@ function watch_tests() {
         then
             CATCH_WARNINGS=""
     fi
-	PYTHON_ENV=test rm -f .testmondata && ptw --runner "pytest --testmon -s $CATCH_WARNINGS tests"
+	PYTHON_ENV=test rm -f .testmond\* && ptw --runner "pytest --testmon -s $CATCH_WARNINGS tests"
 }
 alias install-watch='pip install pytest-watch pytest-testmon'
 
@@ -83,7 +83,7 @@ alias gcan="git commit --amend --no-edit"
 alias ghpr="gh pr create"
 alias ghm="gh pr checks --watch && gh pr merge --rebase"
 # Tag for review
-alias ghtfr="gh pr edit --add-reviewer stevenwu4,meganbarlow,nikodraca,MCDAngelo,ali-hdr2"
+alias ghtfr="gh pr edit --add-reviewer meganbarlow,MCDAngelo,mhynes-shopify,Senjai,sprine"
 alias ghtfros="gh pr edit --add-reviewer stevenwu4,meganbarlow,nikodraca,MCDAngelo,ali-hdr2,Senjai"
 alias ghvw="gh pr view --web"
 

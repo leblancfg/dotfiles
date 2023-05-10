@@ -172,7 +172,9 @@ let g:ale_completion_enabled = 1
 let g:ale_completion_autoimport = 1
 
 "" SQL
-Plug 'erhickey/bigquery-vim', { 'for': 'sql' }
+" Plug 'erhickey/bigquery-vim', { 'for': 'sql' }
+Plug 'tpope/vim-dadbod'
+Plug 'mbhynes/vim-dadbod-ui'
 
 " Fancy glyphs
 Plug 'ryanoasis/vim-devicons'
@@ -188,9 +190,6 @@ Plug 'vim-scripts/ReplaceWithRegister'
 
 " Better tabs 
 Plug 'itchyny/lightline.vim'
-
-" Better browsing???
-Plug 'glacambre/firenvim'
 
 " Add plugins to &runtimepath
 call plug#end()
@@ -236,9 +235,9 @@ nmap <silent> <leader>ak :ALEPrevious<cr>
 " BigQuery
 " TODO: vmap to arbitrary filetypes
 " execute the visual selection
-vnoremap <buffer> <enter> :BQExecute<CR>
+" vnoremap <buffer> <enter> :BQExecute<CR>
 " execute the current paragraph
-nnoremap <buffer> <enter> m'vap:BQExecute<CR>g`'
+" nnoremap <buffer> <enter> m'vap:BQExecute<CR>g`'
 
 "lightline
 set noshowmode
@@ -272,5 +271,4 @@ colorscheme base16-paraiso
 hi VertSplit guibg=NONE guifg=NONE ctermbg=NONE ctermfg=NONE
 set fillchars=vert:\│
 " Don't overwrite the background color, use black foreground instead
-hi Normal guibg=NONE ctermbg=NONE
-"guifg=black ctermfg=black
+hi Normal guibg=NONE ctermbg=NONE guifg=black ctermfg=black
