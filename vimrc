@@ -119,8 +119,7 @@ function! ExpandString()
     endif
 
     execute "normal! i{{ source('"
-    execute "normal! f.i'"
-    execute "normal! lli'"
+    execute "normal! f.s', '"
     execute "normal! lea') }}"
     execute "normal! \<Esc>"
 endfunction
