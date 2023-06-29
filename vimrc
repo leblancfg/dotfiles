@@ -109,6 +109,24 @@ let g:metadataBlock="---\n
 \..."
 map <Leader>m ggm`O<ESC> :put =metadataBlock<CR> ggd2djfI
 
+
+" DBT expand <schema.table_name> to {{ source('schema', 'table_name') }}
+function! ExpandString()
+    " Check if the character on the left of the cursor isn't a space
+    if getline('.')[col('.') - 2] !~ '\s'
+        " Move the cursor to the beginning of the WORD
+        execute "normal! B"
+    endif
+
+    execute "normal! i{{ source('"
+    execute "normal! f.i'"
+    execute "normal! lli'"
+    execute "normal! lea') }}"
+    execute "normal! \<Esc>"
+endfunction
+
+nnoremap <leader>e :call ExpandString()<CR>
+
 " New checkmarked line
 nmap <leader>c o* [ ] <Esc><<A
 
