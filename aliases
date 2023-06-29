@@ -1,3 +1,5 @@
+# Just little things
+alias so=source
 # Python
 export PIP_REQUIRE_VIRTUALENV=true
 ## Pytest-watch
@@ -20,6 +22,11 @@ alias jnk='ps -ax | grep "jupyter-notebook" | awk "{print \$1}" | xargs kill'
 # But actually, neovim
 alias vi=nvim
 alias vim=nvim
+function reload-all-vim() {
+    tmux list-panes -aF "#{pane_id} #{pane_current_command}" |
+    awk '/vim|nvim/ {print $1}' |
+    xargs -I {} tmux send-keys -t {} "C-[" ":so ~/.vimrc" "C-m"
+}
 function install-jupyter-vim() {
     if [ command -v jupyter --version ]
         then
@@ -121,9 +128,8 @@ alias to="dev cd totally-radford"
 alias ia="dev cd impulse-api"
 alias os="dev cd os"
 alias analysis="dev cd analysis"
-alias tf="dev cd os; cd tools/frameworks"
+alias fw="dev cd os; cd tools/frameworks"
 alias tw="dev cd os; cd tools/web"
-alias tb="dev cd os; cd tools/book"
 alias pp="dev cd party-parrots"
 function pg_pw() {
     cat $HOME/src/github.com/ShopifyPeopleAnalytics/siphon/config/sources.development.json | jq -r '.read_database' | cut -f3-3 -d":" | cut -f1 -d"@" | tr -d '[:space:]' | pbcopy

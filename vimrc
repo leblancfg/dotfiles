@@ -173,7 +173,7 @@ let g:ale_completion_autoimport = 1
 
 "" SQL
 " Plug 'erhickey/bigquery-vim', { 'for': 'sql' }
-Plug 'tpope/vim-dadbod'
+Plug 'mbhynes/vim-dadbod'
 Plug 'mbhynes/vim-dadbod-ui'
 
 " Fancy glyphs
@@ -181,6 +181,7 @@ Plug 'ryanoasis/vim-devicons'
 
 " vim-tmux-navigator
 Plug 'christoomey/vim-tmux-navigator'
+Plug 'christoomey/vim-tmux-runner'
 
 " Auto resize the panes based on pointer
 Plug 'roman/golden-ratio'
@@ -232,14 +233,7 @@ let g:ale_sql_sqlfluff_options = '--dialect bigquery --templater jinja --ignore=
 map <silent> <leader>aj :ALENext<cr>
 nmap <silent> <leader>ak :ALEPrevious<cr>
 
-" BigQuery
-" TODO: vmap to arbitrary filetypes
-" execute the visual selection
-" vnoremap <buffer> <enter> :BQExecute<CR>
-" execute the current paragraph
-" nnoremap <buffer> <enter> m'vap:BQExecute<CR>g`'
-
-"lightline
+" Lightline
 set noshowmode
 let g:lightline = {
       \ 'colorscheme': 'srcery_drk',
@@ -265,10 +259,33 @@ let g:lightline = {
        \ 'subseparator': { 'left': "\ue0b1", 'right': "\ue0b3" }
        \ }
 
+" Vim-Tmux-Runner
+nnoremap <leader>v- :VtrOpenRunner { "orientation": "v", "percentage": 30 }<cr>
+nnoremap <leader>v\ :VtrOpenRunner { "orientation": "h", "percentage": 30 }<cr>
+nnoremap <leader>vk :VtrKillRunner<cr>
+"nnoremap <leader>va :VtrAttachToPane<cr>
+
+nnoremap <leader>v0 :VtrAttachToPane 0<cr>:call system("tmux clock-mode -t 0 && sleep 0.1 && tmux send-keys -t 0 q")<cr>
+nnoremap <leader>v1 :VtrAttachToPane 1<cr>:call system("tmux clock-mode -t 1 && sleep 0.1 && tmux send-keys -t 1 q")<cr>
+nnoremap <leader>v2 :VtrAttachToPane 2<cr>:call system("tmux clock-mode -t 2 && sleep 0.1 && tmux send-keys -t 2 q")<cr>
+nnoremap <leader>v3 :VtrAttachToPane 3<cr>:call system("tmux clock-mode -t 3 && sleep 0.1 && tmux send-keys -t 3 q")<cr>
+nnoremap <leader>v4 :VtrAttachToPane 4<cr>:call system("tmux clock-mode -t 4 && sleep 0.1 && tmux send-keys -t 4 q")<cr>
+nnoremap <leader>v5 :VtrAttachToPane 5<cr>:call system("tmux clock-mode -t 5 && sleep 0.1 && tmux send-keys -t 5 q")<cr>
+nnoremap <leader>fr :VtrFocusRunner<cr>
+" noremap <C-f> :VtrSendLinesToRunner<cr>
+
+nnoremap <leader>sq :VtrSendKeysRaw q<cr>
+nnoremap <leader>sd :VtrSendKeysRaw ^D<cr>
+nnoremap <leader>sl :VtrSendKeysRaw ^L<cr>
+nnoremap <leader>sc :VtrSendKeysRaw ^C<cr>
+nnoremap <leader>vs :VtrSendCommandToRunner<space>
+nnoremap <leader>s1 :VtrSendKeysRaw C-p C-m<cr>
+
 " I'd rather not use a color scheme, but can't get decent colors when I run in
 " tmux+iterm2
 colorscheme base16-paraiso
 hi VertSplit guibg=NONE guifg=NONE ctermbg=NONE ctermfg=NONE
 set fillchars=vert:\│
 " Don't overwrite the background color, use black foreground instead
-hi Normal guibg=NONE ctermbg=NONE guifg=black ctermfg=black
+hi Normal guibg=NONE ctermbg=NONE
+"guifg=black ctermfg=black
