@@ -109,7 +109,6 @@ let g:metadataBlock="---\n
 \..."
 map <Leader>m ggm`O<ESC> :put =metadataBlock<CR> ggd2djfI
 
-
 " DBT expand <schema.table_name> to {{ source('schema', 'table_name') }}
 function! ExpandString()
     " Check if the character on the left of the cursor isn't a space
@@ -157,7 +156,7 @@ Plug 'junegunn/fzf', { 'do': { -> fzf#install()  }  }
 Plug 'junegunn/fzf.vim'
 
 " Make splits fullscreen and back with <ctrl>wo
-Plug 'itspriddle/ZoomWin'
+Plug 'szw/vim-maximizer'
 
 " Prose and Markdown
 Plug 'reedes/vim-pencil', { 'for': 'markdown' }
@@ -216,6 +215,8 @@ call plug#end()
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Plug-in specific configs
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Maximize windows
+nmap <C-w>o :MaximizerToggle!<CR>
 
 " No folding for MD files
 let g:vim_markdown_folding_disabled = 1
@@ -242,7 +243,7 @@ let g:ale_python_ruff_options = '--ignore E501'
 let g:ale_fixers = {
 \   'yaml': ['yamlfix'],
 \   'sql': ['sqlfluff', 'remove_trailing_lines'],
-\   'python': ['black', 'isort'],
+\   'python': ['black'],
 \   'ruby': ['rubocop'],
 \}
 let b:ale_sql_pgformatter_options = '--function-case 2 --keyword-case 2 --spaces 2 --no-extra-line'
@@ -304,5 +305,4 @@ colorscheme base16-paraiso
 hi VertSplit guibg=NONE guifg=NONE ctermbg=NONE ctermfg=NONE
 set fillchars=vert:\│
 " Don't overwrite the background color, use black foreground instead
-hi Normal guibg=NONE ctermbg=NONE
-"guifg=black ctermfg=black
+hi Normal guibg=NONE ctermbg=NONE guifg=black ctermfg=black
