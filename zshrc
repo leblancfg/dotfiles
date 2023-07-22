@@ -83,3 +83,4 @@ fi
 # aliases, run `alias`.
 export CLOUDSDK_PYTHON=/usr/bin/python3
 source ~/.aliases
+source /Users/leblancfg/.config/op/plugins.sh
