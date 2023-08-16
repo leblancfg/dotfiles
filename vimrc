@@ -239,6 +239,7 @@ let g:ale_linters = {
 \   'python': ['ruff'],
 \   'sql': ['sqlfluff'],
 \   'js': ['eslint'],
+\   'yaml': ['yamllint'],
 \}
 let g:ale_python_ruff_options = '--ignore E501'
 let g:ale_fixers = {
@@ -249,6 +250,7 @@ let g:ale_fixers = {
 \}
 let b:ale_sql_pgformatter_options = '--function-case 2 --keyword-case 2 --spaces 2 --no-extra-line'
 let g:ale_sql_sqlfluff_options = '--dialect bigquery --templater jinja --ignore=templating'
+let g:ale_yaml_yamllint_options = '-d "{extends: default, rules: {document-start: disable, line-length: disable, indentation: {indent-sequences: whatever}}}"'
 map <silent> <leader>aj :ALENext<cr>
 nmap <silent> <leader>ak :ALEPrevious<cr>
 
@@ -291,14 +293,14 @@ nnoremap <leader>v3 :VtrAttachToPane 3<cr>:call system("tmux clock-mode -t 3 && 
 nnoremap <leader>v4 :VtrAttachToPane 4<cr>:call system("tmux clock-mode -t 4 && sleep 0.1 && tmux send-keys -t 4 q")<cr>
 nnoremap <leader>v5 :VtrAttachToPane 5<cr>:call system("tmux clock-mode -t 5 && sleep 0.1 && tmux send-keys -t 5 q")<cr>
 nnoremap <leader>fr :VtrFocusRunner<cr>
-" noremap <C-f> :VtrSendLinesToRunner<cr>
+noremap <leader>q :VtrSendLinesToRunner<cr>
 
 nnoremap <leader>sq :VtrSendKeysRaw q<cr>
 nnoremap <leader>sd :VtrSendKeysRaw ^D<cr>
 nnoremap <leader>sl :VtrSendKeysRaw ^L<cr>
 nnoremap <leader>sc :VtrSendKeysRaw ^C<cr>
 nnoremap <leader>vs :VtrSendCommandToRunner<space>
-nnoremap <leader>s1 :VtrSendKeysRaw C-p C-m<cr>
+nnoremap <leader>. :VtrSendKeysRaw C-p C-m<cr>
 
 " I'd rather not use a color scheme, but can't get decent colors when I run in
 " tmux+iterm2

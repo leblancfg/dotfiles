@@ -49,7 +49,9 @@ function delswp() { find . -type f -name "*.sw[klmnop]" -delete }
 alias get_gitignore="curl https://www.toptal.com/developers/gitignore/api/jupyternotebooks,python,macos,windows,linux,zsh > .gitignore"
 
 # Better checkout
-function gch() { git for-each-ref --format='%(refname:short)' refs/heads | fzf | xargs git checkout }
+gch () {
+        git for-each-ref --format='%(refname:short)' refs/heads | fzf -q "$@" | xargs git checkout
+}
 
 # Amend commit
 function gac() {git add . && git commit --amend --no-edit}
@@ -120,6 +122,9 @@ function panstrap () {
             exit 1
 	fi
 }
+
+## BigQuery
+alias bqq="bq query --use_legacy_sql=false"
 
 ## Moving around
 alias t1="tree --dirsfirst -ChFL 1"
