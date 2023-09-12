@@ -91,9 +91,6 @@ nmap <Leader>D o## <Esc>:r! date "+\%Y-\%m-\%d"<CR>0i<BS><Esc>
 " Search and replace word under cursor
 nnoremap <Leader>S :%s/\<<C-r><C-w>\>/
 
-" Edit vimrc
-nmap <Leader>v :w<CR> :vsp ~/.vimrc<CR>
-
 """" Markdown """"
 " Put an X in the checkmark on that line
 nmap <leader>x 0f[lsX<Esc>
@@ -158,12 +155,15 @@ Plug 'junegunn/fzf.vim'
 " Prose and Markdown
 Plug 'reedes/vim-pencil', { 'for': 'markdown' }
 Plug 'plasticboy/vim-markdown'
+Plug 'junegunn/vim-easy-align'
 
 " Cuelang
 Plug 'jjo/vim-cue'
 
-" MDX
+" JS
 Plug 'jxnblk/vim-mdx-js'
+Plug 'pantharshit00/vim-prisma'
+Plug 'ianks/vim-tsx'
  
 " Tim Pope extravaganza
 Plug 'tpope/vim-sensible'
@@ -179,16 +179,14 @@ let g:copilot_filetypes = {
             \ }
 
 "" Python
-Plug 'AndrewRadev/splitjoin.vim'
-let g:splitjoin_python_brackets_on_separate_lines = 1
 Plug 'dense-analysis/ale'
 let g:ale_completion_enabled = 1
 let g:ale_completion_autoimport = 1
 
 "" SQL
 " Plug 'erhickey/bigquery-vim', { 'for': 'sql' }
-Plug 'mbhynes/vim-dadbod'
-Plug 'mbhynes/vim-dadbod-ui'
+" Plug 'mbhynes/vim-dadbod'
+" Plug 'mbhynes/vim-dadbod-ui'
 
 " Fancy glyphs
 Plug 'ryanoasis/vim-devicons'
@@ -245,7 +243,7 @@ let g:ale_python_ruff_options = '--ignore E501'
 let g:ale_fixers = {
 \   'yaml': ['yamlfix'],
 \   'sql': ['sqlfluff', 'remove_trailing_lines'],
-\   'python': ['black', 'isort'],
+\   'python': ['black'],
 \   'ruby': ['rubocop'],
 \}
 let b:ale_sql_pgformatter_options = '--function-case 2 --keyword-case 2 --spaces 2 --no-extra-line'
