@@ -243,7 +243,7 @@ let g:ale_python_ruff_options = '--ignore E501'
 let g:ale_fixers = {
 \   'yaml': ['yamlfix'],
 \   'sql': ['sqlfluff', 'remove_trailing_lines'],
-\   'python': ['black'],
+\   'python': ['black', 'isort'],
 \   'ruby': ['rubocop'],
 \}
 let b:ale_sql_pgformatter_options = '--function-case 2 --keyword-case 2 --spaces 2 --no-extra-line'
