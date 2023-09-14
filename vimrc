@@ -297,8 +297,9 @@ nnoremap <leader>sq :VtrSendKeysRaw q<cr>
 nnoremap <leader>sd :VtrSendKeysRaw ^D<cr>
 nnoremap <leader>sl :VtrSendKeysRaw ^L<cr>
 nnoremap <leader>sc :VtrSendKeysRaw ^C<cr>
+nnoremap <leader>su  :VtrSendKeysRaw C-p C-m<cr>
 nnoremap <leader>vs :VtrSendCommandToRunner<space>
-nnoremap <leader>. :VtrSendKeysRaw C-p C-m<cr>
+nnoremap <leader>.  :VtrSendKeysRaw ^D C-p C-m<cr>
 
 " I'd rather not use a color scheme, but can't get decent colors when I run in
 " tmux+iterm2
