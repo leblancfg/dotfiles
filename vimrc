@@ -299,7 +299,7 @@ nnoremap <leader>sl :VtrSendKeysRaw ^L<cr>
 nnoremap <leader>sc :VtrSendKeysRaw ^C<cr>
 nnoremap <leader>su  :VtrSendKeysRaw C-p C-m<cr>
 nnoremap <leader>vs :VtrSendCommandToRunner<space>
-nnoremap <leader>.  :VtrSendKeysRaw ^D C-p C-m<cr>
+nnoremap <leader>.  :VtrSendKeysRaw ^D<cr> :VtrSendKeysRaw C-p C-m<cr>
 
 " I'd rather not use a color scheme, but can't get decent colors when I run in
 " tmux+iterm2
@@ -307,4 +307,5 @@ colorscheme base16-paraiso
 hi VertSplit guibg=NONE guifg=NONE ctermbg=NONE ctermfg=NONE
 set fillchars=vert:\│
 " Don't overwrite the background color, use black foreground instead
-hi Normal guibg=NONE ctermbg=NONE guifg=black ctermfg=black
+hi Normal guibg=NONE ctermbg=NONE
+"guifg=black ctermfg=black

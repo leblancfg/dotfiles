@@ -92,7 +92,8 @@ alias gcan="git commit --amend --no-edit"
 alias ghpr="gh pr create"
 alias ghm="gh pr checks --watch && gh pr merge --rebase"
 # Tag for review
-alias ghtfr="gh pr edit --add-reviewer meganbarlow,MCDAngelo,mhynes-shopify,Senjai,sprine"
+alias ghar="gh pr edit --add-reviewer"
+alias ghtfr="gh pr edit --add-reviewer ali-hdr2,Senjai,nikodraca"
 alias ghtfros="gh pr edit --add-reviewer stevenwu4,meganbarlow,nikodraca,MCDAngelo,ali-hdr2,Senjai"
 alias ghvw="gh pr view --web"
 
@@ -125,6 +126,12 @@ function panstrap () {
 
 ## BigQuery
 alias bqq="bq query --use_legacy_sql=false"
+function dryrun () {
+    dbt compile --model "$@" |
+    awk '/[0-9]{2}:[0-9]{2}:[0-9]{2}  Compiled node/ {flag=1; next} flag' |
+    tee /dev/fd/2 |
+    bq query --dry_run
+}
 
 ## Moving around
 alias t1="tree --dirsfirst -ChFL 1"
