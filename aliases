@@ -1,5 +1,7 @@
 # Just little things
 alias so=source
+alias watch="fd . | entr"
+
 # Python
 export PIP_REQUIRE_VIRTUALENV=true
 ## Pytest-watch
@@ -11,6 +13,10 @@ function watch_tests() {
             CATCH_WARNINGS=""
     fi
 	PYTHON_ENV=test rm -f .testmond\* && ptw --runner "pytest --testmon -s $CATCH_WARNINGS tests"
+}
+function jcue() {
+    jq ".$1" ~/projects/os/job_requirements/requirements.json |
+    python .tmp/generate_cue.py --prefix="$2"
 }
 alias install-watch='pip install pytest-watch pytest-testmon'
 

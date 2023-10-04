@@ -84,3 +84,6 @@ fi
 export CLOUDSDK_PYTHON=/usr/bin/python3
 source ~/.aliases
 source /Users/leblancfg/.config/op/plugins.sh
+
+zstyle ':completion:*' menu select
+fpath+=~/.zfunc
