@@ -234,17 +234,18 @@ map <C-p> :GitFiles<CR>
 """ ALE
 let g:ale_fix_on_save=1
 let g:ale_linters = {
+\   'js': ['eslint'],
 \   'python': ['ruff'],
 \   'sql': ['sqlfluff'],
-\   'js': ['eslint'],
 \   'yaml': ['yamllint'],
 \}
 let g:ale_python_ruff_options = '--ignore E501'
 let g:ale_fixers = {
-\   'yaml': ['yamlfix'],
-\   'sql': ['sqlfluff', 'remove_trailing_lines'],
+\   'javascript': ['prettier'],
 \   'python': ['black', 'isort'],
 \   'ruby': ['rubocop'],
+\   'sql': ['sqlfluff', 'remove_trailing_lines'],
+\   'yaml': ['yamlfix'],
 \}
 let b:ale_sql_pgformatter_options = '--function-case 2 --keyword-case 2 --spaces 2 --no-extra-line'
 let g:ale_sql_sqlfluff_options = '--dialect bigquery --templater jinja --ignore=templating'
@@ -294,12 +295,12 @@ nnoremap <leader>fr :VtrFocusRunner<cr>
 noremap <leader>q :VtrSendLinesToRunner<cr>
 
 nnoremap <leader>sq :VtrSendKeysRaw q<cr>
-nnoremap <leader>sd :VtrSendKeysRaw ^D<cr>
+nnoremap <leader>sd :VtrSendKeysRaw ^U ^D<cr>
+nnoremap <leader>ss :VtrSendKeysRaw ^U ^D<cr>:sleep 100m<cr>:VtrSendKeysRaw C-p C-m<cr>
 nnoremap <leader>sl :VtrSendKeysRaw ^L<cr>
 nnoremap <leader>sc :VtrSendKeysRaw ^C<cr>
 nnoremap <leader>su  :VtrSendKeysRaw C-p C-m<cr>
 nnoremap <leader>vs :VtrSendCommandToRunner<space>
-nnoremap <leader>.  :VtrSendKeysRaw ^D<cr> :VtrSendKeysRaw C-p C-m<cr>
 
 " I'd rather not use a color scheme, but can't get decent colors when I run in
 " tmux+iterm2

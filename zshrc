@@ -2,6 +2,7 @@
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
 # Path to your oh-my-zsh installation.
+export LS_COLORS=''  # Prettier `fd`
 export ZSH="$HOME/.oh-my-zsh"
 export REPLACE_RC='no'  # Don't overwrite the zshrc if installing OMZ
 
@@ -87,3 +88,7 @@ source /Users/leblancfg/.config/op/plugins.sh
 
 zstyle ':completion:*' menu select
 fpath+=~/.zfunc
+
+
+
+
