@@ -240,29 +240,23 @@ let g:ale_linters = {
 \   'yaml': ['yamllint'],
 \}
 let g:ale_python_auto_virtualenv = 1
-let g:ale_python_ruff_auto_pipenv = 1
-let g:ale_python_ruff_auto_poetry = 1
 
 let g:ale_fixers = {
 \   'javascript': ['prettier'],
-\   'python': ['black'],
+\   'python': ['black', 'isort'],
 \   'ruby': ['rubocop'],
 \   'sql': ['sqlfluff', 'remove_trailing_lines'],
 \   'yaml': ['yamlfix'],
 \}
 let b:ale_sql_pgformatter_options = '--function-case 2 --keyword-case 2 --spaces 2 --no-extra-line'
-" let g:ale_sql_sqlfluff_options = '--dialect bigquery --templater jinja --ignore=templating'
 let g:ale_yaml_yamllint_options = '-d "{extends: default, rules: {document-start: disable, line-length: disable, indentation: {indent-sequences: whatever}}}"'
 map <silent> <leader>aj :ALENext<cr>
 nmap <silent> <leader>ak :ALEPrevious<cr>
 
 " Lightline
 set noshowmode
-let g:lightline = {
-      \ 'colorscheme': 'srcery_drk',
-      \ }
 let g:lightline = { 
-       \ 'colorscheme': 'wombat',
+       \ 'colorscheme': 'srcery_drk',
        \ 'active': {
        \   'left': [ ['mode', 'paste'],
        \             ['fugitive', 'readonly', 'filename', 'modified'] ],
