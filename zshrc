@@ -71,12 +71,10 @@ if [[ -f /usr/local/bin/spin ]]; then
   source <(spin completion --shell=zsh)
 fi
 
-# Copilot
-if [ -f /etc/spin/secrets/copilot_hosts.json ]; then
-  mkdir -p "${HOME}/.config/github-copilot"
-  cp /etc/spin/secrets/copilot_hosts.json "${HOME}/.config/github-copilot/hosts.json"
+# Load any userland secrets
+if [[ -f ~/.env ]]; then
+    source ~/.env
 fi
-# eval "$(github-copilot-cli alias -- "$0")"
 
 # Set personal aliases, overriding those provided by oh-my-zsh libs, plugins,
 # and themes. Aliases can be placed here, though oh-my-zsh users are encouraged
@@ -84,6 +82,8 @@ fi
 # aliases, run `alias`.
 export CLOUDSDK_PYTHON=/usr/bin/python3
 source ~/.aliases
+
+# One Password
 source /Users/leblancfg/.config/op/plugins.sh
 
 zstyle ':completion:*' menu select
