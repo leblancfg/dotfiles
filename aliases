@@ -90,6 +90,7 @@ alias giti="git rm -r --cached . && git add . && git commit -m 're-applied .giti
 alias gs="git status"
 alias gl="git log"
 alias gp="git pull"
+alias gres="git restore ."
 alias grc="git rebase --continue"
 alias garp="git add . && grc"
 alias gcan="git commit --amend --no-edit"
