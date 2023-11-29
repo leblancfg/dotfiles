@@ -75,6 +75,9 @@ nnoremap <leader><leader> <c-^>
 " Toggle Paste for Insert mode
 map <leader>p :set paste!<CR>
 
+" Remove trailing whitespace
+:nnoremap <silent> <F6> :let _s=@/ <Bar> :%s/\s\+$//e <Bar> :let @/=_s <Bar> :nohl <Bar> :unlet _s <CR>
+
 " Insert breakpoint
 let g:breakpoint_str="# fmt: off\n
 \import ipdb; ipdb.set_trace()  # noqa: E702, E402\n
@@ -164,7 +167,7 @@ Plug 'jjo/vim-cue'
 Plug 'jxnblk/vim-mdx-js'
 Plug 'pantharshit00/vim-prisma'
 Plug 'ianks/vim-tsx'
- 
+
 " Tim Pope extravaganza
 Plug 'tpope/vim-sensible'
 Plug 'tpope/vim-repeat'
@@ -201,7 +204,7 @@ Plug 'roman/golden-ratio'
 " Replace with register
 Plug 'vim-scripts/ReplaceWithRegister'
 
-" Better tabs 
+" Better tabs
 Plug 'itchyny/lightline.vim'
 
 " Add plugins to &runtimepath
@@ -255,7 +258,7 @@ nmap <silent> <leader>ak :ALEPrevious<cr>
 
 " Lightline
 set noshowmode
-let g:lightline = { 
+let g:lightline = {
        \ 'colorscheme': 'srcery_drk',
        \ 'active': {
        \   'left': [ ['mode', 'paste'],
