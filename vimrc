@@ -164,9 +164,9 @@ Plug 'junegunn/vim-easy-align'
 Plug 'jjo/vim-cue'
 
 " JS
-Plug 'jxnblk/vim-mdx-js'
+" Plug 'jxnblk/vim-mdx-js'
 Plug 'pantharshit00/vim-prisma'
-Plug 'ianks/vim-tsx'
+" Plug 'ianks/vim-tsx'
 
 " Tim Pope extravaganza
 Plug 'tpope/vim-sensible'
@@ -187,7 +187,6 @@ let g:ale_completion_enabled = 1
 let g:ale_completion_autoimport = 1
 
 "" SQL
-" Plug 'erhickey/bigquery-vim', { 'for': 'sql' }
 " Plug 'mbhynes/vim-dadbod'
 " Plug 'mbhynes/vim-dadbod-ui'
 
@@ -237,7 +236,8 @@ map <C-p> :GitFiles<CR>
 """ ALE
 let g:ale_fix_on_save=1
 let g:ale_linters = {
-\   'js': ['eslint'],
+\   'javascript': ['eslint'],
+\   'typescript': ['eslint'],
 \   'python': ['ruff'],
 \   'sql': ['sqlfluff'],
 \   'yaml': ['yamllint'],
@@ -246,12 +246,17 @@ let g:ale_python_auto_virtualenv = 1
 
 let g:ale_fixers = {
 \   'javascript': ['prettier'],
+\   'typescript': ['prettier'],
 \   'python': ['black', 'isort'],
 \   'ruby': ['rubocop'],
 \   'sql': ['sqlfluff', 'remove_trailing_lines'],
 \   'yaml': ['yamlfix'],
 \}
-let b:ale_sql_pgformatter_options = '--function-case 2 --keyword-case 2 --spaces 2 --no-extra-line'
+let g:ale_pattern_options = {
+\ '.*node_modules.*$': {'ale_enabled': 0},
+\ '.*dist.*$': {'ale_enabled': 0},
+\ '.*-config.js$': {'ale_enabled': 0},
+\}
 let g:ale_yaml_yamllint_options = '-d "{extends: default, rules: {document-start: disable, line-length: disable, indentation: {indent-sequences: whatever}}}"'
 map <silent> <leader>aj :ALENext<cr>
 nmap <silent> <leader>ak :ALEPrevious<cr>

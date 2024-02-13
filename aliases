@@ -2,6 +2,40 @@
 alias so=source
 alias watch="fd . | entr"
 
+# Finder stuff
+
+unsetopt flowcontrol
+function insert-selecta-path-in-command-line() {
+	local selected_path
+	echo
+	selected_path=$(rg --files -g "" | fzy) || return
+	eval 'LBUFFER="$LBUFFER$selected_path"'
+	zle reset-prompt
+}
+zle -N insert-selecta-path-in-command-line
+bindkey "^S" "insert-selecta-path-in-command-line"
+
+alias b="git branch | cut -c 3- | fzy | xargs git checkout"
+
+v () {
+    if [[ -z $1 ]]
+    then
+        file=$(rg --files -g "" | fzy)
+        escaped_file=$(printf '%q' "$file")
+        print -s "nvim $escaped_file"
+        nvim "$file"
+    else
+        print -s "nvim $*"
+        nvim "$@"
+    fi
+}
+
+fcd(){
+	cd "$(find . -type d | fzy)"
+}
+
+compdef v=nvim
+
 # Python
 export PIP_REQUIRE_VIRTUALENV=true
 ## Pytest-watch
@@ -67,6 +101,7 @@ function gitc () { git add --all && if [ $# -eq 0 ]; then git commit; else git c
 
 # Push to master
 function gitp () { git push origin $(git branch --show-current) $@; }
+alias gitpf="gitp --force-with-lease"
 
 # Back to master and pull
 function gmp () {
@@ -79,7 +114,7 @@ function gits () {
     NUM_COMMITS="$1"
     COMMIT_MSG="${@:2}"
     git reset --soft HEAD~$NUM_COMMITS && git commit -m $COMMIT_MSG;
-    }
+}
 
 # git recursively pull all subdirectories
 alias gitr="find . -name '.git' -type d | sed 's/\/.git//' |  xargs -P10 -I{} git -C {} pull"
@@ -87,21 +122,39 @@ alias gitr="find . -name '.git' -type d | sed 's/\/.git//' |  xargs -P10 -I{} gi
 alias giti="git rm -r --cached . && git add . && git commit -m 're-applied .gitignore'"
 
 # I must type this 100 times a day; shorten it
+function main_branch () {
+    git symbolic-ref refs/remotes/origin/HEAD | xargs basename
+}
+
 alias gs="git status"
 alias gl="git log"
 alias gp="git pull"
 alias gres="git restore ."
 function grbm () {
-    MAIN_BRANCH=$(git symbolic-ref refs/remotes/origin/HEAD | xargs basename)
-    git rebase $MAIN_BRANCH
+    git rebase $(main_branch) $@
 }
 alias grbc="git rebase --continue"
 alias garp="git add . && grc"
 alias gcan="git commit --amend --no-edit"
+alias gdmno="git diff $(main_branch) --name-only"
 
 # Github cli
 alias ghpr="gh pr create"
-alias ghm="gh pr checks --watch && gh pr merge --rebase"
+alias ghm="gh pr checks --watch && gh pr merge --merge"
+function ghmm() {
+    PR_ID=$1
+    END_TIME=$((SECONDS+1800))  # 30 minutes from now
+    while [ $SECONDS -lt $END_TIME ]; do
+        PR_STATUS=$(gh pr view $PR_ID --json reviews -q '.reviews.nodes[0].state')
+        if [ "$PR_STATUS" = "APPROVED" ]; then
+            # gh pr merge $PR_ID --merge
+            echo "PR $PR_ID merged!"
+            return 0
+        fi
+        sleep 10
+    done
+    echo "Time limit reached. PR $PR_ID was not merged."
+}
 # Tag for review
 alias ghar="gh pr edit --add-reviewer"
 alias ghtfr="gh pr edit --add-reviewer ali-hdr2,meganbarlow,sprine"
