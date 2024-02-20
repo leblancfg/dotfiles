@@ -8,5 +8,7 @@ vim.cmd [[
   highlight Type ctermfg=2
   highlight Special ctermfg=5
   highlight Underlined cterm=underline
-  highlight VertSplit guibg=NONE guifg=NONE ctermbg=NONE ctermfg=NONE
+  highlight MatchParen ctermfg=4 ctermbg=none
+  highlight VertSplit guifg=NONE guibg=NONE ctermfg=NONE ctermbg=NONE
+  highlight SignColumn guifg=NONE guibg=NONE ctermfg=NONE ctermbg=NONE
 ]]

@@ -1,11 +1,15 @@
 -- Attempt to fix colors
+-- Ah but just terminal colors is much less jarring. No fancy colors but shit's behaved.
 -- vim.opt.termguicolors = true
 
 -- Swapfiles are more trouble than they're worth
 vim.opt.swapfile = false
 
--- No search highlight
+-- Highlights
+-- Nothing during search
 vim.opt.hlsearch = false
+-- But match parens, brackets, etc.
+vim.opt.showmatch = true
 
 -- Show hybrid relative line numbers
 vim.opt.relativenumber = true
