@@ -19,10 +19,12 @@ return {
     'tpope/vim-projectionist',
     'github/copilot.vim',
 
-    -- LSP
+    -- Treesitter
     'nvim-treesitter/nvim-treesitter',
     'nvim-treesitter.configs',
+    "HiPhish/nvim-ts-rainbow2",
 
+    -- LSP
     {
         'VonHeikemen/lsp-zero.nvim',
         branch = 'v3.x',
@@ -133,18 +135,6 @@ return {
                     end,
                 }
             })
-            -- TODO: use ruff formatter when available
-            -- require("mason-null-ls").setup({
-            --   ensure_installed = { "black" }
-            -- })
-
-            -- local null_ls = require("null-ls")
-
-            -- null_ls.setup({
-            --   sources = {
-            --     null_ls.builtins.formatting.black,
-            --   },
-            -- })
         end
     },
 
