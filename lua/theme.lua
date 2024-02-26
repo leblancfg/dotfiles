@@ -2,7 +2,7 @@ vim.cmd [[
   highlight Normal guifg=NONE guibg=NONE
   highlight Bold gui=bold
   highlight Boolean ctermfg=6
-  highlight Comment ctermfg=9
+  highlight Comment ctermfg=1
   highlight Constant ctermfg=10
   highlight Number ctermfg=11
   highlight Identifier ctermfg=4

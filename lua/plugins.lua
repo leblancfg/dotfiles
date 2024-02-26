@@ -3,8 +3,8 @@ return {
     'roman/golden-ratio',
     'itchyny/lightline.vim',
     -- TODO: Reset theming for lightline
-    'kyazdani42/nvim-tree.lua',
-    'kyazdani42/nvim-web-devicons',
+    'nvim-tree/nvim-tree.lua',
+    'nvim-tree/nvim-web-devicons',
 
     -- Themeing
     -- 'RRethy/base16-nvim',

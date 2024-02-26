@@ -56,7 +56,7 @@ vim.cmd('filetype plugin indent on')
 
 -- Always reload the newest file, even if that means overwriting
 vim.opt.autoread = true
---
+
 -- Disable netrw
 vim.g.loaded_netrw = 1
 vim.g.loaded_netrwPlugin = 1
