@@ -249,7 +249,6 @@ alias install-pip="pip install --user wheel pandas clipboard tabulate"
 
 # More user stuff
 export PATH="$HOME/.poetry/bin:$PATH"
-eval "$(pyenv init -)"
 export EDITOR="nvim"
 alias shrug="echo '¯\\_(ツ)_/¯' | pbcopy"
 

@@ -38,7 +38,6 @@ if [ -f '$HOME/google-cloud-sdk/path.zsh.inc' ]; then . '$HOME/google-cloud-sdk/
 if [ -f '$HOME/google-cloud-sdk/completion.zsh.inc' ]; then . '$HOME/google-cloud-sdk/completion.zsh.inc'; fi
 
 # Userland niceities
-export PATH="/usr/local/opt/gnu-sed/libexec/gnubin:$PATH"
 export PATH="$HOME/.local/bin:$PATH"
 
 # Use that brew stuff
@@ -46,9 +45,11 @@ export PATH="$HOME/.local/bin:$PATH"
 [[ -x /opt/homebrew/bin/brew ]] && eval $(/opt/homebrew/bin/brew shellenv)
 
 # And make sure pyenv takes over system python
-export PATH="$(pyenv root)/shims:$PATH"
-eval "$(pyenv init -)"
-eval "$(pyenv virtualenv-init -)"
+if [[ "$(uname -s)" == "Darwin" ]]; then
+    export PATH="$(pyenv root)/shims:$PATH"
+    eval "$(pyenv init -)"
+    eval "$(pyenv virtualenv-init -)"
+fi
 
 # Always do these steps when opening up interactive Python shells
 if [ -f $PYTHONSTARTUP ]; then
@@ -88,14 +89,8 @@ export CLOUDSDK_PYTHON=/usr/bin/python3
 source ~/.aliases
 
 # One Password
-source /Users/leblancfg/.config/op/plugins.sh
+ONEPASSPLUGS=$HOME/leblancfg/.config/op/plugins.sh
+[[ -f $ONEPASSPLUGS ]] && source $ONEPASSPLUGS
 
 zstyle ':completion:*' menu select
 fpath+=~/.zfunc
-
-
-
-
-
-
-
