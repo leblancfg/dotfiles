@@ -276,6 +276,7 @@ todo.md
 .pymon
 bin/notebooks
 .projections.json
+.aider*
 
 ### wtf
 sorbet.metrics

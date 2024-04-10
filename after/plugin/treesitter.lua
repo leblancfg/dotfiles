@@ -47,10 +47,4 @@ require 'nvim-treesitter.configs'.setup {
             'css', 'lua', 'xml', 'php', 'markdown', 'typescript.tsx', 'python', 'ruby'
         },
     },
-    -- TODO: Fix this for JS / TS :facepalm:
-    indent = {
-        enable = true,
-    },
-
-    rainbow = { enable = true },
 }

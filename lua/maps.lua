@@ -63,3 +63,9 @@ vim.api.nvim_set_keymap('n', '<leader>gd', '<C-W><C-v>gd', {})
 vim.keymap.set('n', 'gl', '<cmd>lua vim.diagnostic.open_float()<cr>')
 vim.keymap.set('n', '<leader>aj', '<cmd>lua vim.diagnostic.goto_next()<cr>')
 vim.keymap.set('n', '<leader>ak', '<cmd>lua vim.diagnostic.goto_prev()<cr>')
+
+-- Projections
+vim.keymap.set('n', '<Leader>a', '<cmd>A<CR>')
+vim.keymap.set('n', '<Leader>as', '<cmd>AS<CR>')
+vim.keymap.set('n', '<Leader>av', '<cmd>AV<CR>')
+vim.keymap.set('n', '<Leader>at', '<cmd>AT<CR>')

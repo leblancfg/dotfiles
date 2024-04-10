@@ -2,12 +2,24 @@ return {
     -- Drawers
     'roman/golden-ratio',
     'itchyny/lightline.vim',
+    'mike-hearn/base16-vim-lightline',
+    {
+        "folke/tokyonight.nvim",
+        lazy = false,
+        priority = 1000,
+        opts = {},
+    },
     -- TODO: Reset theming for lightline
     'nvim-tree/nvim-tree.lua',
     'nvim-tree/nvim-web-devicons',
 
-    -- Themeing
-    -- 'RRethy/base16-nvim',
+    -- Prose
+    {
+        "iamcco/markdown-preview.nvim",
+        cmd = { "MarkdownPreviewToggle", "MarkdownPreview", "MarkdownPreviewStop" },
+        ft = { "markdown" },
+        build = function() vim.fn["mkdp#util#install"]() end,
+    },
 
     -- Tim Pope extravaganza
     'tpope/vim-sensible',
@@ -126,6 +138,12 @@ return {
 
             require('mason').setup({})
             require('mason-lspconfig').setup({
+                ensure_installed = {
+                    'tsserver',
+                    'eslint',
+                    'html',
+                    'cssls'
+                },
                 handlers = {
                     lsp_zero.default_setup,
                     lua_ls = function()
@@ -158,11 +176,12 @@ return {
     'jose-elias-alvarez/typescript.nvim',
 
     -- Pretties
-    -- This is cool, but forces `termguicolors`, which forces more complex theming.
-    -- {
-    --   'norcalli/nvim-colorizer.lua',
-    --   config = function()
-    --     require('colorizer').setup()
-    --   end,
-    -- }
+    -- 'RRethy/nvim-base16',
+    -- 'xiyaowong/transparent.nvim',
+    {
+        'norcalli/nvim-colorizer.lua',
+        config = function()
+            require('colorizer').setup()
+        end,
+    }
 }

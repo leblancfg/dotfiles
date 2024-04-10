@@ -1,7 +1,7 @@
 vim.opt.showmode = false
 
 vim.g.lightline = {
-    colorscheme = 'srcery_drk',
+    colorscheme = 'tokyonight',
     active = {
         left = { { 'mode', 'paste' }, { 'fugitive', 'readonly', 'filename', 'modified' } },
         right = { { 'lineinfo' }, { 'percent' } }

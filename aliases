@@ -136,7 +136,9 @@ function grbm () {
 alias grbc="git rebase --continue"
 alias garp="git add . && grc"
 alias gcan="git commit --amend --no-edit"
-alias gdmno="git diff $(main_branch) --name-only"
+function gdmno () {
+    git diff $(main_branch) --name-only
+}
 
 # Github cli
 alias ghpr="gh pr create"

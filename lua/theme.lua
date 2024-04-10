@@ -1,19 +1,37 @@
-vim.cmd [[
-  highlight Normal guifg=NONE guibg=NONE
-  highlight Bold gui=bold
-  highlight Boolean ctermfg=6
-  highlight Comment ctermfg=1
-  highlight Constant ctermfg=10
-  highlight Number ctermfg=11
-  highlight Identifier ctermfg=4
-  highlight Statement ctermfg=5
-  highlight PreProc ctermfg=11
-  highlight TSStringRegex ctermfg=6
-  highlight TSConstantBuiltin ctermfg=3
-  highlight Type ctermfg=11
-  highlight Special ctermfg=3
-  highlight Underlined cterm=underline
-  highlight MatchParen ctermfg=4 ctermbg=2
-  highlight VertSplit guifg=NONE guibg=NONE ctermfg=NONE ctermbg=NONE
-  highlight SignColumn guifg=NONE guibg=NONE ctermfg=NONE ctermbg=NONE
-]]
+vim.cmd[[colorscheme tokyonight]]
+
+-- But make it light
+-- require('base16-colorscheme').setup({
+--     base00 = '#e7e9db', base01 = '#b9b6b0', base02 = '#8d8687', base03 = '#776e71',
+--     base04 = '#41323f', base05 = '#e96ba8', base06 = '#815ba4', base07 = '#fec418',
+--     base08 = '#ef6155', base09 = '#f99b15', base0A = '#48b685', base0B = '#06b6ef',
+--     base0C = '#815ba4', base0D = '#48b685', base0E = '#06b6ef', base0F = '#f99b15'
+-- })
+-- require('base16-colorscheme').setup({
+--     base00 = '#2f1e2e', base01 = '#41323f', base02 = '#4f424c', base03 = '#776e71', base04 = '#8d8687',
+--     base05 = '#a39e9b',
+--     -- base05 = '#4f424c',
+--     base06 = '#b9b6b0', base07 = '#e7e9db', base08 = '#ef6155', base09 = '#f99b15', base0A = '#fec418',
+--     base0B = '#48b685', base0C = '#5bc4bf', base0D = '#06b6ef', base0E = '#815ba4', base0F = '#e96ba8',
+-- })
+
+-- vim.cmd [[
+--   highlight Normal guibg=NONE ctermbg=NONE guifg=black ctermfg=black 
+--   highlight VertSplit guifg=NONE guibg=NONE ctermfg=NONE ctermbg=NONE
+--   highlight SignColumn guifg=NONE guibg=NONE ctermfg=NONE ctermbg=NONE
+--   highlight Comment guifg=grey guibg=NONE ctermfg=grey ctermbg=NONE
+-- ]]
+-- highlight Bold cterm=bold gui=bold
+-- highlight Underlined cterm=underline gui=underline
+-- highlight Boolean ctermfg=6
+-- highlight Comment ctermfg=1
+-- highlight Constant ctermfg=10
+-- highlight Number ctermfg=11
+-- highlight Identifier ctermfg=4
+-- highlight Statement ctermfg=5
+-- highlight PreProc ctermfg=11
+-- highlight TSStringRegex ctermfg=6
+-- highlight TSConstantBuiltin ctermfg=3
+-- highlight Type ctermfg=11
+-- highlight Special ctermfg=3
+-- highlight MatchParen ctermfg=4 ctermbg=2
