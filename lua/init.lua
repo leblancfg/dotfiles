@@ -41,4 +41,4 @@ require('lazy').setup('plugins', {
     },
 })
 
-require("theme")
+vim.cmd[[colorscheme tokyonight]]

@@ -6,3 +6,8 @@ vim.api.nvim_create_autocmd('BufWritePre', {
         vim.lsp.buf.format()
     end,
 })
+require("mason").setup {
+  registries = {
+    "file:~/src/github.com/mason-org/mason-registry",
+  }
+}

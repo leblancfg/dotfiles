@@ -4,10 +4,26 @@ return {
     'itchyny/lightline.vim',
     'mike-hearn/base16-vim-lightline',
     {
+        "f-person/auto-dark-mode.nvim",
+        config = {
+            update_interval = 1000,
+            set_dark_mode = function()
+                vim.o.background = 'dark'
+                -- vim.api.nvim_set_option("background", "dark")
+                -- vim.cmd("colorscheme gruvbox")
+            end,
+            set_light_mode = function()
+                vim.o.background = 'light'
+                -- vim.api.nvim_set_option("background", "light")
+                -- vim.cmd("colorscheme gruvbox")
+            end,
+        },
+    },
+    {
         "folke/tokyonight.nvim",
         lazy = false,
         priority = 1000,
-        opts = {},
+        opts = { style = 'moon' },
     },
     -- TODO: Reset theming for lightline
     'nvim-tree/nvim-tree.lua',
@@ -56,6 +72,8 @@ return {
     -- Snippets
     {
         "L3MON4D3/LuaSnip",
+        version = "v2.*",
+        build = "make install_jsregexp",
         keys = function()
             return {}
         end,
@@ -131,7 +149,7 @@ return {
                     timeout_ms = 10000,
                 },
                 servers = {
-                    ['null-ls'] = { 'javascript', 'typescript', 'typescriptreact', 'jsx', 'css' },
+                    ['null-ls'] = { 'javascript', 'typescript', 'typescriptreact', 'jsx', 'css', 'rust', 'sql'},
                     ['ruff-lsp'] = { 'python' },
                 },
             })
@@ -142,7 +160,7 @@ return {
                     'tsserver',
                     'eslint',
                     'html',
-                    'cssls'
+                    'cssls',
                 },
                 handlers = {
                     lsp_zero.default_setup,
