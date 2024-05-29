@@ -69,3 +69,9 @@ vim.keymap.set('n', '<Leader>a', '<cmd>A<CR>')
 vim.keymap.set('n', '<Leader>as', '<cmd>AS<CR>')
 vim.keymap.set('n', '<Leader>av', '<cmd>AV<CR>')
 vim.keymap.set('n', '<Leader>at', '<cmd>AT<CR>')
+
+
+-- Whisper.cpp
+vim.api.nvim_set_keymap('i', '<C-G>', '<C-O>:!whisper.nvim<CR><C-O>:lua vim.fn.setreg("a", vim.fn.system("cat /tmp/whisper.nvim | tail -n 1 | xargs -0 | tr -d \'\\n\' | sed -e \'s/^[[:space:]]*//\'"))<CR><C-R>a', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<C-G>', ':!whisper.nvim<CR>:lua vim.fn.setreg("a", vim.fn.system("cat /tmp/whisper.nvim | tail -n 1 | xargs -0 | tr -d \'\\n\' | sed -e \'s/^[[:space:]]*//\'"))<CR>"ap', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('v', '<C-G>', 'c<C-O>:!whisper.nvim<CR><C-O>:lua vim.fn.setreg("a", vim.fn.system("cat /tmp/whisper.nvim | tail -n 1 | xargs -0 | tr -d \'\\n\' | sed -e \'s/^[[:space:]]*//\'"))<CR><C-R>a', { noremap = true, silent = true })

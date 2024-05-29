@@ -2,8 +2,10 @@
 -- Ah but just terminal colors is much less jarring. No fancy colors but shit's behaved.
 -- vim.opt.termguicolors = true
 
--- Swapfiles are more trouble than they're worth
+-- Modelines and swapfiles are more trouble than they're worth
 vim.opt.swapfile = false
+vim.opt.modeline = false
+vim.opt.modelines = 0
 
 -- Highlights
 -- Nothing during search

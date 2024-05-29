@@ -33,9 +33,10 @@ source $ZSH/oh-my-zsh.sh
 [ -f /opt/dev/dev.sh ] && source /opt/dev/dev.sh
 
 # The next line updates PATH for the Google Cloud SDK.
-if [ -f '$HOME/google-cloud-sdk/path.zsh.inc' ]; then . '$HOME/google-cloud-sdk/path.zsh.inc'; fi
+if [ -f "$(brew --prefix)/share/google-cloud-sdk/path.zsh.inc" ]; then source "$(brew --prefix)/share/google-cloud-sdk/path.zsh.inc"; fi
+# if [ -f '$HOME/google-cloud-sdk/path.zsh.inc' ]; then . '$HOME/google-cloud-sdk/path.zsh.inc'; fi
 # The next line enables shell command completion for gcloud.
-if [ -f '$HOME/google-cloud-sdk/completion.zsh.inc' ]; then . '$HOME/google-cloud-sdk/completion.zsh.inc'; fi
+# if [ -f '$HOME/google-cloud-sdk/completion.zsh.inc' ]; then . '$HOME/google-cloud-sdk/completion.zsh.inc'; fi
 
 # Userland niceities
 export PATH="$HOME/.local/bin:$PATH"
@@ -85,8 +86,12 @@ fi
 # and themes. Aliases can be placed here, though oh-my-zsh users are encouraged
 # to define aliases within the ZSH_CUSTOM folder.  For a full list of active
 # aliases, run `alias`.
-export CLOUDSDK_PYTHON=/usr/bin/python3
+# export CLOUDSDK_PYTHON=/usr/bin/python3
 source ~/.aliases
+
+# Talk to vim
+export WHISPER_CPP_HOME=$HOME/src/github.com/ggerganov/whisper.cpp
+PATH=$PATH:$WHISPER_CPP_HOME/examples/whisper.nvim/
 
 # One Password
 ONEPASSPLUGS=$HOME/leblancfg/.config/op/plugins.sh
