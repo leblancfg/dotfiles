@@ -49,7 +49,7 @@ return {
 
     -- Treesitter
     'nvim-treesitter/nvim-treesitter',
-    'nvim-treesitter.configs',
+    -- 'nvim-treesitter.configs',
     "HiPhish/nvim-ts-rainbow2",
 
     -- LSP
@@ -100,13 +100,6 @@ return {
 
             cmp.setup({
                 formatting = lsp_zero.cmp_format(),
-                -- mapping = cmp.mapping.preset.insert({
-                --     ['<C-Space>'] = cmp.mapping.complete(),
-                --     ['<C-u>'] = cmp.mapping.scroll_docs(-4),
-                --     ['<C-d>'] = cmp.mapping.scroll_docs(4),
-                --     ['<C-n>'] = cmp_action.luasnip_jump_forward(),
-                --     ['<C-p>'] = cmp_action.luasnip_jump_backward(),
-                -- })
             })
         end
     },
