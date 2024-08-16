@@ -23,7 +23,7 @@ fi
 ZSH_THEME="agnoster"
 HYPHEN_INSENSITIVE="true"
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git ripgrep)
+plugins=(git)
 
 source $ZSH/oh-my-zsh.sh
 
