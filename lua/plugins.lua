@@ -25,10 +25,16 @@ return {
         priority = 1000,
         opts = { style = 'moon' },
     },
-    -- TODO: Reset theming for lightline
-    'nvim-tree/nvim-tree.lua',
-    'nvim-tree/nvim-web-devicons',
-
+    {
+        "nvim-neo-tree/neo-tree.nvim",
+        branch = "v3.x",
+        dependencies = {
+            "nvim-lua/plenary.nvim",
+            "nvim-tree/nvim-web-devicons", -- not strictly required, but recommended
+            "MunifTanjim/nui.nvim",
+            -- "3rd/image.nvim", -- Optional image support in preview window: See `# Preview Mode` for more information
+        }
+    },
     -- Prose
     {
         "iamcco/markdown-preview.nvim",
@@ -142,7 +148,7 @@ return {
                     timeout_ms = 10000,
                 },
                 servers = {
-                    ['null-ls'] = { 'javascript', 'typescript', 'typescriptreact', 'jsx', 'css', 'rust', 'sql'},
+                    ['null-ls'] = { 'javascript', 'typescript', 'typescriptreact', 'jsx', 'css', 'rust', 'sql' },
                     ['ruff-lsp'] = { 'python' },
                 },
             })
