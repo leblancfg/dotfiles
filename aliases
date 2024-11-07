@@ -48,10 +48,6 @@ function watch_tests() {
     fi
 	PYTHON_ENV=test rm -f .testmond\* && ptw --runner "pytest --testmon -s $CATCH_WARNINGS tests"
 }
-function jcue() {
-    jq ".$1" ~/projects/os/job_requirements/requirements.json |
-    python .tmp/generate_cue.py --prefix="$2"
-}
 alias install-watch='pip install pytest-watch pytest-testmon'
 
 ## Jupyter Notebook
@@ -197,7 +193,7 @@ function dryrun () {
     dbt compile --model "$@" |
     awk '/[0-9]{2}:[0-9]{2}:[0-9]{2}  Compiled node/ {flag=1; next} flag' |
     tee /dev/fd/2 |
-    bq query --nouse-legacy-sql --dry_run
+    bq query --use_legacy_sql=false --dry_run
 }
 
 ## Moving around
@@ -237,10 +233,6 @@ function dfpull() {
 	./install  2>&1 >/dev/null
     )
 }
-
-# Spin
-alias spinrmrf="spin destroy --all --quiet -y"
-alias spinreset="spin destroy --all -y && spin up os --no-snapshots --config os.branch=spin && spin ssh"
 
 ## Etc
 alias cl="clear"
