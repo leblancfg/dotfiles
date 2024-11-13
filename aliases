@@ -163,6 +163,7 @@ alias ghtfr="gh pr edit --add-reviewer ali-hdr2,meganbarlow,sprine"
 alias ghtfros="gh pr edit --add-reviewer stevenwu4,meganbarlow,nikodraca,MCDAngelo,ali-hdr2,Senjai"
 alias ghvw="gh pr view --web"
 alias ghurl="gh pr view --json url -q '.url' |  tr -d '\n'"
+alias ghcp="gh pr view --json url -q '.url' |  tr -d '\n' | pbcopy"
 
 # Common workflows
 alias gpm="gitp && ghpr -f && sleep 10 && ghm"
