@@ -4,6 +4,7 @@ vim.api.nvim_set_keymap('', '<Bslash>', 'gt', {})
 
 -- Remove this footgun I never use
 vim.keymap.set("n", "Q", "<nop>")
+vim.keymap.set('n', 'QQ', ':qa!<CR>')
 
 -- Copy-paste, works with Cygwin and mouse-enabled X Server on Linux
 -- vim.api.nvim_set_keymap('n', '<leader>y', '"+y', { noremap = true, silent = true })

@@ -148,7 +148,7 @@ return {
                 -- see :help lsp-zero-keybindings
                 -- to learn the available actions
                 lsp_zero.default_keymaps({ buffer = bufnr })
-                if client.name == 'ruff_lsp' then
+                if client.name == 'ruff' then
                     -- Disable hover in favor of Pyright
                     client.server_capabilities.hoverProvider = false
                 end
@@ -161,7 +161,7 @@ return {
                 },
                 servers = {
                     ['null-ls'] = { 'javascript', 'typescript', 'typescriptreact', 'jsx', 'css', 'rust', 'sql' },
-                    ['ruff-lsp'] = { 'python' },
+                    ['ruff'] = { 'python' },
                 },
             })
 

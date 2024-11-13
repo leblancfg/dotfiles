@@ -40,6 +40,7 @@ if [ -f "$(brew --prefix)/share/google-cloud-sdk/path.zsh.inc" ]; then source "$
 
 # Userland niceities
 export PATH="$HOME/.local/bin:$PATH"
+export PATH="$PATH:$HOME/go/bin"
 
 # Use that brew stuff
 [[ -x /usr/local/bin/brew ]] && eval $(/usr/local/bin/brew shellenv)

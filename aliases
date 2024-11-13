@@ -1,6 +1,10 @@
 # Just little things
 alias so=source
 alias watch="fd . | entr"
+function slurp() {
+    extension="${1:-py}"
+    fd -e "$extension" -x sh -c 'echo "# {}"; cat {}' | pbcopy
+}
 
 # Finder stuff
 
@@ -169,6 +173,13 @@ function blacken () {
 }
 
 ## Pandoc - generate Bootstrap HTML
+function panodt () {
+    filename=$(basename -- "$1")
+    filename="${filename%.*}"
+    OUTPUT_FILENAME="$filename.odt"
+    pandoc "$1" --variable colorlinks=true -o "$OUTPUT_FILENAME"
+    echo "$OUTPUT_FILENAME"
+}
 function panstrap () {
 	DIR="$HOME/Templates"
     # If there's a second argument, use that as the output filename
