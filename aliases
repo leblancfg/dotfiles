@@ -143,6 +143,7 @@ function gdmno () {
 # Github cli
 alias ghpr="gh pr create"
 alias ghm="gh pr checks --watch && gh pr merge --merge"
+alias ghs="gh pr checks --watch && gh pr merge --squash"
 function ghmm() {
     PR_ID=$1
     END_TIME=$((SECONDS+1800))  # 30 minutes from now
@@ -159,8 +160,7 @@ function ghmm() {
 }
 # Tag for review
 alias ghar="gh pr edit --add-reviewer"
-alias ghtfr="gh pr edit --add-reviewer ali-hdr2,meganbarlow,sprine"
-alias ghtfros="gh pr edit --add-reviewer stevenwu4,meganbarlow,nikodraca,MCDAngelo,ali-hdr2,Senjai"
+alias ghtfr="gh pr edit --add-reviewer btimothy-har,nikodraca,wjwatkinson"
 alias ghvw="gh pr view --web"
 alias ghurl="gh pr view --json url -q '.url' |  tr -d '\n'"
 alias ghcp="gh pr view --json url -q '.url' |  tr -d '\n' | pbcopy"

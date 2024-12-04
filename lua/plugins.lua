@@ -161,7 +161,6 @@ return {
                 },
                 servers = {
                     ['null-ls'] = { 'javascript', 'typescript', 'typescriptreact', 'jsx', 'css', 'rust', 'sql' },
-                    ['ruff'] = { 'python' },
                 },
             })
 
