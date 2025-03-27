@@ -166,12 +166,13 @@ return {
 
             require('mason').setup({})
             require('mason-lspconfig').setup({
-                -- ensure_installed = {
-                --     'tsserver',
-                --     'eslint',
-                --     'html',
-                --     'cssls',
-                -- },
+                ensure_installed = {
+                    'eslint',
+                    'html',
+                    'cssls',
+                    'ruff',
+                    -- 'basedpyright',
+                },
                 handlers = {
                     lsp_zero.default_setup,
                     lua_ls = function()

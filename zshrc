@@ -9,6 +9,7 @@ stty -ixon -ixoff
 export LS_COLORS=''  # Prettier `fd`
 export ZSH="$HOME/.oh-my-zsh"
 export REPLACE_RC='no'  # Don't overwrite the zshrc if installing OMZ
+export ZVM_CURSOR_STYLE_ENABLED=false  # Attempt at blinking cursor
 
 # First, install oh-my-zsh if it's not present
 if [ ! -d ~/.oh-my-zsh ];then
@@ -100,3 +101,4 @@ ONEPASSPLUGS=$HOME/leblancfg/.config/op/plugins.sh
 
 zstyle ':completion:*' menu select
 fpath+=~/.zfunc
+eval "$(direnv hook zsh)"

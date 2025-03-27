@@ -90,7 +90,7 @@ profile_default/
 ipython_config.py
 
 # pyenv
-.python-version
+# .python-version
 
 # PEP 582; used by e.g. github.com/David-OConnor/pyflow
 __pypackages__/
@@ -277,6 +277,7 @@ todo.md
 bin/notebooks
 .projections.json
 .aider*
+CLAUDE.md
 
 ### wtf
 sorbet.metrics

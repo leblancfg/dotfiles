@@ -2,8 +2,11 @@
 alias so=source
 alias watch="fd . | entr"
 function slurp() {
-    extension="${1:-py}"
-    fd -e "$extension" -x sh -c 'echo "# {}"; cat {}' | pbcopy
+    if [ -n "$1" ]; then
+        fd -t f -e "$1" -E "*.svg" -E "*.ico" -E output.css -x sh -c 'echo "# {}"; cat {}' | pbcopy
+    else
+        fd -t f -E svg -E "*.svg" -E "*.ico" -E output.css -x sh -c 'echo "# {}"; cat {}' | pbcopy
+    fi
 }
 
 # Finder stuff
@@ -107,7 +110,9 @@ alias gitpf="gitp --force-with-lease"
 function gmp () {
     MAIN_BRANCH=$(git symbolic-ref refs/remotes/origin/HEAD | xargs basename)
     git checkout $MAIN_BRANCH && git fetch && git pull origin $MAIN_BRANCH;
-    }
+}
+# Optimize for fat fingers ¯\_(ツ)_/¯
+alias mp="gmp"
 
 # Git squash last n commits
 function gits () {
@@ -178,7 +183,7 @@ function panodt () {
     filename=$(basename -- "$1")
     filename="${filename%.*}"
     OUTPUT_FILENAME="$filename.odt"
-    pandoc "$1" --variable colorlinks=true -o "$OUTPUT_FILENAME"
+    pandoc "$1" --variable colorlinks=true --filter mermaid-filter -o "$OUTPUT_FILENAME"
     echo "$OUTPUT_FILENAME"
 }
 function panstrap () {

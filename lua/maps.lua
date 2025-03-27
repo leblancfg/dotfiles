@@ -70,3 +70,12 @@ vim.keymap.set('n', '<Leader>a', '<cmd>A<CR>')
 vim.keymap.set('n', '<Leader>as', '<cmd>AS<CR>')
 vim.keymap.set('n', '<Leader>av', '<cmd>AV<CR>')
 vim.keymap.set('n', '<Leader>at', '<cmd>AT<CR>')
+
+-- Get model name in dbt files
+function Get_file_name_without_extension()
+    local filename = vim.fn.expand('%:t:r')
+    vim.fn.system('pbcopy', filename)
+    print('Copied: ' .. filename)
+end
+
+vim.api.nvim_set_keymap('n', '<leader>o', ':lua Get_file_name_without_extension()<CR>', { noremap = true, silent = true })
