@@ -172,6 +172,9 @@ return {
                     'cssls',
                     'ruff',
                     -- 'basedpyright',
+                    'ruby_lsp',
+                    'solargraph',
+                    'standardrb',
                 },
                 handlers = {
                     lsp_zero.default_setup,
@@ -179,6 +182,31 @@ return {
                         -- (Optional) Configure lua language server for neovim
                         local lua_opts = lsp_zero.nvim_lua_ls()
                         require('lspconfig').lua_ls.setup(lua_opts)
+                    end,
+                    ruby_lsp = function()
+                        require('lspconfig').ruby_lsp.setup({
+                            cmd = { "ruby-lsp" },
+                            filetypes = { "ruby" },
+                            root_dir = require('lspconfig.util').root_pattern("Gemfile", ".git"),
+                        })
+                    end,
+                    solargraph = function()
+                        require('lspconfig').solargraph.setup({
+                            filetypes = { "ruby" },
+                            root_dir = require('lspconfig.util').root_pattern("Gemfile", ".git"),
+                            settings = {
+                                solargraph = {
+                                    diagnostics = true,
+                                    completion = true,
+                                }
+                            }
+                        })
+                    end,
+                    standardrb = function()
+                        require('lspconfig').standardrb.setup({
+                            filetypes = { "ruby" },
+                            root_dir = require('lspconfig.util').root_pattern("Gemfile", ".git"),
+                        })
                     end,
                 }
             })

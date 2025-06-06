@@ -70,7 +70,13 @@ fi
 mkdir -p $ZSH_CUSTOM/plugins/poetry
 [ -x "$(command -v poetry)" ] && poetry completions zsh > $ZSH_CUSTOM/plugins/poetry/_poetry
 
-[[ -f /opt/dev/sh/chruby/chruby.sh ]] && { type chruby >/dev/null 2>&1 || chruby () { source /opt/dev/sh/chruby/chruby.sh; chruby "$@"; } }
+[[ -f /opt/dev/sh/chruby/chruby.sh ]] && {
+  type chruby >/dev/null 2>&1 || chruby () { source /opt/dev/sh/chruby/chruby.sh; chruby "$@"; }
+  # Load Ruby 3.3.6 by default if available
+  if type chruby > /dev/null 2>&1; then
+    chruby 3.4.2 2>/dev/null || true
+  fi
+}
 
 # Spin completion
 autoload -Uz compinit && compinit
@@ -102,3 +108,8 @@ ONEPASSPLUGS=$HOME/leblancfg/.config/op/plugins.sh
 zstyle ':completion:*' menu select
 fpath+=~/.zfunc
 eval "$(direnv hook zsh)"
+
+# cloudplatform: add Shopify clusters to your local kubernetes config
+export KUBECONFIG=${KUBECONFIG:+$KUBECONFIG:}/Users/leblancfg/.kube/config:/Users/leblancfg/.kube/config.shopify.cloudplatform
+
+[[ -f /opt/dev/sh/chruby/chruby.sh ]] && { type chruby >/dev/null 2>&1 || chruby () { source /opt/dev/sh/chruby/chruby.sh; chruby "$@"; } }

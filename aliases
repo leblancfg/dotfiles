@@ -141,7 +141,7 @@ function grbm () {
 alias grbc="git rebase --continue"
 alias garp="git add . && grc"
 alias gcan="git commit --amend --no-edit"
-function gdmno () {
+function gdn () {
     git diff $(main_branch) --name-only
 }
 
@@ -270,6 +270,7 @@ function notify() {
     "$INCANTATION" && terminal-notifier -title "$COMMAND" -message "Task complete" -contentImage "https://cdn4.iconfinder.com/data/icons/logos-brands-5/24/shopify-128.png"
 }
 alias clip='python $HOME/dotfiles/scripts/clipboard_md.py'
+alias tomato=$HOME/dotfiles/scripts/tomato
 
 function syn() {
     WORD="$1"

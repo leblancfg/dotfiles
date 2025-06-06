@@ -1,0 +1,41 @@
+#!/usr/bin/env python3
+
+import sys
+import time
+
+# Use ANSI escape codes for colors
+RED_BACKGROUND = '\033[41m'
+NORMAL_BACKGROUND = '\033[49m'
+CLEAR_SCREEN = '\033[2J'
+CURSOR_HOME = '\033[H'
+
+def clear_and_color_bg(color_code):
+    print(f"{color_code}{CLEAR_SCREEN}{CURSOR_HOME}", end='')
+
+def big_countdown(minutes):
+    for remaining in range(minutes, -1, -1):
+        clear_and_color_bg(RED_BACKGROUND)
+        mins, secs = divmod(remaining * 60, 60)
+        timer = f"{mins:02}:{secs:02}"
+        print(f"\n\n\n\n\n\n\t\t\t\033[1;97m{timer}\033[0m\n")
+        sys.stdout.flush()
+        time.sleep(60) if remaining > 0 else time.sleep(0)
+
+def blink_background(duration_secs, blink_speed=0.5):
+    end_time = time.time() + duration_secs
+    while time.time() < end_time:
+        clear_and_color_bg(NORMAL_BACKGROUND)
+        sys.stdout.flush()
+        time.sleep(blink_speed)
+        clear_and_color_bg(RED_BACKGROUND)
+        sys.stdout.flush()
+        time.sleep(blink_speed)
+
+def main():
+    big_countdown(25)
+    blink_background(5)
+    clear_and_color_bg(NORMAL_BACKGROUND)
+    print("\033[0mDone!\n")
+
+if __name__ == '__main__':
+    main()

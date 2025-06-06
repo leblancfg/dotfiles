@@ -1,6 +1,8 @@
 -- Set custom maps
 vim.g.mapleader = ","
-vim.api.nvim_set_keymap('', '<Bslash>', 'gt', {})
+vim.api.nvim_set_keymap('', '<bslash>', 'gt', {})
+-- Move current tab to tab index zero
+vim.api.nvim_set_keymap('n', '<leader>0', ':tabmove 0<CR>', {})
 
 -- Remove this footgun I never use
 vim.keymap.set("n", "Q", "<nop>")
