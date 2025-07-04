@@ -163,6 +163,18 @@ function ghmm() {
     done
     echo "Time limit reached. PR $PR_ID was not merged."
 }
+function pr2slack() {
+    local url=$(pbpaste)
+    if [[ $url =~ ^https://github\.com/([^/]+)/([^/]+)/pull/([0-9]+) ]]; then
+        local api="https://api.github.com/repos/${BASH_REMATCH[1]}/${BASH_REMATCH[2]}/pulls/${BASH_REMATCH[3]}"
+        local title=$(curl -s "$api" | grep -o '"title": "[^"]*' | cut -d'"' -f4)
+        echo "<$url|[Needs review]> $title" | pbcopy
+    else
+        echo "Invalid GitHub PR URL" >&2
+        return 1
+    fi
+}
+
 # Tag for review
 alias ghar="gh pr edit --add-reviewer"
 alias ghtfr="gh pr edit --add-reviewer btimothy-har,nikodraca,wjwatkinson"

@@ -1,16 +1,13 @@
--- require("neo-tree").setup({
---     sort = {
---         sorter = "case_sensitive",
---     },
---     view = {
---         width = 30,
---         number = true,
---         relativenumber = true,
---     },
---     filters = {
---         dotfiles = true,
---     },
--- })
+require("neo-tree").setup({
+    filesystem = {
+       window = {
+         mappings = {
+           -- disable fuzzy finder
+           ["/"] = "noop"
+         }
+       }
+     },
+})
 vim.api.nvim_set_keymap('n', '<C-n>', ':Neotree toggle<CR>', { noremap = true, silent = true })
 
 vim.g.nvim_tree_ignore = { '.git', 'egg-info', 'dist-info', '__editable__', '__pycache__' }

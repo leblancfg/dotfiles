@@ -4,7 +4,6 @@
 # Terminal settings
 stty -ixon -ixoff
 
-
 # Path to your oh-my-zsh installation.
 export LS_COLORS=''  # Prettier `fd`
 export ZSH="$HOME/.oh-my-zsh"
@@ -67,9 +66,6 @@ else
 fi
 
 # Autocomplete
-mkdir -p $ZSH_CUSTOM/plugins/poetry
-[ -x "$(command -v poetry)" ] && poetry completions zsh > $ZSH_CUSTOM/plugins/poetry/_poetry
-
 [[ -f /opt/dev/sh/chruby/chruby.sh ]] && {
   type chruby >/dev/null 2>&1 || chruby () { source /opt/dev/sh/chruby/chruby.sh; chruby "$@"; }
   # Load Ruby 3.3.6 by default if available
@@ -94,12 +90,7 @@ fi
 # and themes. Aliases can be placed here, though oh-my-zsh users are encouraged
 # to define aliases within the ZSH_CUSTOM folder.  For a full list of active
 # aliases, run `alias`.
-# export CLOUDSDK_PYTHON=/usr/bin/python3
 source ~/.aliases
-
-# Talk to vim
-export WHISPER_CPP_HOME=$HOME/src/github.com/ggerganov/whisper.cpp
-PATH=$PATH:$WHISPER_CPP_HOME/examples/whisper.nvim/
 
 # One Password
 ONEPASSPLUGS=$HOME/leblancfg/.config/op/plugins.sh
