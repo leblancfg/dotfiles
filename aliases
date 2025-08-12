@@ -61,6 +61,9 @@ alias install-watch='pip install pytest-watch pytest-testmon'
 alias jn="cd && jupyter notebook &> /dev/null &"
 alias jnk='ps -ax | grep "jupyter-notebook" | awk "{print \$1}" | xargs kill'
 
+## AI coding
+alias clc="claude --dangerously-skip-permissions"
+
 ### Vim everywhere
 # But actually, neovim
 alias vi=nvim
@@ -105,7 +108,7 @@ function gitc () { git add --all && if [ $# -eq 0 ]; then git commit; else git c
 # Push to master
 function gitp () { git push origin $(git branch --show-current) $@; }
 alias gitpf="gitp --force-with-lease"
-
+alias gags="git add . && git stash"
 # Back to master and pull
 function gmp () {
     MAIN_BRANCH=$(git symbolic-ref refs/remotes/origin/HEAD | xargs basename)

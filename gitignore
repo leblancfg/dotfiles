@@ -279,8 +279,11 @@ bin/notebooks
 .projections.json
 .aider*
 CLAUDE.md
-.claude/
+# .claude/
 
 ### wtf
 sorbet.metrics
 sorbet.outputs
+
+### Claude
+*swarm.yml
