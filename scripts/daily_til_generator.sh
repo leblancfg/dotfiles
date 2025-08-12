@@ -20,7 +20,7 @@ log_message() {
 cleanup() {
     if [ $? -ne 0 ]; then
         log_message "Script failed, cleaning up..."
-        cd "$BLOG_REPO_PATH" 2>/dev/null && git checkout main 2>/dev/null || true
+        cd "$BLOG_REPO_PATH" 2>/dev/null && git checkout dev 2>/dev/null || true
     fi
 }
 trap cleanup EXIT
@@ -46,10 +46,10 @@ fi
 # Navigate to blog repository
 cd "$BLOG_REPO_PATH"
 
-# Ensure we're on the main branch and up to date
+# Ensure we're on the dev branch and up to date (dev is the base for feature branches)
 log_message "Updating blog repository..."
-git checkout main > /dev/null 2>&1
-git pull origin main > /dev/null 2>&1
+git checkout dev > /dev/null 2>&1
+git pull origin dev > /dev/null 2>&1
 
 # Generate the TIL article
 log_message "Generating TIL article..."
@@ -109,7 +109,7 @@ This TIL article was automatically generated from my shell history using AI anal
     PR_URL=$(gh pr create \
         --title "TIL: $TITLE" \
         --body "$PR_BODY" \
-        --base main \
+        --base dev \
         --head "$BRANCH_NAME" \
         2>&1) || {
         log_message "Failed to create PR. You can create it manually."
@@ -124,7 +124,7 @@ else
     log_message "Branch $BRANCH_NAME has been pushed. Create a PR manually."
 fi
 
-# Return to main branch
-git checkout main > /dev/null 2>&1
+# Return to dev branch
+git checkout dev > /dev/null 2>&1
 
 log_message "TIL generation complete!"

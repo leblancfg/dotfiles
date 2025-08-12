@@ -35,6 +35,8 @@ Automated system that analyzes your shell history daily and creates "Today I Lea
 4. **Blog Repository Structure**:
    - Your blog should have a `content/til/` directory for TIL posts
    - Posts should use Markdown with front matter
+   - **Important**: Feature branches are created from `dev`, not `main`
+   - PRs will target the `dev` branch for review
 
 ### Installation as Cron Job
 
@@ -71,10 +73,11 @@ Automated system that analyzes your shell history daily and creates "Today I Lea
 2. **AI Selection**: OpenAI identifies the most interesting/educational command
 3. **Article Generation**: Creates a concise TIL post
 4. **Git Workflow**:
-   - Creates a feature branch
+   - Switches to `dev` branch (base for feature branches)
+   - Creates a feature branch from `dev`
    - Commits the new article
    - Pushes to remote
-   - Opens a PR for review
+   - Opens a PR to merge into `dev` (not `main`)
 
 ## Manual Usage
 
