@@ -228,7 +228,7 @@ tags: ["cli", "terminal", "automation"]
 def main():
     # Configuration
     history_file = Path.home() / '.zsh_history'
-    blog_path = Path.home() / 'code' / 'blog'  # Adjust this to your blog repo path
+    blog_path = Path.home() / 'src' / 'github.com' / 'leblancfg' / 'leblancfg.github.io'
     
     # Allow overriding the date (useful for testing)
     if len(sys.argv) > 1:

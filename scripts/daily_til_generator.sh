@@ -5,9 +5,16 @@
 
 set -euo pipefail
 
+# Load environment variables from .env file if it exists
+if [ -f "$HOME/.env" ]; then
+    set -a
+    source "$HOME/.env"
+    set +a
+fi
+
 # Configuration
 SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
-BLOG_REPO_PATH="${BLOG_REPO_PATH:-$HOME/code/blog}"
+BLOG_REPO_PATH="${BLOG_REPO_PATH:-$HOME/src/github.com/leblancfg/leblancfg.github.io}"
 PYTHON_SCRIPT="$SCRIPT_DIR/generate_til.py"
 LOG_FILE="$HOME/.til_generator.log"
 
@@ -51,9 +58,9 @@ log_message "Updating blog repository..."
 git checkout dev > /dev/null 2>&1
 git pull origin dev > /dev/null 2>&1
 
-# Generate the TIL article
+# Generate the TIL article using UV
 log_message "Generating TIL article..."
-GENERATION_OUTPUT=$(python3 "$PYTHON_SCRIPT" 2>&1) || {
+GENERATION_OUTPUT=$(cd "$SCRIPT_DIR" && uv run python generate_til.py 2>&1) || {
     log_message "Failed to generate TIL article"
     log_message "$GENERATION_OUTPUT"
     exit 1

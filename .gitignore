@@ -219,3 +219,8 @@ $RECYCLE.BIN/
 # End of https://www.gitignore.io/api/vim,linux,macos,python,windows
 
 **/.claude/settings.local.json
+
+# TIL generator project files
+scripts/pyproject.toml
+scripts/.venv/
+scripts/uv.lock
