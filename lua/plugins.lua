@@ -148,7 +148,7 @@ return {
                 -- to learn the available actions
                 lsp_zero.default_keymaps({ buffer = bufnr })
                 if client.name == 'ruff' then
-                    -- Disable hover in favor of Pyright
+                    -- Disable hover in favor of BasedPyright
                     client.server_capabilities.hoverProvider = false
                 end
             end)
@@ -170,13 +170,30 @@ return {
                     'html',
                     'cssls',
                     'ruff',
-                    -- 'basedpyright',
+                    -- Python: use BasedPyright (hover, defs, etc.)
+                    'basedpyright',
                     'ruby_lsp',
                     'solargraph',
                     'standardrb',
+                    -- TypeScript / JavaScript LSP
+                    'tsserver',
                 },
                 handlers = {
                     lsp_zero.default_setup,
+                    basedpyright = function()
+                        require('lspconfig').basedpyright.setup({
+                            settings = {
+                                basedpyright = {
+                                    disableOrganizeImports = true,
+                                },
+                                python = {
+                                    analysis = {
+                                        typeCheckingMode = 'basic',
+                                    },
+                                },
+                            },
+                        })
+                    end,
                     lua_ls = function()
                         -- (Optional) Configure lua language server for neovim
                         local lua_opts = lsp_zero.nvim_lua_ls()

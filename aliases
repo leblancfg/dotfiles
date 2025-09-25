@@ -63,6 +63,7 @@ alias jnk='ps -ax | grep "jupyter-notebook" | awk "{print \$1}" | xargs kill'
 
 ## AI coding
 alias clc="claude --dangerously-skip-permissions"
+alias cdx="codex --dangerously-bypass-approvals-and-sandbox"
 
 ### Vim everywhere
 # But actually, neovim
@@ -230,6 +231,7 @@ function dryrun () {
 
 ## Moving around
 alias t1="tree --dirsfirst -ChFL 1"
+alias devs="rm -rf client/node_modules/.vite node_modules/.vite && dev server"
 alias devus="dev up && dev server"
 alias si="dev cd siphon"
 alias to="dev cd totally-radford"
