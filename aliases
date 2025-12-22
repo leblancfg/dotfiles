@@ -62,7 +62,8 @@ alias jn="cd && jupyter notebook &> /dev/null &"
 alias jnk='ps -ax | grep "jupyter-notebook" | awk "{print \$1}" | xargs kill'
 
 ## AI coding
-alias clc="claude --dangerously-skip-permissions"
+alias clc="CLAUDE_CODE_DISABLE_FEEDBACK_SURVEY=1 devx claude --dangerously-skip-permissions"
+alias cdx="devx codex --dangerously-bypass-approvals-and-sandbox"
 
 ### Vim everywhere
 # But actually, neovim
@@ -112,7 +113,7 @@ alias gags="git add . && git stash"
 # Back to master and pull
 function gmp () {
     MAIN_BRANCH=$(git symbolic-ref refs/remotes/origin/HEAD | xargs basename)
-    git checkout $MAIN_BRANCH && git fetch && git pull origin $MAIN_BRANCH;
+    git checkout $MAIN_BRANCH && git pull origin $MAIN_BRANCH;
 }
 # Optimize for fat fingers ¯\_(ツ)_/¯
 alias mp="gmp"
@@ -152,6 +153,15 @@ function gdn () {
 alias ghpr="gh pr create"
 alias ghm="gh pr checks --watch && gh pr merge --merge"
 alias ghs="gh pr checks --watch && gh pr merge --squash"
+function prmerge() {
+    gh pr checks --watch && \
+    while [ "$(gh pr view --json reviewDecision -q .reviewDecision)" != "APPROVED" ];
+        do echo "⏳ Waiting for approval...";
+        sleep 10;
+    done && \
+    gh pr merge --merge
+}
+
 function ghmm() {
     PR_ID=$1
     END_TIME=$((SECONDS+1800))  # 30 minutes from now
@@ -230,6 +240,8 @@ function dryrun () {
 
 ## Moving around
 alias t1="tree --dirsfirst -ChFL 1"
+alias devs="rm -rf client/node_modules/.vite node_modules/.vite && dev server"
+alias devus="dev up && dev server"
 alias si="dev cd siphon"
 alias to="dev cd totally-radford"
 alias ia="dev cd impulse-api"

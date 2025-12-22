@@ -29,6 +29,19 @@ source $ZSH/oh-my-zsh.sh
 
 ### User configuration
 
+## History Configuration
+HISTFILE=~/.zsh_history
+HISTSIZE=50000
+SAVEHIST=50000
+setopt EXTENDED_HISTORY       # Write timestamp to history
+setopt HIST_EXPIRE_DUPS_FIRST # Expire duplicate entries first when trimming history
+setopt HIST_IGNORE_DUPS       # Don't record an entry that was just recorded again
+setopt HIST_IGNORE_ALL_DUPS   # Delete old recorded entry if new entry is a duplicate
+setopt HIST_FIND_NO_DUPS      # Do not display a line previously found
+setopt HIST_IGNORE_SPACE      # Don't record an entry starting with a space
+setopt HIST_SAVE_NO_DUPS      # Don't write duplicate entries in the history file
+setopt SHARE_HISTORY          # Share history between all sessions
+
 ## Installs
 [ -f /opt/dev/dev.sh ] && source /opt/dev/dev.sh
 
@@ -104,3 +117,6 @@ eval "$(direnv hook zsh)"
 export KUBECONFIG=${KUBECONFIG:+$KUBECONFIG:}/Users/leblancfg/.kube/config:/Users/leblancfg/.kube/config.shopify.cloudplatform
 
 [[ -f /opt/dev/sh/chruby/chruby.sh ]] && { type chruby >/dev/null 2>&1 || chruby () { source /opt/dev/sh/chruby/chruby.sh; chruby "$@"; } }
+
+# Added by tec agent
+[[ -x /Users/leblancfg/.local/state/tec/profiles/base/current/global/init ]] && eval "$(/Users/leblancfg/.local/state/tec/profiles/base/current/global/init zsh)"

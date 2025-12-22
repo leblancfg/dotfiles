@@ -3,6 +3,9 @@ vim.g.mapleader = ","
 vim.api.nvim_set_keymap('', '<bslash>', 'gt', {})
 -- Move current tab to tab index zero
 vim.api.nvim_set_keymap('n', '<leader>0', ':tabmove 0<CR>', {})
+-- Copy the current file path to clipboard
+vim.api.nvim_set_keymap('n', '<leader>ya', ':let @+ = expand("%:p")<CR>', {})
+vim.api.nvim_set_keymap('n', '<leader>yf', ':let @+ = expand("%:p:r")<CR>', {})
 
 -- Remove this footgun I never use
 vim.keymap.set("n", "Q", "<nop>")
@@ -54,7 +57,7 @@ vim.g.metadataBlock = "---\ntitle: Insert Title Here\nauthor: François Leblanc\
 vim.api.nvim_set_keymap('n', '<Leader>m', 'ggm`O<ESC> :put =metadataBlock<CR> ggd2djfI', {})
 
 -- New checkmarked line
-vim.api.nvim_set_keymap('n', '<leader>c', 'o* [ ] <Esc><<A', {})
+vim.api.nvim_set_keymap('n', '<leader>c', 'o* [ ] <C-o><<', {})
 
 -- Create new tab
 vim.api.nvim_set_keymap('n', '<leader><space>', ':tabnew<CR>', {})

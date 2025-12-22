@@ -117,6 +117,20 @@ return {
 
             cmp.setup({
                 formatting = lsp_zero.cmp_format(),
+                sources = {
+                    { name = 'nvim_lsp' },
+                    { name = 'luasnip' },
+                    { name = 'buffer', option = {
+                        get_bufnrs = function()
+                            local buf = vim.api.nvim_get_current_buf()
+                            local byte_size = vim.api.nvim_buf_get_offset(buf, vim.api.nvim_buf_line_count(buf))
+                            if byte_size > 50000 then
+                                return {}
+                            end
+                            return { buf }
+                        end
+                    }},
+                },
             })
         end
     },
@@ -148,7 +162,7 @@ return {
                 -- to learn the available actions
                 lsp_zero.default_keymaps({ buffer = bufnr })
                 if client.name == 'ruff' then
-                    -- Disable hover in favor of Pyright
+                    -- Disable hover in favor of BasedPyright
                     client.server_capabilities.hoverProvider = false
                 end
             end)
@@ -170,13 +184,29 @@ return {
                     'html',
                     'cssls',
                     'ruff',
-                    -- 'basedpyright',
+                    -- Python: use BasedPyright (hover, defs, etc.)
+                    'basedpyright',
+                    -- Ruby: use ruby_lsp only (has built-in RuboCop support)
                     'ruby_lsp',
-                    'solargraph',
-                    'standardrb',
+                    -- TypeScript / JavaScript LSP
+                    'ts_ls',
                 },
                 handlers = {
                     lsp_zero.default_setup,
+                    basedpyright = function()
+                        require('lspconfig').basedpyright.setup({
+                            settings = {
+                                basedpyright = {
+                                    disableOrganizeImports = true,
+                                },
+                                python = {
+                                    analysis = {
+                                        typeCheckingMode = 'basic',
+                                    },
+                                },
+                            },
+                        })
+                    end,
                     lua_ls = function()
                         -- (Optional) Configure lua language server for neovim
                         local lua_opts = lsp_zero.nvim_lua_ls()
@@ -184,27 +214,13 @@ return {
                     end,
                     ruby_lsp = function()
                         require('lspconfig').ruby_lsp.setup({
-                            cmd = { "ruby-lsp" },
+                            cmd = { "bundle", "exec", "ruby-lsp" },
                             filetypes = { "ruby" },
                             root_dir = require('lspconfig.util').root_pattern("Gemfile", ".git"),
-                        })
-                    end,
-                    solargraph = function()
-                        require('lspconfig').solargraph.setup({
-                            filetypes = { "ruby" },
-                            root_dir = require('lspconfig.util').root_pattern("Gemfile", ".git"),
-                            settings = {
-                                solargraph = {
-                                    diagnostics = true,
-                                    completion = true,
-                                }
-                            }
-                        })
-                    end,
-                    standardrb = function()
-                        require('lspconfig').standardrb.setup({
-                            filetypes = { "ruby" },
-                            root_dir = require('lspconfig.util').root_pattern("Gemfile", ".git"),
+                            init_options = {
+                                formatter = "rubocop",
+                                linters = { "rubocop" },
+                            },
                         })
                     end,
                 }
@@ -218,8 +234,20 @@ return {
     },
 
     -- Move around
-    'christoomey/vim-tmux-navigator',
-    'christoomey/vim-tmux-runner',
+    -- 'christoomey/vim-tmux-navigator',  -- Commented out for Zellij migration
+    {
+        "swaits/zellij-nav.nvim",
+        lazy = true,
+        event = "VeryLazy",
+        keys = {
+            { "<c-h>", "<cmd>ZellijNavigateLeft<cr>", { silent = true, desc = "navigate left" } },
+            { "<c-j>", "<cmd>ZellijNavigateDown<cr>", { silent = true, desc = "navigate down" } },
+            { "<c-k>", "<cmd>ZellijNavigateUp<cr>", { silent = true, desc = "navigate up" } },
+            { "<c-l>", "<cmd>ZellijNavigateRight<cr>", { silent = true, desc = "navigate right" } },
+        },
+        opts = {},
+    },
+    -- 'christoomey/vim-tmux-runner',
     {
         'nvim-telescope/telescope.nvim',
         tag = '0.1.5',

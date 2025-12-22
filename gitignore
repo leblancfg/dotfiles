@@ -269,13 +269,14 @@ zsdoc/data
 !/tests/_output/.gitkeep
 
 ### Personal ###
+/.shadowenv.d/
+secrets.*.json
 notes.md
 todo.md
 .testmondata*
 .testmondata
 .testmondata-journal
 .pymon
-bin/notebooks
 .projections.json
 .aider*
 CLAUDE.md
