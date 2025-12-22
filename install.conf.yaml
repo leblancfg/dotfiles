@@ -9,6 +9,7 @@
 - create:
     - ~/.config/nvim/lua/
     - ~/.config/nvim/after/plugin/
+    - ~/.config/zellij/
 
 - link:
     ~/.gitignore:
@@ -29,6 +30,8 @@
       path: vimrc
     ~/.config/nvim/init.vim:
       path: init.vim
+    ~/.config/zellij/config.kdl:
+      path: zellij.kdl
     ~/Templates:
       path: Templates
 
