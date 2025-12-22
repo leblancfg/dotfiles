@@ -241,6 +241,10 @@ keybinds clear-defaults=true {
         bind "j" { MoveFocus "down"; SwitchToMode "normal"; }
         bind "k" { MoveFocus "up"; SwitchToMode "normal"; }
         bind "l" { MoveFocus "right"; SwitchToMode "normal"; }
+        bind "Ctrl h" { Resize "Increase left"; }
+        bind "Ctrl j" { Resize "Increase down"; }
+        bind "Ctrl k" { Resize "Increase up"; }
+        bind "Ctrl l" { Resize "Increase right"; }
         bind "n" { GoToNextTab; SwitchToMode "normal"; }
         bind "o" { FocusNextPane; }
         bind "p" { GoToPreviousTab; SwitchToMode "normal"; }
