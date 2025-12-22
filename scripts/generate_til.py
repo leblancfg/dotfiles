@@ -4,7 +4,7 @@ import json
 import re
 from datetime import datetime
 from pathlib import Path
-from typing import List, Dict, Optional
+from typing import List, Dict, Optional, Set
 import dotenv
 # import subprocess
 
@@ -16,8 +16,14 @@ def get_openai_client():
     import openai
 
     # Use the URL that doesn't need token refresh
-    api_base = os.environ["OPENAI_API_PROXY"]
-    api_key = os.environ["OPENAI_API_KEY"]
+    # Try OPENAI_API_PROXY first, fall back to other options
+    api_base = os.environ.get("OPENAI_API_PROXY") or os.environ.get("OPENAI_API_BASE") or os.environ.get("OPENAI_BASE_URL")
+    if not api_base:
+        raise ValueError("No OpenAI API base URL found in environment variables")
+
+    api_key = os.environ.get("OPENAI_API_KEY")
+    if not api_key:
+        raise ValueError("OPENAI_API_KEY not found in environment variables")
 
     return openai.OpenAI(api_key=api_key, base_url=api_base)
 
@@ -59,6 +65,26 @@ def parse_zsh_history(history_file: Path, target_date: datetime) -> List[str]:
     return commands
 
 
+def load_command_history(history_file: Path) -> Dict:
+    """Load the command history tracking file."""
+    if history_file.exists():
+        try:
+            with open(history_file, "r") as f:
+                return json.load(f)
+        except Exception as e:
+            print(f"Warning: Could not load command history: {e}")
+    return {"commands": []}
+
+
+def save_command_history(history_file: Path, history_data: Dict):
+    """Save the command history tracking file."""
+    try:
+        with open(history_file, "w") as f:
+            json.dump(history_data, f, indent=2)
+    except Exception as e:
+        print(f"Warning: Could not save command history: {e}")
+
+
 def get_published_commands(blog_path: Path) -> List[str]:
     """Extract previously published commands from TIL posts."""
     published_commands = []
@@ -89,7 +115,59 @@ def get_published_commands(blog_path: Path) -> List[str]:
     return published_commands
 
 
-def analyze_commands(commands: List[str], published_commands: List[str]) -> Dict:
+def check_command_similarity(command: str, previous_commands: List[str], client) -> bool:
+    """Use LLM to check if a command is similar to any previously seen commands."""
+    if not previous_commands:
+        return False
+
+    # For efficiency, only check against the most recent 50 commands
+    recent_commands = previous_commands[-50:]
+
+    prompt = f"""Analyze if this command is essentially the same as any previously seen command, just with different parameters.
+
+New command: {command}
+
+Previously seen commands:
+{chr(10).join(recent_commands)}
+
+Consider these factors:
+- Ignore differences in URLs, file paths, IP addresses, or specific values
+- Focus on the command structure and what it does
+- curl with different URLs = similar
+- ssh to different hosts = similar
+- git commands on different repos/branches = similar
+- docker commands with different image names = similar
+
+Return JSON:
+{{
+  "is_similar": true/false,
+  "similar_to": "the previous command it's similar to" or null,
+  "reason": "explanation"
+}}"""
+
+    try:
+        response = client.chat.completions.create(
+            model="gpt-4o-mini",
+            messages=[
+                {
+                    "role": "system",
+                    "content": "You are analyzing shell commands to identify duplicates that only differ in parameters.",
+                },
+                {"role": "user", "content": prompt},
+            ],
+            response_format={"type": "json_object"},
+            temperature=0.3,
+        )
+
+        result = json.loads(response.choices[0].message.content)
+        return result.get("is_similar", False)
+
+    except Exception as e:
+        print(f"Warning: Could not check command similarity: {e}")
+        return False
+
+
+def analyze_commands(commands: List[str], published_commands: List[str], command_history: List[str]) -> Dict:
     """Use OpenAI to analyze commands and find interesting patterns."""
     client = get_openai_client()
 
@@ -98,6 +176,9 @@ def analyze_commands(commands: List[str], published_commands: List[str]) -> Dict
 
     # Create a set of published commands for faster lookup
     published_set = set(published_commands)
+
+    # Combine published commands and command history for comprehensive check
+    all_previous_commands = list(set(published_commands + [cmd["command"] for cmd in command_history]))
 
     # Filter out very common/simple commands AND previously published commands
     filtered_commands = []
@@ -132,6 +213,22 @@ def analyze_commands(commands: List[str], published_commands: List[str]) -> Dict
 
     if not filtered_commands:
         print("No new interesting commands found (all were either common or previously published)")
+        return None
+
+    # Second pass: Use LLM to check for semantic similarity with command history
+    print(f"Checking {len(filtered_commands)} commands for semantic similarity...")
+    final_filtered_commands = []
+
+    for cmd in filtered_commands:
+        if not check_command_similarity(cmd, all_previous_commands, client):
+            final_filtered_commands.append(cmd)
+        else:
+            print(f"  Skipping '{cmd}' - similar to previous command")
+
+    filtered_commands = final_filtered_commands
+
+    if not filtered_commands:
+        print("No new unique commands found after similarity check")
         return None
     
     print(f"After filtering: {len(filtered_commands)} candidate commands remain")
@@ -267,6 +364,7 @@ def main():
     # Configuration
     history_file = Path.home() / ".zsh_history"
     blog_path = Path(os.environ.get("BLOG_REPO_PATH", str(Path.home() / "src" / "github.com" / "leblancfg" / "leblancfg.github.io")))
+    command_history_file = Path(__file__).parent / "til_command_history.json"
 
     # Allow overriding the date (useful for testing)
     if len(sys.argv) > 1:
@@ -288,9 +386,14 @@ def main():
     published_commands = get_published_commands(blog_path)
     print(f"Found {len(published_commands)} previously published commands")
 
+    # Load command history
+    command_history_data = load_command_history(command_history_file)
+    command_history = command_history_data.get("commands", [])
+    print(f"Found {len(command_history)} commands in history")
+
     # Analyze commands
     print("Analyzing commands for interesting patterns...")
-    command_info = analyze_commands(commands, published_commands)
+    command_info = analyze_commands(commands, published_commands, command_history)
 
     if not command_info or not command_info.get("is_interesting"):
         print("No interesting commands found today")
@@ -310,6 +413,16 @@ def main():
     # Create the post file
     post_path = create_til_post(command_info["title"], article_content, blog_path)
     print(f"Created TIL post: {post_path}")
+
+    # Update command history with the selected command
+    command_history_data = load_command_history(command_history_file)
+    command_history_data["commands"].append({
+        "command": command_info["command"],
+        "date": datetime.now().isoformat(),
+        "title": command_info["title"]
+    })
+    save_command_history(command_history_file, command_history_data)
+    print(f"Updated command history")
 
     # Output the path for the shell script to use
     print(f"POST_FILE={post_path}")

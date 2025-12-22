@@ -117,3 +117,6 @@ eval "$(direnv hook zsh)"
 export KUBECONFIG=${KUBECONFIG:+$KUBECONFIG:}/Users/leblancfg/.kube/config:/Users/leblancfg/.kube/config.shopify.cloudplatform
 
 [[ -f /opt/dev/sh/chruby/chruby.sh ]] && { type chruby >/dev/null 2>&1 || chruby () { source /opt/dev/sh/chruby/chruby.sh; chruby "$@"; } }
+
+# Added by tec agent
+[[ -x /Users/leblancfg/.local/state/tec/profiles/base/current/global/init ]] && eval "$(/Users/leblancfg/.local/state/tec/profiles/base/current/global/init zsh)"
