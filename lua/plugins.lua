@@ -247,7 +247,7 @@ return {
         },
         opts = {},
     },
-    'christoomey/vim-tmux-runner',
+    -- 'christoomey/vim-tmux-runner',
     {
         'nvim-telescope/telescope.nvim',
         tag = '0.1.5',
