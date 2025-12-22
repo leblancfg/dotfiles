@@ -1,5 +1,6 @@
 keybinds clear-defaults=true {
     locked {
+        bind "Ctrl a" { SwitchToMode "tmux"; }
         bind "Ctrl g" { SwitchToMode "normal"; }
         bind "Ctrl h" { MoveFocus "left"; }
         bind "Ctrl j" { MoveFocus "down"; }
@@ -275,6 +276,11 @@ plugins {
 // eg. "file:/path/to/my-plugin.wasm"
 // eg. "https://example.com/my-plugin.wasm"
 load_plugins {
+    autolock location="https://github.com/fresh2dev/zellij-autolock/releases/latest/download/zellij-autolock.wasm" {
+        triggers "nvim|vim|v|nv"
+        watch_triggers "fzf|zoxide|atuin"
+        watch_interval "1.0"
+    }
 }
 web_client {
     font "monospace"
