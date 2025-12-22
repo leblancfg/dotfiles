@@ -1,10 +1,10 @@
 keybinds clear-defaults=true {
     locked {
         bind "Ctrl g" { SwitchToMode "normal"; }
-        bind "Ctrl h" { MoveFocusOrTab "left"; }
+        bind "Ctrl h" { MoveFocus "left"; }
         bind "Ctrl j" { MoveFocus "down"; }
         bind "Ctrl k" { MoveFocus "up"; }
-        bind "Ctrl l" { MoveFocusOrTab "right"; }
+        bind "Ctrl l" { MoveFocus "right"; }
     }
     pane {
         bind "left" { MoveFocus "left"; }
@@ -289,8 +289,8 @@ web_client {
  
 // Choose the theme that is specified in the themes section.
 // Default: default
-// 
-theme "ansi"
+//
+theme "custom"
  
 // Choose the base input mode of zellij.
 // Default: normal
@@ -538,3 +538,19 @@ default_mode "locked"
 // can be useful for removing wrappers around commands
 // Note: be sure to escape backslashes and similar characters properly
 // post_command_discovery_hook "echo $RESURRECT_COMMAND | sed <your_regex_here>"
+
+themes {
+    custom {
+        fg "#D8DEE9"
+        bg "#2E3440"
+        black "#3B4252"
+        red "#BF616A"
+        green "#A3BE8C"
+        yellow "#EBCB8B"
+        blue "#81A1C1"
+        magenta "#B48EAD"
+        cyan "#88C0D0"
+        white "#E5E9F0"
+        orange "#D08770"
+    }
+}
