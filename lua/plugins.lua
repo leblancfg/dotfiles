@@ -233,9 +233,8 @@ return {
         dependencies = { "nvim-lua/plenary.nvim" },
     },
 
-    -- Move around
-    -- 'christoomey/vim-tmux-navigator',  -- Commented out for Zellij migration
-    {
+    -- Move around - load appropriate plugin based on multiplexer
+    (vim.fn.getenv('TMUX') ~= vim.NIL) and 'christoomey/vim-tmux-navigator' or {
         "swaits/zellij-nav.nvim",
         lazy = true,
         event = "VeryLazy",

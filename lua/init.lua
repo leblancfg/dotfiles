@@ -44,7 +44,9 @@ require('lazy').setup('plugins', {
 vim.cmd[[colorscheme tokyonight]]
 
 -- Ensure Zellij returns to normal mode when exiting NeoVim
-vim.api.nvim_create_autocmd("VimLeave", {
-    pattern = "*",
-    command = "silent !zellij action switch-mode normal"
-})
+if vim.fn.getenv('ZELLIJ') ~= vim.NIL then
+    vim.api.nvim_create_autocmd("VimLeave", {
+        pattern = "*",
+        command = "silent !zellij action switch-mode normal"
+    })
+end

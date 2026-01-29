@@ -45,8 +45,16 @@ vim.api.nvim_set_keymap('n', '<Leader>D', 'o## <Esc>:r! date "+\\%Y-\\%m-\\%d"<C
 -- Search and replace word under cursor
 vim.api.nvim_set_keymap('n', '<Leader>S', ':%s/\\<<C-r><C-w>\\>/', {})
 
--- Put an X in the checkmark on that line
-vim.api.nvim_set_keymap('n', '<leader>x', '0f[lsX<Esc>', {})
+-- Cycle checkbox: [ ] -> [X] -> [/] -> [ ]
+local function cycle_checkbox()
+  local line = vim.api.nvim_get_current_line()
+  local new_line, n = line:gsub('%[ %]', '[/]', 1)
+  if n == 0 then new_line, n = line:gsub('%[/%]', '[X]', 1) end
+  if n == 0 then new_line, n = line:gsub('%[X%]', '[ ]', 1) end
+  if n > 0 then vim.api.nvim_set_current_line(new_line) end
+  pcall(function() vim.fn['repeat#set'](vim.api.nvim_replace_termcodes('<leader>x', true, true, true), -1) end)
+end
+vim.keymap.set('n', '<leader>x', cycle_checkbox)
 
 -- Markdown to PDF and launch
 vim.api.nvim_set_keymap('n', '<Leader>z',
