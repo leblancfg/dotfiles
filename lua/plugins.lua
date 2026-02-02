@@ -120,6 +120,7 @@ return {
                 sources = {
                     { name = 'nvim_lsp' },
                     { name = 'luasnip' },
+                    { name = 'path' },
                     { name = 'buffer', option = {
                         get_bufnrs = function()
                             local buf = vim.api.nvim_get_current_buf()
@@ -184,12 +185,10 @@ return {
                     'html',
                     'cssls',
                     'ruff',
-                    -- Python: use BasedPyright (hover, defs, etc.)
                     'basedpyright',
-                    -- Ruby: use ruby_lsp only (has built-in RuboCop support)
                     'ruby_lsp',
-                    -- TypeScript / JavaScript LSP
                     'ts_ls',
+                    'clangd',
                 },
                 handlers = {
                     lsp_zero.default_setup,

@@ -6,3 +6,9 @@ vim.api.nvim_create_autocmd('BufWritePre', {
         vim.lsp.buf.format()
     end,
 })
+vim.api.nvim_create_autocmd({"BufRead", "BufNewFile"}, {
+    pattern = "*.ino",
+    callback = function()
+        vim.bo.filetype = "cpp"
+    end,
+})
