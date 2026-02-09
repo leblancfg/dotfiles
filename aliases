@@ -315,3 +315,6 @@ function ant() {
 function tomato() {
     termdown 25m -T "🍅" --no-figlet && say "ding"
 }
+
+## Server connections
+alias coloc="ssh francois@fl1.coloc.systems"

@@ -120,3 +120,6 @@ export KUBECONFIG=${KUBECONFIG:+$KUBECONFIG:}/Users/leblancfg/.kube/config:/User
 
 # Added by tec agent
 [[ -x /Users/leblancfg/.local/state/tec/profiles/base/current/global/init ]] && eval "$(/Users/leblancfg/.local/state/tec/profiles/base/current/global/init zsh)"
+
+# OpenClaw Completion
+source "/Users/leblancfg/.openclaw/completions/openclaw.zsh"
