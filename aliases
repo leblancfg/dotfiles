@@ -64,6 +64,7 @@ alias jnk='ps -ax | grep "jupyter-notebook" | awk "{print \$1}" | xargs kill'
 ## AI coding
 alias clc="CLAUDE_CODE_DISABLE_FEEDBACK_SURVEY=1 devx claude --dangerously-skip-permissions"
 alias cdx="devx codex --dangerously-bypass-approvals-and-sandbox"
+alias pi="devx pi"
 
 ### Vim everywhere
 # But actually, neovim

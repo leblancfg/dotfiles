@@ -272,9 +272,10 @@ zsdoc/data
 /.shadowenv.d/
 secrets.*.json
 notes.md
-PRD.json
 todo.json
 todo.md
+PRD.json
+work_log.md
 progress.txt
 progress.md
 .testmondata*

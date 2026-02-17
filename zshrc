@@ -27,6 +27,10 @@ plugins=(git)
 
 source $ZSH/oh-my-zsh.sh
 
+### Helpers
+source_if_exists() { [[ -f "$1" ]] && source "$1" }
+eval_if_exists() { [[ -x "$1" ]] && eval "$("$@")" }
+
 ### User configuration
 
 ## History Configuration
@@ -42,22 +46,20 @@ setopt HIST_IGNORE_SPACE      # Don't record an entry starting with a space
 setopt HIST_SAVE_NO_DUPS      # Don't write duplicate entries in the history file
 setopt SHARE_HISTORY          # Share history between all sessions
 
-## Installs
-[ -f /opt/dev/dev.sh ] && source /opt/dev/dev.sh
-
-# The next line updates PATH for the Google Cloud SDK.
-if [ -f "$(brew --prefix)/share/google-cloud-sdk/path.zsh.inc" ]; then source "$(brew --prefix)/share/google-cloud-sdk/path.zsh.inc"; fi
-# if [ -f '$HOME/google-cloud-sdk/path.zsh.inc' ]; then . '$HOME/google-cloud-sdk/path.zsh.inc'; fi
-# The next line enables shell command completion for gcloud.
-# if [ -f '$HOME/google-cloud-sdk/completion.zsh.inc' ]; then . '$HOME/google-cloud-sdk/completion.zsh.inc'; fi
-
 # Userland niceities
 export PATH="$HOME/.local/bin:$PATH"
 export PATH="$PATH:$HOME/go/bin"
 
-# Use that brew stuff
-[[ -x /usr/local/bin/brew ]] && eval $(/usr/local/bin/brew shellenv)
-[[ -x /opt/homebrew/bin/brew ]] && eval $(/opt/homebrew/bin/brew shellenv)
+## Installs
+source_if_exists /opt/dev/dev.sh
+eval_if_exists ~/.local/state/tec/profiles/base/current/global/init zsh
+
+source_if_exists "$(brew --prefix)/share/google-cloud-sdk/path.zsh.inc"
+eval_if_exists /usr/local/bin/brew shellenv
+eval_if_exists /opt/homebrew/bin/brew shellenv
+source_if_exists $HOME/leblancfg/.config/op/plugins.sh
+
+source_if_exists ~/.openclaw/completions/openclaw.zsh
 
 # And make sure pyenv takes over system python
 if [[ "$(uname -s)" == "Darwin" ]]; then
@@ -87,39 +89,15 @@ fi
   fi
 }
 
-# Spin completion
-autoload -Uz compinit && compinit
-# Check if it's in PATH first
-if [[ -f /usr/local/bin/spin ]]; then
-  source <(spin completion --shell=zsh)
-fi
-
-# Load any userland secrets
-if [[ -f ~/.env ]]; then
-    source ~/.env
-fi
-
-# Set personal aliases, overriding those provided by oh-my-zsh libs, plugins,
-# and themes. Aliases can be placed here, though oh-my-zsh users are encouraged
-# to define aliases within the ZSH_CUSTOM folder.  For a full list of active
-# aliases, run `alias`.
-source ~/.aliases
-
-# One Password
-ONEPASSPLUGS=$HOME/leblancfg/.config/op/plugins.sh
-[[ -f $ONEPASSPLUGS ]] && source $ONEPASSPLUGS
-
 zstyle ':completion:*' menu select
 fpath+=~/.zfunc
 eval "$(direnv hook zsh)"
 
-# cloudplatform: add Shopify clusters to your local kubernetes config
-export KUBECONFIG=${KUBECONFIG:+$KUBECONFIG:}/Users/leblancfg/.kube/config:/Users/leblancfg/.kube/config.shopify.cloudplatform
-
 [[ -f /opt/dev/sh/chruby/chruby.sh ]] && { type chruby >/dev/null 2>&1 || chruby () { source /opt/dev/sh/chruby/chruby.sh; chruby "$@"; } }
+
+### Finally, load any userland aliases and secrets ###
+source_if_exists ~/.env
+source_if_exists ~/.aliases
 
 # Added by tec agent
 [[ -x /Users/leblancfg/.local/state/tec/profiles/base/current/global/init ]] && eval "$(/Users/leblancfg/.local/state/tec/profiles/base/current/global/init zsh)"
-
-# OpenClaw Completion
-source "/Users/leblancfg/.openclaw/completions/openclaw.zsh"
