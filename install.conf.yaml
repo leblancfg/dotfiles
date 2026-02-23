@@ -34,6 +34,8 @@
       path: zellij.kdl
     ~/Templates:
       path: Templates
+    ~/.wezterm.lua:
+      path: wezterm.lua
 
 - shell:
     - [git submodule update --init --recursive, Installing submodules]
