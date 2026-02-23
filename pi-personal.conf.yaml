@@ -1,0 +1,16 @@
+---
+- defaults:
+    link:
+      relink: true
+      force: true
+
+- create:
+    - ~/.pi/agent/
+
+- link:
+    ~/.pi/agent/settings.json:
+      path: .pi/agent/settings.json
+    ~/.pi/agent/extensions:
+      path: .pi/shared/extensions
+    ~/.pi/agent/system-theme.json:
+      path: .pi/shared/system-theme.json

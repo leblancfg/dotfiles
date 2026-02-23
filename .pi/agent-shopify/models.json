@@ -1,0 +1,64 @@
+{
+  "providers": {
+    "anthropic": {
+      "baseUrl": "https://proxy.shopify.ai/vendors/anthropic",
+      "apiKey": "PI_PROXY_API_KEY"
+    },
+    "anthropic-1m": {
+      "baseUrl": "https://proxy.shopify.ai/vendors/anthropic",
+      "apiKey": "PI_PROXY_API_KEY",
+      "api": "anthropic-messages",
+      "headers": {
+        "anthropic-beta": "context-1m-2025-08-07"
+      },
+      "models": [
+        {
+          "id": "claude-opus-4-6",
+          "name": "Claude Opus 4.6 [1M]",
+          "reasoning": true,
+          "input": ["text", "image"],
+          "contextWindow": 1000000,
+          "maxTokens": 128000,
+          "cost": { "input": 5, "output": 25, "cacheRead": 0.5, "cacheWrite": 6.25 }
+        },
+        {
+          "id": "claude-sonnet-4-5",
+          "name": "Claude Sonnet 4.5 [1M]",
+          "reasoning": true,
+          "input": ["text", "image"],
+          "contextWindow": 1000000,
+          "maxTokens": 64000,
+          "cost": { "input": 3, "output": 15, "cacheRead": 0.3, "cacheWrite": 3.75 }
+        },
+        {
+          "id": "claude-sonnet-4-6",
+          "name": "Claude Sonnet 4.6 [1M]",
+          "reasoning": true,
+          "input": ["text", "image"],
+          "contextWindow": 1000000,
+          "maxTokens": 64000,
+          "cost": { "input": 3, "output": 15, "cacheRead": 0.3, "cacheWrite": 3.75 }
+        }
+      ]
+    },
+    "openai": {
+      "baseUrl": "https://proxy.shopify.ai/vendors/openai/v1",
+      "apiKey": "PI_PROXY_API_KEY"
+    },
+    "google": {
+      "baseUrl": "https://proxy.shopify.ai/vendors/googlevertexai-global/v1beta1/projects/shopify-ml-production/locations/global/publishers/google",
+      "apiKey": "PI_PROXY_API_KEY",
+      "headers": {
+        "Authorization": "PI_PROXY_AUTH_HEADER"
+      }
+    },
+    "groq": {
+      "baseUrl": "https://proxy.shopify.ai/vendors/groq/openai/v1",
+      "apiKey": "PI_PROXY_API_KEY"
+    },
+    "xai": {
+      "baseUrl": "https://proxy.shopify.ai/vendors/xai/v1",
+      "apiKey": "PI_PROXY_API_KEY"
+    }
+  }
+}

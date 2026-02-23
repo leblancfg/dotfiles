@@ -1,0 +1,18 @@
+---
+- defaults:
+    link:
+      relink: true
+      force: true
+
+- create:
+    - ~/.pi/agent-shopify/
+
+- link:
+    ~/.pi/agent-shopify/settings.json:
+      path: .pi/agent-shopify/settings.json
+    ~/.pi/agent-shopify/models.json:
+      path: .pi/agent-shopify/models.json
+    ~/.pi/agent-shopify/extensions:
+      path: .pi/shared/extensions
+    ~/.pi/agent-shopify/system-theme.json:
+      path: .pi/shared/system-theme.json
