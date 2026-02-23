@@ -39,6 +39,10 @@ config.font_size = 15
 -- Claude Code: Shift + Enter to send backslash + Enter
 config.keys = {
   {key="Enter", mods="SHIFT", action=wezterm.action{SendString="\x1b\r"}},
+  -- Option+Arrow to skip words, matching iTerm2/Terminal.app behavior
+  {key="LeftArrow", mods="OPT", action=wezterm.action{SendKey={key="b", mods="ALT"}}},
+  {key="RightArrow", mods="OPT", action=wezterm.action{SendKey={key="f", mods="ALT"}}},
+  {key="phys:Delete", mods="ALT", action=wezterm.action{SendKey={key="d", mods="ALT"}}},
 }
 
 -- and finally, return the configuration to wezterm
