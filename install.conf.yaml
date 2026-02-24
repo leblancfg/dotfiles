@@ -34,6 +34,8 @@
       path: zellij.kdl
     ~/Templates:
       path: Templates
+    ~/.oh-my-zsh/custom/themes/atheoster.zsh-theme:
+      path: atheoster.zsh-theme
     ~/.wezterm.lua:
       path: wezterm.lua
 
