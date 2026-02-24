@@ -144,7 +144,7 @@ build_prompt() {
   if [[ -n "$_git_text" ]]; then
     prompt_segment "$_git_bg" "$_git_fg" "$_git_text"
   elif (( _git_pending )); then
-    prompt_segment black black "    "
+    prompt_segment white black $'\ue0a0 \u28FB'
   fi
   prompt_end
 }
