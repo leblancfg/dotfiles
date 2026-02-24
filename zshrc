@@ -1,31 +1,71 @@
-## If you come from bash you might have to change your $PATH.
-# export PATH=$HOME/bin:/usr/local/bin:$PATH
-
 # Terminal settings
 stty -ixon -ixoff
-
-# Path to your oh-my-zsh installation.
 export LS_COLORS=''  # Prettier `fd`
-export ZSH="$HOME/.oh-my-zsh"
-export REPLACE_RC='no'  # Don't overwrite the zshrc if installing OMZ
-export ZVM_CURSOR_STYLE_ENABLED=false  # Attempt at blinking cursor
+export ZVM_CURSOR_STYLE_ENABLED=false
 
-# First, install oh-my-zsh if it's not present
-if [ ! -d ~/.oh-my-zsh ];then
-  echo 'oh-my-zsh not installed, installing...'
-  sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" ; 
+# ── Completion ───────────────────────────────────────────────────────
+autoload -Uz compinit
+# Only regenerate .zcompdump once a day (stat check avoids slow compaudit)
+if [[ -z "$ZSH_COMPDUMP" ]]; then
+  ZSH_COMPDUMP="${ZDOTDIR:-$HOME}/.zcompdump"
+fi
+if [[ ! -f "$ZSH_COMPDUMP" || $(date +'%j') != $(stat -f '%Sm' -t '%j' "$ZSH_COMPDUMP" 2>/dev/null) ]]; then
+  compinit -d "$ZSH_COMPDUMP"
+else
+  compinit -C -d "$ZSH_COMPDUMP"
 fi
 
-# Set name of the theme to load --- if set to "random", it will
-# load a random theme each time oh-my-zsh is loaded, in which case,
-# to know which specific one was loaded, run: echo $RANDOM_THEME
-# See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
-ZSH_THEME="atheoster"
-HYPHEN_INSENSITIVE="true"
-# Add wisely, as too many plugins slow down shell startup.
-plugins=(git)
+zmodload -i zsh/complist
+zstyle ':completion:*:*:*:*:*' menu select
+zstyle ':completion:*' matcher-list 'r:|=*' 'l:|=* r:|=*'   # case-insensitive, partial-word
 
-source $ZSH/oh-my-zsh.sh
+# ── Key bindings ─────────────────────────────────────────────────────
+bindkey -e   # emacs mode
+
+# Up/Down arrow: prefix-aware history search
+autoload -U up-line-or-beginning-search down-line-or-beginning-search
+zle -N up-line-or-beginning-search
+zle -N down-line-or-beginning-search
+bindkey "^[[A" up-line-or-beginning-search
+bindkey "^[[B" down-line-or-beginning-search
+[[ -n "${terminfo[kcuu1]}" ]] && bindkey "${terminfo[kcuu1]}" up-line-or-beginning-search
+[[ -n "${terminfo[kcud1]}" ]] && bindkey "${terminfo[kcud1]}" down-line-or-beginning-search
+
+# Home / End
+[[ -n "${terminfo[khome]}" ]] && bindkey "${terminfo[khome]}" beginning-of-line
+[[ -n "${terminfo[kend]}"  ]] && bindkey "${terminfo[kend]}"  end-of-line
+
+# Shift-Tab: reverse menu completion
+[[ -n "${terminfo[kcbt]}" ]] && bindkey "${terminfo[kcbt]}" reverse-menu-complete
+
+bindkey '^r' history-incremental-search-backward
+bindkey ' ' magic-space   # history expansion on space
+
+# Edit command in $EDITOR
+autoload -U edit-command-line
+zle -N edit-command-line
+bindkey '\C-x\C-e' edit-command-line
+
+# ── Terminal title (tmux / iTerm) ────────────────────────────────────
+function _set_title_precmd { print -Pn "\e]2;%n@%m:%~\a"; print -Pn "\e]1;%15<..<%~%<<\a" }
+function _set_title_preexec { print -Pn "\e]2;$2\a" }
+autoload -Uz add-zsh-hook
+add-zsh-hook precmd _set_title_precmd
+add-zsh-hook preexec _set_title_preexec
+
+# ── Prompt ───────────────────────────────────────────────────────────
+source "$HOME/dotfiles/atheoster.zsh-theme"
+
+# ── Git aliases (the handful from omz you actually used) ─────────────
+alias gco='git checkout'
+alias gd='git diff'
+alias ga='git add'
+alias gb='git branch'
+alias gf='git fetch'
+alias gm='git merge'
+alias grb='git rebase'
+alias grba='git rebase --abort'
+alias gss='git status --short'
 
 ### Helpers
 source_if_exists() { [[ -f "$1" ]] && source "$1" }

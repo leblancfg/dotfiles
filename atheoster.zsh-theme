@@ -112,7 +112,7 @@ _git_callback() {
 }
 
 _atheoster_precmd() {
-  _retval=$?
+  # _retval is already captured by _atheoster_save_retval (see bottom of file)
 
   # Tear down previous async job
   if [[ -n "$_git_fd" ]]; then
@@ -150,6 +150,12 @@ build_prompt() {
 }
 
 PROMPT='%{%f%b%k%}$(build_prompt) '
+
+# Grab the real $? before direnv, pyenv, omz hooks, etc. can clobber it.
+# The standalone `precmd` function runs before the entire precmd_functions
+# array, so no hook can race us. return $_retval so downstream hooks that
+# care about $? still see the original value.
+precmd() { _retval=$?; return $_retval }
 
 autoload -Uz add-zsh-hook
 add-zsh-hook precmd _atheoster_precmd

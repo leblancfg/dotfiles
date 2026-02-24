@@ -41,6 +41,8 @@ config.enable_kitty_keyboard = true
 
 -- Remaps
 config.keys = {
+  -- Send Kitty keyboard protocol sequence for Shift+Enter to ensure TUI apps (like Pi, Claude Code) detect it
+  {key="Enter", mods="SHIFT", action=wezterm.action{SendString="\x1b[13;2u"}},
   -- Option+Arrow to skip words, matching iTerm2/Terminal.app behavior
   {key="LeftArrow", mods="OPT", action=wezterm.action{SendKey={key="b", mods="ALT"}}},
   {key="RightArrow", mods="OPT", action=wezterm.action{SendKey={key="f", mods="ALT"}}},
