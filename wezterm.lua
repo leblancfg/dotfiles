@@ -36,9 +36,11 @@ config.font_size = 15
 -- config.cursor_blink_ease_in = "Constant"
 -- config.cursor_blink_ease_out = "Constant"
 
--- Claude Code: Shift + Enter to send backslash + Enter
+-- Let pi (and other TUI apps) detect modifier keys properly
+config.enable_kitty_keyboard = true
+
+-- Remaps
 config.keys = {
-  {key="Enter", mods="SHIFT", action=wezterm.action{SendString="\x1b\r"}},
   -- Option+Arrow to skip words, matching iTerm2/Terminal.app behavior
   {key="LeftArrow", mods="OPT", action=wezterm.action{SendKey={key="b", mods="ALT"}}},
   {key="RightArrow", mods="OPT", action=wezterm.action{SendKey={key="f", mods="ALT"}}},
