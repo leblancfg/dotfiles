@@ -1,7 +1,7 @@
 {
   "lastChangelogVersion": "0.54.0",
   "quietStartup": true,
-  "theme": "light",
+  "theme": "ansi-light",
   "defaultThinkingLevel": "high",
   "doubleEscapeAction": "tree",
   "editorPaddingX": 1

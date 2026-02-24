@@ -1,11 +1,14 @@
 {
   "lastChangelogVersion": "0.54.0",
   "quietStartup": true,
-  "theme": "light",
+  "theme": "ansi-dark",
   "defaultThinkingLevel": "high",
   "doubleEscapeAction": "tree",
   "editorPaddingX": 1,
   "skills": [
     "~/.pi/agent-shopify/skills"
+  ],
+  "packages": [
+    "~/src/github.com/leblancfg/pi-ansi-themes"
   ]
 }
