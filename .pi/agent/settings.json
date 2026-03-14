@@ -1,8 +1,11 @@
 {
-  "lastChangelogVersion": "0.54.0",
+  "lastChangelogVersion": "0.55.3",
   "quietStartup": true,
-  "theme": "ansi-light",
+  "theme": "ansi-dark",
   "defaultThinkingLevel": "high",
   "doubleEscapeAction": "tree",
-  "editorPaddingX": 1
+  "editorPaddingX": 1,
+  "transport": "websocket",
+  "defaultProvider": "anthropic",
+  "defaultModel": "claude-opus-4-6"
 }

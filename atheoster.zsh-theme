@@ -149,6 +149,7 @@ build_prompt() {
   prompt_end
 }
 
+setopt PROMPT_SUBST
 PROMPT='%{%f%b%k%}$(build_prompt) '
 
 # Grab the real $? before direnv, pyenv, omz hooks, etc. can clobber it.
