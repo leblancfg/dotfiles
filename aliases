@@ -66,6 +66,9 @@ alias clc="CLAUDE_CODE_DISABLE_FEEDBACK_SURVEY=1 devx claude --dangerously-skip-
 alias cdx="devx codex --dangerously-bypass-approvals-and-sandbox"
 alias pi="devx pi"
 
+### Tmux
+alias focus="tmux new -s focus -t dev"
+
 ### Vim everywhere
 # But actually, neovim
 alias vi=nvim

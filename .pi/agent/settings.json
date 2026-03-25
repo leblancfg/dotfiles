@@ -1,11 +1,11 @@
 {
-  "lastChangelogVersion": "0.55.3",
+  "lastChangelogVersion": "0.62.0",
   "quietStartup": true,
   "theme": "ansi-dark",
   "defaultThinkingLevel": "high",
   "doubleEscapeAction": "tree",
   "editorPaddingX": 1,
   "transport": "websocket",
-  "defaultProvider": "anthropic",
-  "defaultModel": "claude-opus-4-6"
+  "defaultProvider": "openai-codex",
+  "defaultModel": "gpt-5.4"
 }
