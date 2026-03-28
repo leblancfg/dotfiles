@@ -36,12 +36,11 @@ config.font_size = 15
 -- config.cursor_blink_ease_in = "Constant"
 -- config.cursor_blink_ease_out = "Constant"
 
--- Let pi (and other TUI apps) detect modifier keys properly
-config.enable_kitty_keyboard = true
-
 -- Remaps
 config.keys = {
-  -- Send Kitty keyboard protocol sequence for Shift+Enter to ensure TUI apps (like Pi, Claude Code) detect it
+  -- Send CSI u sequence for Shift+Enter so TUI apps (pi, Claude Code) detect it.
+  -- tmux extended-keys handles the rest; no need for global Kitty keyboard protocol
+  -- (which breaks Ctrl-E and other readline keys in zsh).
   {key="Enter", mods="SHIFT", action=wezterm.action{SendString="\x1b[13;2u"}},
   -- Option+Arrow to skip words, matching iTerm2/Terminal.app behavior
   {key="LeftArrow", mods="OPT", action=wezterm.action{SendKey={key="b", mods="ALT"}}},
