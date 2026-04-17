@@ -1,9 +1,10 @@
 # Terminal settings
-stty -ixon -ixoff
+[[ -t 0 ]] && stty -ixon -ixoff
 export LS_COLORS=''  # Prettier `fd`
 export ZVM_CURSOR_STYLE_ENABLED=false
 
 # ── Completion ───────────────────────────────────────────────────────
+fpath+=(~/.zfunc)
 autoload -Uz compinit
 # Only regenerate .zcompdump once a day (stat check avoids slow compaudit)
 if [[ -z "$ZSH_COMPDUMP" ]]; then
@@ -14,6 +15,8 @@ if [[ ! -f "$ZSH_COMPDUMP" || $(date +'%j') != $(stat -f '%Sm' -t '%j' "$ZSH_COM
 else
   compinit -C -d "$ZSH_COMPDUMP"
 fi
+
+(( $+commands[just] )) && source <(just --completions zsh)
 
 zmodload -i zsh/complist
 zstyle ':completion:*:*:*:*:*' menu select
@@ -68,8 +71,8 @@ alias grba='git rebase --abort'
 alias gss='git status --short'
 
 ### Helpers
-source_if_exists() { [[ -f "$1" ]] && source "$1" }
-eval_if_exists() { [[ -x "$1" ]] && eval "$("$@")" }
+source_if_exists() { [[ -f "$1" ]] || return 0; source "$1" }
+eval_if_exists() { [[ -x "$1" ]] || return 0; eval "$("$@")" }
 
 ### User configuration
 
@@ -130,7 +133,6 @@ fi
 }
 
 zstyle ':completion:*' menu select
-fpath+=~/.zfunc
 eval "$(direnv hook zsh)"
 
 [[ -f /opt/dev/sh/chruby/chruby.sh ]] && { type chruby >/dev/null 2>&1 || chruby () { source /opt/dev/sh/chruby/chruby.sh; chruby "$@"; } }
@@ -140,4 +142,4 @@ source_if_exists ~/.env
 source_if_exists ~/.aliases
 
 # Added by tec agent
-[[ -x /Users/leblancfg/.local/state/tec/profiles/base/current/global/init ]] && eval "$(/Users/leblancfg/.local/state/tec/profiles/base/current/global/init zsh)"
+eval_if_exists /Users/leblancfg/.local/state/tec/profiles/base/current/global/init zsh

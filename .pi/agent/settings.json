@@ -1,11 +1,14 @@
 {
-  "lastChangelogVersion": "0.62.0",
+  "lastChangelogVersion": "0.67.1",
   "quietStartup": true,
   "theme": "ansi-dark",
-  "defaultThinkingLevel": "high",
+  "defaultThinkingLevel": "low",
   "doubleEscapeAction": "tree",
   "editorPaddingX": 1,
   "transport": "websocket",
   "defaultProvider": "openai-codex",
-  "defaultModel": "gpt-5.4"
+  "defaultModel": "gpt-5.4",
+  "packages": [
+    "git:github.com/dbachelder/pi-btw"
+  ]
 }
