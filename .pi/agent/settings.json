@@ -9,6 +9,8 @@
   "defaultProvider": "openai-codex",
   "defaultModel": "gpt-5.4",
   "packages": [
-    "git:github.com/dbachelder/pi-btw"
+    "git:github.com/dbachelder/pi-btw",
+    "~/src/github.com/leblancfg/pi-ansi-themes",
+    "~/src/github.com/leblancfg/lsp-pi"
   ]
 }

@@ -62,7 +62,12 @@ return {
     'tpope/vim-abolish',
     'tpope/vim-fugitive',
     'tpope/vim-projectionist',
-    'github/copilot.vim',
+    {
+        'github/copilot.vim',
+        init = function()
+            vim.g.copilot_npx_command = '/opt/homebrew/bin/npx'
+        end,
+    },
 
     -- Treesitter
     'nvim-treesitter/nvim-treesitter',
@@ -163,7 +168,7 @@ return {
                 -- to learn the available actions
                 lsp_zero.default_keymaps({ buffer = bufnr })
                 if client.name == 'ruff' then
-                    -- Disable hover in favor of BasedPyright
+                    -- Let the Python type server own hover while Ruff handles linting.
                     client.server_capabilities.hoverProvider = false
                 end
             end)
@@ -180,12 +185,16 @@ return {
 
             require('mason').setup({})
             require('mason-lspconfig').setup({
+                automatic_enable = {
+                    exclude = { 'basedpyright' },
+                },
                 ensure_installed = {
                     'eslint',
                     'html',
                     'cssls',
                     'ruff',
-                    'basedpyright',
+                    'ty',
+                    'lua_ls',
                     'ruby_lsp',
                     'ts_ls',
                     'clangd',
@@ -193,18 +202,7 @@ return {
                 handlers = {
                     lsp_zero.default_setup,
                     basedpyright = function()
-                        require('lspconfig').basedpyright.setup({
-                            settings = {
-                                basedpyright = {
-                                    disableOrganizeImports = true,
-                                },
-                                python = {
-                                    analysis = {
-                                        typeCheckingMode = 'basic',
-                                    },
-                                },
-                            },
-                        })
+                        -- Disabled for now so Python diagnostics come only from Ruff.
                     end,
                     lua_ls = function()
                         -- (Optional) Configure lua language server for neovim
@@ -249,7 +247,13 @@ return {
     {
         'nvim-telescope/telescope.nvim',
         tag = '0.1.5',
-        dependencies = { 'nvim-lua/plenary.nvim' },
+        dependencies = {
+            'nvim-lua/plenary.nvim',
+            {
+                'nvim-telescope/telescope-fzf-native.nvim',
+                build = 'make',
+            },
+        },
     },
 
     -- Langs

@@ -43,7 +43,26 @@
     },
     "openai": {
       "baseUrl": "https://proxy.shopify.ai/vendors/openai/v1",
-      "apiKey": "PI_PROXY_API_KEY"
+      "apiKey": "PI_PROXY_API_KEY",
+      "headers": {
+        "Shopify-Usage-Tag": "[\"pi\", \"coding-agent\", \"interactive\"]"
+      },
+      "models": [
+        {
+          "id": "gpt-5.3-codex-spark-preview",
+          "name": "Spark (gpt-5.3 Codex)",
+          "reasoning": true,
+          "input": ["text", "image"],
+          "contextWindow": 272000,
+          "maxTokens": 128000,
+          "cost": {
+            "input": 2.5,
+            "output": 15,
+            "cacheRead": 0.25,
+            "cacheWrite": 0
+          }
+        }
+      ]
     },
     "google": {
       "baseUrl": "https://proxy.shopify.ai/vendors/googlevertexai-global/v1beta1/projects/shopify-ml-production/locations/global/publishers/google",

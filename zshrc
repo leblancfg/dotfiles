@@ -92,6 +92,7 @@ setopt SHARE_HISTORY          # Share history between all sessions
 # Userland niceities
 export PATH="$HOME/.local/bin:$PATH"
 export PATH="$PATH:$HOME/go/bin"
+export PATH="$PATH:/Users/leblancfg/.bun/bin"
 
 ## Installs
 source_if_exists /opt/dev/dev.sh
@@ -143,3 +144,25 @@ source_if_exists ~/.aliases
 
 # Added by tec agent
 eval_if_exists /Users/leblancfg/.local/state/tec/profiles/base/current/global/init zsh
+
+# bun completions
+[ -s "/Users/leblancfg/.bun/_bun" ] && source "/Users/leblancfg/.bun/_bun"
+#compdef gt
+###-begin-gt-completions-###
+#
+# yargs command completion script
+#
+# Installation: gt completion >> ~/.zshrc
+#    or gt completion >> ~/.zprofile on OSX.
+#
+_gt_yargs_completions()
+{
+  local reply
+  local si=$IFS
+  IFS=$'
+' reply=($(COMP_CWORD="$((CURRENT-1))" COMP_LINE="$BUFFER" COMP_POINT="$CURSOR" gt --get-yargs-completions "${words[@]}"))
+  IFS=$si
+  _describe 'values' reply
+}
+compdef _gt_yargs_completions gt
+###-end-gt-completions-###

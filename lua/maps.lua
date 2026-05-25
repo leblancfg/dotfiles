@@ -70,8 +70,30 @@ vim.api.nvim_set_keymap('n', '<leader>c', 'o* [ ] <C-o><<', {})
 -- Create new tab
 vim.api.nvim_set_keymap('n', '<leader><space>', ':tabnew<CR>', {})
 
--- Jump to definition in vsp, aka<C-WV> <gf>
-vim.api.nvim_set_keymap('n', '<leader>gd', '<C-W><C-v>gd', {})
+local function has_lsp_method(method)
+    return next(vim.lsp.get_clients({ bufnr = 0, method = method })) ~= nil
+end
+
+-- Jump to definition in a vertical split.
+vim.keymap.set('n', '<leader>gd', function()
+    if not has_lsp_method('textDocument/definition') then
+        vim.notify('No attached LSP server supports definition for this buffer', vim.log.levels.WARN)
+        return
+    end
+
+    vim.cmd.vsplit()
+    vim.lsp.buf.definition()
+end, { desc = 'LSP definition in vertical split' })
+
+-- Show all references in a quickfix list.
+vim.keymap.set('n', '<leader>gr', function()
+    if not has_lsp_method('textDocument/references') then
+        vim.notify('No attached LSP server supports references for this buffer', vim.log.levels.WARN)
+        return
+    end
+
+    vim.lsp.buf.references()
+end, { desc = 'LSP references' })
 
 -- Jump to diagnostics
 vim.keymap.set('n', 'gl', '<cmd>lua vim.diagnostic.open_float()<cr>')

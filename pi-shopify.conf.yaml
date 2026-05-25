@@ -5,14 +5,10 @@
       force: true
 
 - create:
-    - ~/.pi/agent-shopify/
+    - ~/.pi/agent/
 
 - link:
-    ~/.pi/agent-shopify/settings.json:
+    ~/.pi/agent/settings.json:
       path: .pi/agent-shopify/settings.json
-    ~/.pi/agent-shopify/models.json:
+    ~/.pi/agent/models.json:
       path: .pi/agent-shopify/models.json
-    ~/.pi/agent-shopify/extensions:
-      path: .pi/shared/extensions
-    ~/.pi/agent-shopify/system-theme.json:
-      path: .pi/shared/system-theme.json
