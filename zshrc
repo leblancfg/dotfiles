@@ -41,7 +41,8 @@ bindkey "^[[B" down-line-or-beginning-search
 # Shift-Tab: reverse menu completion
 [[ -n "${terminfo[kcbt]}" ]] && bindkey "${terminfo[kcbt]}" reverse-menu-complete
 
-bindkey '^r' history-incremental-search-backward
+# ^R is handled by fzf if installed, otherwise fallback to incremental search
+(( $+commands[fzf] )) || bindkey '^r' history-incremental-search-backward
 bindkey ' ' magic-space   # history expansion on space
 
 # Edit command in $EDITOR
@@ -55,6 +56,18 @@ function _set_title_preexec { print -Pn "\e]2;$2\a" }
 autoload -Uz add-zsh-hook
 add-zsh-hook precmd _set_title_precmd
 add-zsh-hook preexec _set_title_preexec
+
+# ── Plugins ──────────────────────────────────────────────────────────
+
+# zsh-autosuggestions (grey ghost text as you type)
+if [[ -f "$(brew --prefix)/share/zsh-autosuggestions/zsh-autosuggestions.zsh" ]]; then
+  source "$(brew --prefix)/share/zsh-autosuggestions/zsh-autosuggestions.zsh"
+fi
+
+# fzf — fuzzy find files (Ctrl+T), history (Ctrl+R), processes (Ctrl+Z)
+if (( $+commands[fzf] )); then
+  eval "$(fzf --zsh)"
+fi
 
 # ── Prompt ───────────────────────────────────────────────────────────
 source "$HOME/dotfiles/atheoster.zsh-theme"
