@@ -92,7 +92,7 @@ setopt SHARE_HISTORY          # Share history between all sessions
 # Userland niceities
 export PATH="$HOME/.local/bin:$PATH"
 export PATH="$PATH:$HOME/go/bin"
-export PATH="$PATH:/Users/leblancfg/.bun/bin"
+export PATH="$PATH:$HOME/.bun/bin"
 
 ## Installs
 source_if_exists /opt/dev/dev.sh
@@ -101,7 +101,7 @@ eval_if_exists ~/.local/state/tec/profiles/base/current/global/init zsh
 source_if_exists "$(brew --prefix)/share/google-cloud-sdk/path.zsh.inc"
 eval_if_exists /usr/local/bin/brew shellenv
 eval_if_exists /opt/homebrew/bin/brew shellenv
-source_if_exists $HOME/leblancfg/.config/op/plugins.sh
+source_if_exists ~/.config/op/plugins.sh
 
 source_if_exists ~/.openclaw/completions/openclaw.zsh
 
@@ -121,36 +121,14 @@ fi
   fi
 }
 
-zstyle ':completion:*' menu select
 eval "$(direnv hook zsh)"
-
-[[ -f /opt/dev/sh/chruby/chruby.sh ]] && { type chruby >/dev/null 2>&1 || chruby () { source /opt/dev/sh/chruby/chruby.sh; chruby "$@"; } }
 
 ### Finally, load any userland aliases and secrets ###
 source_if_exists ~/.env
 source_if_exists ~/.aliases
 
-# Added by tec agent
-eval_if_exists /Users/leblancfg/.local/state/tec/profiles/base/current/global/init zsh
-
 # bun completions
-[ -s "/Users/leblancfg/.bun/_bun" ] && source "/Users/leblancfg/.bun/_bun"
-#compdef gt
-###-begin-gt-completions-###
-#
-# yargs command completion script
-#
-# Installation: gt completion >> ~/.zshrc
-#    or gt completion >> ~/.zprofile on OSX.
-#
-_gt_yargs_completions()
-{
-  local reply
-  local si=$IFS
-  IFS=$'
-' reply=($(COMP_CWORD="$((CURRENT-1))" COMP_LINE="$BUFFER" COMP_POINT="$CURSOR" gt --get-yargs-completions "${words[@]}"))
-  IFS=$si
-  _describe 'values' reply
-}
-compdef _gt_yargs_completions gt
-###-end-gt-completions-###
+[ -s "$HOME/.bun/_bun" ] && source "$HOME/.bun/_bun"
+
+# gt completions (only if gt is installed)
+(( $+commands[gt] )) && eval "$(gt completion zsh 2>/dev/null)" 2>/dev/null || true

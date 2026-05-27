@@ -207,31 +207,7 @@ function blacken () {
     git status --porcelain | cut -d ' ' -f3 | xargs black
 }
 
-## Pandoc - generate Bootstrap HTML
-function panodt () {
-    filename=$(basename -- "$1")
-    filename="${filename%.*}"
-    OUTPUT_FILENAME="$filename.odt"
-    pandoc "$1" --variable colorlinks=true --filter mermaid-filter -o "$OUTPUT_FILENAME"
-    echo "$OUTPUT_FILENAME"
-}
-function panstrap () {
-	DIR="$HOME/Templates"
-    # If there's a second argument, use that as the output filename
-	if [ "$#" -eq 2 ]
-        then
-            pandoc "$1" -o "$2" --template $DIR/template.html --css $DIR/template.css --self-contained --toc --toc-depth 3 --quiet
-	elif [ "$#" -eq 1 ]
-        then
-            filename=$(basename -- "$1")
-            filename="${filename%.*}"
-            OUTPUT_FILENAME="$filename.html"
-            pandoc "$1" -o "$OUTPUT_FILENAME" --template $DIR/template.html --css $DIR/template.css --self-contained --toc --toc-depth 3
-        else
-	    echo "Illegal number of parameters: need at least input filename and optional output filename"
-            exit 1
-	fi
-}
+
 
 ## BigQuery
 alias bqq="bq query --use_legacy_sql=false"
