@@ -71,8 +71,7 @@ return {
 
     -- Treesitter
     'nvim-treesitter/nvim-treesitter',
-    -- 'nvim-treesitter.configs',
-    "HiPhish/nvim-ts-rainbow2",
+    "HiPhish/rainbow-delimiters.nvim",
 
     -- LSP
     {
@@ -265,9 +264,8 @@ return {
     -- 'RRethy/nvim-base16',
     -- 'xiyaowong/transparent.nvim',
     {
-        'norcalli/nvim-colorizer.lua',
-        config = function()
-            require('colorizer').setup()
-        end,
+        "catgoose/nvim-colorizer.lua",
+        event = "BufReadPre",
+        opts = {},
     }
 }

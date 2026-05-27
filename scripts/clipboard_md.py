@@ -1,3 +1,8 @@
+# /// script
+# requires-python = ">=3.11"
+# dependencies = ["clipboard", "pandas", "tabulate"]
+# ///
+
 import sys
 
 import clipboard

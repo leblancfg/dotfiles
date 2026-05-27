@@ -1,16 +1,17 @@
 {
-  "lastChangelogVersion": "0.67.1",
+  "lastChangelogVersion": "0.75.4",
   "quietStartup": true,
   "theme": "ansi-dark",
-  "defaultThinkingLevel": "low",
+  "defaultThinkingLevel": "high",
   "doubleEscapeAction": "tree",
   "editorPaddingX": 1,
   "transport": "websocket",
-  "defaultProvider": "openai-codex",
-  "defaultModel": "gpt-5.4",
+  "defaultProvider": "qwac",
+  "defaultModel": "unsloth/Qwen3.6-27B-UD-MLX-4bit",
   "packages": [
     "git:github.com/dbachelder/pi-btw",
     "~/src/github.com/leblancfg/pi-ansi-themes",
-    "~/src/github.com/leblancfg/lsp-pi"
+    "~/src/github.com/leblancfg/lsp-pi",
+    "npm:pi-autoresearch"
   ]
 }

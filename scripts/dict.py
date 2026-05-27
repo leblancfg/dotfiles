@@ -1,3 +1,8 @@
+# /// script
+# requires-python = ">=3.11"
+# dependencies = ["requests"]
+# ///
+
 import itertools
 from pprint import pprint
 import sys

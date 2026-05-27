@@ -105,23 +105,11 @@ source_if_exists $HOME/leblancfg/.config/op/plugins.sh
 
 source_if_exists ~/.openclaw/completions/openclaw.zsh
 
-# And make sure pyenv takes over system python
-if [[ "$(uname -s)" == "Darwin" ]]; then
-    export PATH="$(pyenv root)/shims:$PATH"
-    eval "$(pyenv init -)"
-    eval "$(pyenv virtualenv-init -)"
-fi
-
-# Always do these steps when opening up interactive Python shells
-if [ -f $PYTHONSTARTUP ]; then
-   export PYTHONSTARTUP
-else
-   PYTHONSTARTUP="$HOME/.ipython/profile_default/startup/pyrc.py"
-   if [ -f $PYTHONSTARTUP ]; then
-      export PYTHONSTARTUP
-   else
-      echo "Not able to set PYTHONSTARTUP"
-   fi
+# Python startup hooks: enable one only when it exists.
+if [[ -n "${PYTHONSTARTUP:-}" && -f "$PYTHONSTARTUP" ]]; then
+  export PYTHONSTARTUP
+elif [[ -f "$HOME/.ipython/profile_default/startup/pyrc.py" ]]; then
+  export PYTHONSTARTUP="$HOME/.ipython/profile_default/startup/pyrc.py"
 fi
 
 # Autocomplete

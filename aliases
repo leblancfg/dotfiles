@@ -55,7 +55,7 @@ function watch_tests() {
     fi
 	PYTHON_ENV=test rm -f .testmond\* && ptw --runner "pytest --testmon -s $CATCH_WARNINGS tests"
 }
-alias install-watch='pip install pytest-watch pytest-testmon'
+alias install-watch='uv tool install pytest-watch --with pytest-testmon'
 
 ## Jupyter Notebook
 alias jn="cd && jupyter notebook &> /dev/null &"
@@ -243,6 +243,11 @@ function dryrun () {
 }
 
 ## Moving around
+alias ls='lsd'
+alias ll='lsd -l'
+alias la='lsd -a'
+alias lla='lsd -la'
+alias lt='lsd --tree'
 alias t1="tree --dirsfirst -ChFL 1"
 alias devs="rm -rf client/node_modules/.vite node_modules/.vite && dev server"
 alias devus="dev up && dev server"
@@ -286,11 +291,7 @@ function dfpull() {
 alias cl="clear"
 alias ding="afplay /System/Library/Sounds/Funk.aiff"
 
-# Install dependencies
-alias install-pip="pip install --user wheel pandas clipboard tabulate"
-
 # More user stuff
-export PATH="$HOME/.poetry/bin:$PATH"
 export EDITOR="nvim"
 alias shrug="echo '¯\\_(ツ)_/¯' | pbcopy"
 
@@ -300,20 +301,20 @@ function notify() {
 
     "$INCANTATION" && terminal-notifier -title "$COMMAND" -message "Task complete" -contentImage "https://cdn4.iconfinder.com/data/icons/logos-brands-5/24/shopify-128.png"
 }
-alias clip='python $HOME/dotfiles/scripts/clipboard_md.py'
+alias clip='uv run $HOME/dotfiles/scripts/clipboard_md.py'
 alias tomato=$HOME/dotfiles/scripts/tomato
 
 function syn() {
     WORD="$1"
-    python $HOME/dotfiles/scripts/dict.py syn "$WORD"
+    uv run $HOME/dotfiles/scripts/dict.py syn "$WORD"
 }
 function def() {
     WORD="$1"
-    python $HOME/dotfiles/scripts/dict.py def "$WORD"
+    uv run $HOME/dotfiles/scripts/dict.py def "$WORD"
 }
 function ant() {
     WORD="$1"
-    python $HOME/dotfiles/scripts/dict.py ant "$WORD"
+    uv run $HOME/dotfiles/scripts/dict.py ant "$WORD"
 }
 
 function tomato() {
