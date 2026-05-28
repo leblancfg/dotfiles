@@ -136,6 +136,9 @@ fi
 
 eval "$(direnv hook zsh)"
 
+# zoxide — smarter cd
+(( $+commands[zoxide] )) && eval "$(zoxide init zsh)"
+
 ### Finally, load any userland aliases and secrets ###
 source_if_exists ~/.env
 source_if_exists ~/.aliases

@@ -10,6 +10,7 @@ brew "bat"
 brew "tree"
 brew "sd"
 brew "fmt"
+brew "zoxide"
 
 
 # Git & GitHub
