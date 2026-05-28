@@ -1,7 +1,7 @@
 require("rc")
 require("maps")
 
-vim.opt.termguicolors = true
+vim.opt.termguicolors = false
 
 local lazypath = vim.fn.stdpath 'data' .. '/lazy/lazy.nvim'
 if not vim.loop.fs_stat(lazypath) then
@@ -41,7 +41,7 @@ require('lazy').setup('plugins', {
     },
 })
 
-vim.cmd[[colorscheme tokyonight]]
+require('nocte').load()
 
 -- Ensure Zellij returns to normal mode when exiting NeoVim
 if vim.fn.getenv('ZELLIJ') ~= vim.NIL then

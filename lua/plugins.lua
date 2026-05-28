@@ -2,29 +2,6 @@ return {
     -- Drawers
     'roman/golden-ratio',
     'itchyny/lightline.vim',
-    'mike-hearn/base16-vim-lightline',
-    {
-        "f-person/auto-dark-mode.nvim",
-        config = {
-            update_interval = 1000,
-            set_dark_mode = function()
-                vim.o.background = 'dark'
-                -- vim.api.nvim_set_option("background", "dark")
-                -- vim.cmd("colorscheme gruvbox")
-            end,
-            set_light_mode = function()
-                vim.o.background = 'light'
-                -- vim.api.nvim_set_option("background", "light")
-                -- vim.cmd("colorscheme gruvbox")
-            end,
-        },
-    },
-    {
-        "folke/tokyonight.nvim",
-        lazy = false,
-        priority = 1000,
-        opts = { style = 'moon' },
-    },
     {
         "nvim-neo-tree/neo-tree.nvim",
         branch = "v3.x",
@@ -262,10 +239,5 @@ return {
 
     -- Pretties
     -- 'RRethy/nvim-base16',
-    -- 'xiyaowong/transparent.nvim',
-    {
-        "catgoose/nvim-colorizer.lua",
-        event = "BufReadPre",
-        opts = {},
-    }
+    -- 'xiyaowong/transparent.nvim'
 }
