@@ -42,7 +42,7 @@ return {
     {
         'github/copilot.vim',
         init = function()
-            vim.g.copilot_npx_command = '/opt/homebrew/bin/npx'
+            vim.g.copilot_npx_command = vim.fn.exepath('npx')
         end,
     },
 
@@ -121,7 +121,7 @@ return {
         dependencies = 'nvim-lua/plenary.nvim'
     },
 
-    -- LSP
+    -- LSP — config lives in lua/lsp.lua
     {
         'neovim/nvim-lspconfig',
         cmd = { 'LspInfo', 'LspInstall', 'LspStart' },
@@ -129,81 +129,12 @@ return {
         dependencies = {
             { 'hrsh7th/cmp-nvim-lsp' },
             { 'williamboman/mason-lspconfig.nvim' },
-            { 'jose-elias-alvarez/null-ls.nvim' },
+            { 'jose-elias-alvarez/null-ls.nvim', dependencies = { 'nvim-lua/plenary.nvim' } },
             { 'jay-babu/mason-null-ls.nvim' },
         },
         config = function()
-            -- This is where all the LSP shenanigans will live
-            local lsp_zero = require('lsp-zero')
-            lsp_zero.extend_lspconfig()
-
-            --- if you want to know more about lsp-zero and mason.nvim
-            --- read this: https://github.com/VonHeikemen/lsp-zero.nvim/blob/v3.x/doc/md/guides/integrate-with-mason-nvim.md
-            lsp_zero.on_attach(function(client, bufnr)
-                -- see :help lsp-zero-keybindings
-                -- to learn the available actions
-                lsp_zero.default_keymaps({ buffer = bufnr })
-                if client.name == 'ruff' then
-                    -- Let the Python type server own hover while Ruff handles linting.
-                    client.server_capabilities.hoverProvider = false
-                end
-            end)
-
-            lsp_zero.format_on_save({
-                format_opts = {
-                    async = true,
-                    timeout_ms = 10000,
-                },
-                servers = {
-                    ['null-ls'] = { 'javascript', 'typescript', 'typescriptreact', 'jsx', 'css', 'rust', 'sql' },
-                },
-            })
-
-            require('mason').setup({})
-            require('mason-lspconfig').setup({
-                automatic_enable = {
-                    exclude = { 'basedpyright' },
-                },
-                ensure_installed = {
-                    'eslint',
-                    'html',
-                    'cssls',
-                    'ruff',
-                    'ty',
-                    'lua_ls',
-                    'ruby_lsp',
-                    'ts_ls',
-                    'clangd',
-                },
-                handlers = {
-                    lsp_zero.default_setup,
-                    basedpyright = function()
-                        -- Disabled for now so Python diagnostics come only from Ruff.
-                    end,
-                    lua_ls = function()
-                        -- (Optional) Configure lua language server for neovim
-                        local lua_opts = lsp_zero.nvim_lua_ls()
-                        require('lspconfig').lua_ls.setup(lua_opts)
-                    end,
-                    ruby_lsp = function()
-                        require('lspconfig').ruby_lsp.setup({
-                            cmd = { "bundle", "exec", "ruby-lsp" },
-                            filetypes = { "ruby" },
-                            root_dir = require('lspconfig.util').root_pattern("Gemfile", ".git"),
-                            init_options = {
-                                formatter = "rubocop",
-                                linters = { "rubocop" },
-                            },
-                        })
-                    end,
-                }
-            })
+            require('lsp')
         end
-    },
-
-    {
-        "jose-elias-alvarez/null-ls.nvim",
-        dependencies = { "nvim-lua/plenary.nvim" },
     },
 
     -- Move around - load appropriate plugin based on multiplexer
