@@ -220,6 +220,11 @@ $RECYCLE.BIN/
 
 **/.claude/settings.local.json
 
+# Python cache
+__pycache__/
+*.py[cod]
+*.pyc
+
 # TIL generator project files
 scripts/pyproject.toml
 scripts/.venv/
