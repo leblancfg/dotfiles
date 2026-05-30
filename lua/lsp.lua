@@ -36,7 +36,6 @@ require('mason-lspconfig').setup({
         'ruff',
         'ty',
         'lua_ls',
-        'ruby_lsp',
         'ts_ls',
         'clangd',
     },
@@ -49,16 +48,18 @@ require('mason-lspconfig').setup({
             local lua_opts = lsp_zero.nvim_lua_ls()
             require('lspconfig').lua_ls.setup(lua_opts)
         end,
-        ruby_lsp = function()
-            require('lspconfig').ruby_lsp.setup({
-                cmd = { "bundle", "exec", "ruby-lsp" },
-                filetypes = { "ruby" },
-                root_dir = require('lspconfig.util').root_pattern("Gemfile", ".git"),
-                init_options = {
-                    formatter = "rubocop",
-                    linters = { "rubocop" },
-                },
-            })
-        end,
     }
+})
+
+-- Ruby LSP is managed by each Ruby project (usually through Bundler), not Mason.
+-- Mason's ruby_lsp install can be flaky across Ruby versions, and Shopify-style
+-- projects already provide the right version in the bundle.
+require('lspconfig').ruby_lsp.setup({
+    cmd = { "bundle", "exec", "ruby-lsp" },
+    filetypes = { "ruby" },
+    root_dir = require('lspconfig.util').root_pattern("Gemfile", ".git"),
+    init_options = {
+        formatter = "rubocop",
+        linters = { "rubocop" },
+    },
 })
