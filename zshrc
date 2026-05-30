@@ -148,3 +148,6 @@ source_if_exists ~/.aliases
 
 # gt completions (only if gt is installed)
 (( $+commands[gt] )) && eval "$(gt completion zsh 2>/dev/null)" 2>/dev/null || true
+
+# Added by tec agent
+[[ -x /Users/leblancfg/.local/state/tec/profiles/base/current/global/init ]] && eval "$(/Users/leblancfg/.local/state/tec/profiles/base/current/global/init zsh)"
