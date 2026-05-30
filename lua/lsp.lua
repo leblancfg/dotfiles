@@ -23,6 +23,24 @@ lsp_zero.format_on_save({
     },
 })
 
+-- Neovim 0.11+ LSP configuration. Avoid require('lspconfig').server.setup(),
+-- which now emits deprecation warnings in nvim-lspconfig.
+vim.lsp.config('lua_ls', lsp_zero.nvim_lua_ls())
+
+-- Ruby LSP is managed by each Ruby project (usually through Bundler), not Mason.
+-- Mason's ruby_lsp install can be flaky across Ruby versions, and Shopify-style
+-- projects already provide the right version in the bundle.
+vim.lsp.config('ruby_lsp', {
+    cmd = { "bundle", "exec", "ruby-lsp" },
+    filetypes = { "ruby" },
+    root_markers = { "Gemfile", ".git" },
+    init_options = {
+        formatter = "rubocop",
+        linters = { "rubocop" },
+    },
+})
+vim.lsp.enable('ruby_lsp')
+
 -- Mason: manage LSP servers and tools
 require('mason').setup({})
 require('mason-lspconfig').setup({
@@ -38,28 +56,5 @@ require('mason-lspconfig').setup({
         'lua_ls',
         'ts_ls',
         'clangd',
-    },
-    handlers = {
-        lsp_zero.default_setup,
-        basedpyright = function()
-            -- Disabled — Python diagnostics come from Ruff only.
-        end,
-        lua_ls = function()
-            local lua_opts = lsp_zero.nvim_lua_ls()
-            require('lspconfig').lua_ls.setup(lua_opts)
-        end,
-    }
-})
-
--- Ruby LSP is managed by each Ruby project (usually through Bundler), not Mason.
--- Mason's ruby_lsp install can be flaky across Ruby versions, and Shopify-style
--- projects already provide the right version in the bundle.
-require('lspconfig').ruby_lsp.setup({
-    cmd = { "bundle", "exec", "ruby-lsp" },
-    filetypes = { "ruby" },
-    root_dir = require('lspconfig.util').root_pattern("Gemfile", ".git"),
-    init_options = {
-        formatter = "rubocop",
-        linters = { "rubocop" },
     },
 })
