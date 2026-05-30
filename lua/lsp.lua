@@ -27,25 +27,15 @@ lsp_zero.format_on_save({
 -- which now emits deprecation warnings in nvim-lspconfig.
 vim.lsp.config('lua_ls', lsp_zero.nvim_lua_ls())
 
--- Ruby LSP is managed by each Ruby project (usually through Bundler), not Mason.
--- Mason's ruby_lsp install can be flaky across Ruby versions, and Shopify-style
--- projects already provide the right version in the bundle.
-vim.lsp.config('ruby_lsp', {
-    cmd = { "bundle", "exec", "ruby-lsp" },
-    filetypes = { "ruby" },
-    root_markers = { "Gemfile", ".git" },
-    init_options = {
-        formatter = "rubocop",
-        linters = { "rubocop" },
-    },
-})
-vim.lsp.enable('ruby_lsp')
+-- Ruby LSP is intentionally disabled for now. Re-enable when actively working
+-- in a Ruby codebase; project-local Bundler/Ruby version mismatches make it
+-- noisier than useful otherwise.
 
 -- Mason: manage LSP servers and tools
 require('mason').setup({})
 require('mason-lspconfig').setup({
     automatic_enable = {
-        exclude = { 'basedpyright' },
+        exclude = { 'basedpyright', 'ruby_lsp' },
     },
     ensure_installed = {
         'eslint',
