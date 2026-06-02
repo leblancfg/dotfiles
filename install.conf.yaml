@@ -9,6 +9,7 @@
 - create:
     - ~/.config/nvim/lua/
     - ~/.config/nvim/after/plugin/
+    - ~/.local/bin/
 
 - link:
     ~/.gitignore:
@@ -29,6 +30,8 @@
       path: vimrc
     ~/.config/nvim/init.vim:
       path: init.vim
+    ~/.local/bin/md-fmt:
+      path: scripts/md-fmt
     ~/.wezterm.lua:
       path: wezterm.lua
 

@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+# Hard-wrap markdown to 100 chars via Prettier, then fix header spacing:
+# 1. Remove blank lines between successive headers
+# 2. Add double blank line before h2
+pnpm --silent dlx prettier@latest --prose-wrap always --print-width 100 --parser markdown \
+  | sd '(^#{1,6} .*)\n\n(#{1,6} )' '$1\n$2' \
+  | sd '([^\n])\n\n(## )' '$1\n\n\n$2'
