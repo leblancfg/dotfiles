@@ -1,13 +1,13 @@
 {
-  "lastChangelogVersion": "0.75.4",
+  "lastChangelogVersion": "0.78.1",
   "quietStartup": true,
   "theme": "ansi-dark",
   "defaultThinkingLevel": "high",
   "doubleEscapeAction": "tree",
   "editorPaddingX": 1,
   "transport": "websocket",
-  "defaultProvider": "qwac",
-  "defaultModel": "unsloth/Qwen3.6-27B-UD-MLX-4bit",
+  "defaultProvider": "openai-codex",
+  "defaultModel": "gpt-5.5",
   "packages": [
     "git:github.com/dbachelder/pi-btw",
     "~/src/github.com/leblancfg/pi-ansi-themes",

@@ -1,0 +1,92 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+# Send a `cd` command to panes in the current tmux window.
+# Default behavior: cd other shell panes to the active pane's cwd.
+# With --from-option: read target dir from @cd-panes-dir and include active pane.
+
+shell_quote() {
+  local value="$1"
+  value=${value//\'/\'\\\'\'}
+  printf "'%s'" "$value"
+}
+
+is_shell_command() {
+  local command="${1##*/}"
+  case "$command" in
+    bash|zsh|fish|sh|dash|ksh|mksh)
+      return 0
+      ;;
+    *)
+      return 1
+      ;;
+  esac
+}
+
+active_pane="$(tmux display-message -p '#{pane_id}')"
+target_window="$(tmux display-message -p '#{window_id}')"
+active_path="$(tmux display-message -p '#{pane_current_path}')"
+include_active="${TMUX_CD_PANES_INCLUDE_ACTIVE:-0}"
+only_shells="${TMUX_CD_PANES_ONLY_SHELLS:-1}"
+
+dir=""
+if [[ "${1:-}" == "--from-option" ]]; then
+  dir="$(tmux show-option -gqv @cd-panes-dir || true)"
+  tmux set-option -gu @cd-panes-dir >/dev/null 2>&1 || true
+  include_active=1
+elif [[ $# -gt 0 ]]; then
+  dir="$1"
+else
+  dir="$active_path"
+fi
+
+if [[ -z "$dir" ]]; then
+  dir="$active_path"
+fi
+
+# Expand ~ and make relative paths relative to the active pane.
+if [[ "$dir" == "~" ]]; then
+  dir="$HOME"
+elif [[ "$dir" == "~/"* ]]; then
+  dir="$HOME/${dir:2}"
+elif [[ "$dir" != /* ]]; then
+  dir="$active_path/$dir"
+fi
+
+if [[ ! -d "$dir" ]]; then
+  tmux display-message "tmux-cd-panes: not a directory: $dir"
+  exit 1
+fi
+
+quoted_dir="$(shell_quote "$dir")"
+sent=0
+skipped=0
+
+while IFS= read -r pane; do
+  if [[ "$include_active" != "1" && "$pane" == "$active_pane" ]]; then
+    continue
+  fi
+
+  pane_command="$(tmux display-message -p -t "$pane" '#{pane_current_command}')"
+  if [[ "$only_shells" == "1" ]] && ! is_shell_command "$pane_command"; then
+    ((skipped += 1))
+    continue
+  fi
+
+  tmux send-keys -t "$pane" "cd -- $quoted_dir" C-m
+  ((sent += 1))
+done < <(tmux list-panes -t "$target_window" -F '#{pane_id}')
+
+if (( sent == 0 )); then
+  if (( skipped > 0 )); then
+    tmux display-message "tmux-cd-panes: no shell panes to cd; skipped $skipped non-shell pane(s)"
+  else
+    tmux display-message "tmux-cd-panes: no other panes in this window"
+  fi
+else
+  message="tmux-cd-panes: sent cd to $sent pane(s): $dir"
+  if (( skipped > 0 )); then
+    message="$message; skipped $skipped non-shell pane(s)"
+  fi
+  tmux display-message "$message"
+fi

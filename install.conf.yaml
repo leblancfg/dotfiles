@@ -32,6 +32,8 @@
       path: init.vim
     ~/.local/bin/md-fmt:
       path: scripts/md-fmt
+    ~/.local/bin/tmux-cd-panes:
+      path: scripts/tmux-cd-panes
     ~/.wezterm.lua:
       path: wezterm.lua
 
