@@ -10,8 +10,7 @@
   ],
   "packages": [
     "~/src/github.com/leblancfg/pi-ansi-themes",
-    "~/src/github.com/leblancfg/lsp-pi",
-    "https://github.com/shopify-playground/pi-autoresearch"
+    "~/src/github.com/leblancfg/lsp-pi"
   ],
   "defaultProvider": "anthropic",
   "defaultModel": "claude-opus-4-6",

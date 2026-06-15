@@ -47,7 +47,11 @@ return {
     },
 
     -- Treesitter
-    'nvim-treesitter/nvim-treesitter',
+    {
+        'nvim-treesitter/nvim-treesitter',
+        branch = 'main',
+        lazy = false,
+    },
     "HiPhish/rainbow-delimiters.nvim",
 
     -- LSP

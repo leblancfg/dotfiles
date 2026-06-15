@@ -1,6 +1,7 @@
 # Just little things
 alias so=source
 alias cwd="pwd | tee /dev/stderr | tr -d '\n' | pbcopy"
+alias cdd="cd $(pbpaste) && cl"
 alias watch="fd . | entr"
 function slurp() {
     if [ -n "$1" ]; then
@@ -227,22 +228,6 @@ alias lt='lsd --tree'
 alias t1="tree --dirsfirst -ChFL 1"
 alias devs="rm -rf client/node_modules/.vite node_modules/.vite && dev server"
 alias devus="dev up && dev server"
-alias si="dev cd siphon"
-alias to="dev cd totally-radford"
-alias ia="dev cd impulse-api"
-alias os="dev cd os"
-alias analysis="dev cd analysis"
-alias fw="dev cd os; cd tools/frameworks"
-alias tw="dev cd os; cd tools/web"
-alias pp="dev cd party-parrots"
-function pg_pw() {
-    cat $HOME/src/github.com/ShopifyPeopleAnalytics/siphon/config/sources.development.json | jq -r '.read_database' | cut -f3-3 -d":" | cut -f1 -d"@" | tr -d '[:space:]' | pbcopy
-}
-function db () {
-    pg_pw
-    gcloud sql connect people-analytics --user=postgres --database=hr
-}
-alias wds="gcloud scheduler jobs run worker_daily_snapshot"
 alias bullet='pbpaste | sed "s/^.\{6\}//g" | pbcopy'
 
 ## Dotfiles
