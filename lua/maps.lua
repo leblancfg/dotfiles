@@ -31,6 +31,28 @@ vim.api.nvim_set_keymap('n', '<F6>', ':let _s=@/ <Bar> :%s/\\s\\+$//e <Bar> :let
     { silent = true })
 vim.keymap.set("n", "<leader>f", vim.lsp.buf.format)
 
+local function straighten_quotes()
+    local lines = vim.api.nvim_buf_get_lines(0, 0, -1, false)
+    local changed = false
+
+    for index, line in ipairs(lines) do
+        local straight = line:gsub("‘", "'")
+        straight = straight:gsub("’", "'")
+        straight = straight:gsub("“", '"')
+        straight = straight:gsub("”", '"')
+        if straight ~= line then
+            lines[index] = straight
+            changed = true
+        end
+    end
+
+    if changed then
+        vim.api.nvim_buf_set_lines(0, 0, -1, false, lines)
+    end
+end
+
+vim.keymap.set("n", "<leader>'", straighten_quotes, { desc = "Replace curly quotes with straight quotes" })
+
 -- Insert breakpoint
 vim.g.breakpoint_str = "# fmt: off\nimport ipdb; ipdb.set_trace()  # noqa: E702, E402\n# fmt: on\n"
 vim.api.nvim_set_keymap('n', '<Leader>b', 'm`O<ESC> :put =breakpoint_str<CR> 4kd2d2j0<Esc>', {})

@@ -10,5 +10,3 @@
 - link:
     ~/.pi/agent/settings.json:
       path: .pi/agent-shopify/settings.json
-    ~/.pi/agent/models.json:
-      path: .pi/agent-shopify/models.json

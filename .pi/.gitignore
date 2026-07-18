@@ -1,6 +1,9 @@
 # Credentials
 auth.json
 
+# Local pi model/provider config
+agent-shopify/models.json
+
 # Session history -- full conversation transcripts
 sessions/
 

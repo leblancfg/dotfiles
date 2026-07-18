@@ -109,7 +109,6 @@ export PATH="$PATH:$HOME/.bun/bin"
 
 ## Installs
 source_if_exists /opt/dev/dev.sh
-eval_if_exists ~/.local/state/tec/profiles/base/current/global/init zsh
 
 source_if_exists "$(brew --prefix)/share/google-cloud-sdk/path.zsh.inc"
 eval_if_exists /usr/local/bin/brew shellenv
@@ -151,3 +150,12 @@ source_if_exists ~/.aliases
 
 # Added by tec agent
 [[ -x /Users/leblancfg/.local/state/tec/profiles/base/current/global/init ]] && eval "$(/Users/leblancfg/.local/state/tec/profiles/base/current/global/init zsh)"
+typeset -U path PATH
+
+# pnpm
+export PNPM_HOME="/Users/leblancfg/.local/share/pnpm"
+case ":$PATH:" in
+  *":$PNPM_HOME:"*) ;;
+  *) export PATH="$PNPM_HOME:$PATH" ;;
+esac
+# pnpm end
