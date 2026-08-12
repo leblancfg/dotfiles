@@ -1,4 +1,19 @@
+local function scroll(cmd)
+  return function()
+    vim.cmd("normal! " .. cmd)
+  end
+end
+
 require("neo-tree").setup({
+    window = {
+      mappings = {
+        -- default binds bare `z` to close_all_nodes, which swallows zz/zt/zb
+        ["z"] = "noop",
+        ["zz"] = scroll("zz"),
+        ["zt"] = scroll("zt"),
+        ["zb"] = scroll("zb"),
+      }
+    },
     filesystem = {
        window = {
          mappings = {

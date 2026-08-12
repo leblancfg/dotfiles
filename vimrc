@@ -1,3 +1,5 @@
+"" This vimrc exists so I can run it in SSH sessions. ""
+"" It's a crystallized form of my 2023 setup, likely to break. That's fine. ""
 " Swapfiles are more trouble than they're worth
 set noswapfile
 

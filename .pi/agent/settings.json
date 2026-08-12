@@ -1,25 +1,8 @@
 {
-  "lastChangelogVersion": "0.78.1",
+  "lastChangelogVersion": "0.54.0",
   "quietStartup": true,
-  "theme": "ansi-dark",
+  "theme": "light",
   "defaultThinkingLevel": "high",
   "doubleEscapeAction": "tree",
-  "editorPaddingX": 1,
-  "transport": "websocket",
-  "defaultProvider": "openai-codex",
-  "defaultModel": "gpt-5.5",
-  "packages": [
-    "git:github.com/dbachelder/pi-btw",
-    "~/src/github.com/leblancfg/pi-ansi-themes",
-    "~/src/github.com/leblancfg/lsp-pi",
-    "npm:pi-autoresearch"
-  ],
-  "httpIdleTimeoutMs": 0,
-  "retry": {
-    "provider": {
-      "timeoutMs": 3600000,
-      "maxRetries": 0,
-      "maxRetryDelayMs": 60000
-    }
-  }
+  "editorPaddingX": 1
 }
