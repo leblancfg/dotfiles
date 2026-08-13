@@ -3,6 +3,36 @@ return {
     'roman/golden-ratio',
     'itchyny/lightline.vim',
     {
+        -- Used for its group->role mapping only; every colour comes from
+        -- lua/paraiso.lua so the editor matches the WezTerm scheme.
+        'folke/tokyonight.nvim',
+        lazy = false,
+        priority = 1000,
+        opts = {
+            style = 'moon',
+            on_colors = function(colors)
+                local dark = vim.o.background ~= 'light'
+                for k, v in pairs(require('paraiso').tokyonight_colors(dark)) do
+                    colors[k] = v
+                end
+            end,
+        },
+    },
+    {
+        'f-person/auto-dark-mode.nvim',
+        opts = {
+            update_interval = 1000,
+            set_dark_mode = function()
+                vim.o.background = 'dark'
+                vim.cmd.colorscheme('tokyonight-moon')
+            end,
+            set_light_mode = function()
+                vim.o.background = 'light'
+                vim.cmd.colorscheme('tokyonight-day')
+            end,
+        },
+    },
+    {
         "nvim-neo-tree/neo-tree.nvim",
         branch = "v3.x",
         dependencies = {
@@ -157,7 +187,7 @@ return {
     -- 'christoomey/vim-tmux-runner',
     {
         'nvim-telescope/telescope.nvim',
-        tag = '0.1.5',
+        tag = 'v0.1.9',
         dependencies = {
             'nvim-lua/plenary.nvim',
             {
