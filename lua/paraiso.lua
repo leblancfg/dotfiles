@@ -36,7 +36,7 @@ function M.tokyonight_colors(dark)
     -- surfaces
     bg = bg, bg_dark = bg, bg_dark1 = bg, bg_float = bg, bg_popup = bg,
     bg_sidebar = bg, bg_highlight = bg2, bg_statusline = bg2,
-    bg_visual = gutter, bg_search = p.base0A,
+    bg_visual = gutter, bg_search = p.base0E,
     border = bg2, border_highlight = p.base0D,
     fg = fg, fg_dark = fg_dark, fg_float = fg, fg_sidebar = fg_dark,
     fg_gutter = gutter, comment = comment,
@@ -54,8 +54,12 @@ function M.tokyonight_colors(dark)
     blue0 = p.base0D, blue2 = p.base0D,
     blue5 = p.base04, blue7 = gutter,
 
-    -- derived at tokyonight/colors/init.lua:62-66, which runs BEFORE on_colors,
-    -- so these must be set explicitly or they keep Tokyonight defaults.
+    -- derived at tokyonight/colors/init.lua:40 and :62-66, which run BEFORE
+    -- on_colors, so these must be set explicitly or they keep Tokyonight
+    -- defaults. `black` is used as the foreground on bright accent backgrounds
+    -- (IncSearch, Substitute); leaving it at Tokyonight's blended #b4b5b9 gave
+    -- 1.05:1 contrast on orange, i.e. invisible.
+    black = p.base00,
     error = p.base08, warning = p.base09, info = p.base0D,
     hint = p.base0C, todo = p.base0E,
 
@@ -64,6 +68,23 @@ function M.tokyonight_colors(dark)
 
     git = { add = p.base0B, change = p.base0D, delete = p.base08 },
     gitSigns = { add = p.base0B, change = p.base0D, delete = p.base08 },
+  }
+end
+
+-- Explicit overrides where Tokyonight's own choice lands badly in this palette.
+-- Contrast ratios are WCAG relative luminance, identical in light and dark since
+-- all four use accent backgrounds independent of the editor background.
+function M.tokyonight_highlights(_dark)
+  local p = M.palette
+  return {
+    -- Purple is mid-luminance, so it cannot carry readable text either way
+    -- (4.31:1 light fg, 2.95:1 dark fg). Use it for the many-matches layer,
+    -- where calm matters more than legibility, and give the single match you
+    -- actually read the AAA pairing.
+    Search = { bg = p.base0E, fg = p.base07 }, -- all matches      4.31:1
+    IncSearch = { bg = p.base0A, fg = p.base00, bold = true }, -- current  9.75:1
+    CurSearch = { bg = p.base0A, fg = p.base00, bold = true }, -- current  9.75:1
+    Substitute = { bg = p.base08, fg = p.base00 }, -- replacement    4.84:1
   }
 end
 
