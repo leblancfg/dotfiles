@@ -92,27 +92,6 @@ function M.tokyonight_colors(dark)
     black = p.base00,
     error = a('base08'), warning = a('base09'), info = a('base0D'),
     hint = a('base0C'), todo = a('base0E'),
-    magenta2 = a('base0F'),
-
-    -- colors.diff and colors.terminal are also built before on_colors, from
-    -- blends of the *default* palette, so they leak Tokyonight values into
-    -- DiffAdd/DiffText and :terminal unless replaced wholesale.
-    diff = {
-      add = dark and p.base01 or p.base06,
-      delete = dark and p.base01 or p.base06,
-      change = dark and p.base01 or p.base06,
-      text = gutter,
-    },
-    terminal = {
-      black = p.base00, black_bright = p.base03,
-      red = p.base08, red_bright = p.base08,
-      green = p.base0B, green_bright = p.base0B,
-      yellow = p.base0A, yellow_bright = p.base0A,
-      blue = p.base0D, blue_bright = p.base0D,
-      magenta = p.base0E, magenta_bright = p.base0E,
-      cyan = p.base0C, cyan_bright = p.base0C,
-      white = p.base05, white_bright = p.base07,
-    },
 
     -- six distinct markdown heading levels (@markup.heading.N.markdown)
     rainbow = {
@@ -120,10 +99,7 @@ function M.tokyonight_colors(dark)
       a('base0B'), a('base0D'), a('base0E'),
     },
 
-    git = {
-      add = a('base0B'), change = a('base0D'), delete = a('base08'),
-      ignore = comment,
-    },
+    git = { add = a('base0B'), change = a('base0D'), delete = a('base08') },
     gitSigns = { add = a('base0B'), change = a('base0D'), delete = a('base08') },
   }
 end
@@ -131,21 +107,9 @@ end
 -- Explicit overrides where Tokyonight's own choice lands badly in this palette.
 -- Contrast ratios are WCAG relative luminance, identical in light and dark since
 -- all four use accent backgrounds independent of the editor background.
-function M.tokyonight_highlights(dark)
+function M.tokyonight_highlights(_dark)
   local p = M.palette
-  local a = function(key) return accent(dark, key) end
   return {
-    -- Tokyonight distinguishes diff kinds with blended background washes, which
-    -- have no equivalent in 16 colours: snapping them to the surface ramp made
-    -- add/change/delete identical. Colour the text instead of the background.
-    DiffAdd = { fg = a('base0B'), bg = 'NONE' },
-    DiffDelete = { fg = a('base08'), bg = 'NONE' },
-    DiffChange = { fg = a('base0D'), bg = 'NONE' },
-    DiffText = { fg = a('base0A'), bg = 'NONE', bold = true },
-    ['@diff.plus'] = { fg = a('base0B'), bg = 'NONE' },
-    ['@diff.minus'] = { fg = a('base08'), bg = 'NONE' },
-    ['@diff.delta'] = { fg = a('base0D'), bg = 'NONE' },
-
     -- Purple is mid-luminance, so it cannot carry readable text either way
     -- (4.31:1 light fg, 2.95:1 dark fg). Use it for the many-matches layer,
     -- where calm matters more than legibility, and give the single match you
@@ -155,66 +119,6 @@ function M.tokyonight_highlights(dark)
     CurSearch = { bg = p.base0A, fg = p.base00, bold = true }, -- current  9.75:1
     Substitute = { bg = p.base08, fg = p.base00 }, -- replacement    4.84:1
   }
-end
-
--- Anything Tokyonight computes with Util.blend_* lands between two palette
--- entries, and groups Tokyonight never touches keep Neovim's own Nvim* defaults.
--- Neither is reachable through on_colors, so snap the final highlight table:
--- foregrounds to the mode's 16, backgrounds to the surface ramp only (so a
--- tinted background stays a background instead of becoming a loud accent).
-local function nearest(value, candidates)
-  local r = math.floor(value / 65536) % 256
-  local g = math.floor(value / 256) % 256
-  local b = value % 256
-  local best, bestd
-  for _, hex in ipairs(candidates) do
-    local cr = tonumber(hex:sub(2, 3), 16)
-    local cg = tonumber(hex:sub(4, 5), 16)
-    local cb = tonumber(hex:sub(6, 7), 16)
-    -- weighted RGB, approximates perceived difference well enough for snapping
-    local d = 0.3 * (r - cr) ^ 2 + 0.59 * (g - cg) ^ 2 + 0.11 * (b - cb) ^ 2
-    if not bestd or d < bestd then best, bestd = hex, d end
-  end
-  return best
-end
-
-function M.enforce(dark)
-  local p = M.palette
-  local fgs, surfaces = {}, {}
-  for _, k in ipairs({ 'base00', 'base01', 'base02', 'base03',
-                       'base04', 'base05', 'base06', 'base07' }) do
-    fgs[#fgs + 1] = p[k]
-  end
-  for _, k in ipairs({ 'base08', 'base09', 'base0A', 'base0B',
-                       'base0C', 'base0D', 'base0E', 'base0F' }) do
-    fgs[#fgs + 1] = accent(dark, k)
-  end
-  for _, k in ipairs(dark and { 'base00', 'base01', 'base02', 'base03' }
-                          or { 'base04', 'base05', 'base06', 'base07' }) do
-    surfaces[#surfaces + 1] = p[k]
-  end
-
-  local allowed = {}
-  for _, hex in ipairs(fgs) do allowed[hex:lower()] = true end
-
-  local snapped = 0
-  for name, def in pairs(vim.api.nvim_get_hl(0, {})) do
-    if not def.link then
-      local changed = false
-      for attr, pool in pairs({ fg = fgs, sp = fgs, bg = surfaces }) do
-        local v = def[attr]
-        if type(v) == 'number' and not allowed[('#%06x'):format(v)] then
-          def[attr] = tonumber(nearest(v, pool):sub(2), 16)
-          changed = true
-        end
-      end
-      if changed then
-        snapped = snapped + 1
-        pcall(vim.api.nvim_set_hl, 0, name, def)
-      end
-    end
-  end
-  return snapped
 end
 
 return M
