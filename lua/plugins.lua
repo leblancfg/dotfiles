@@ -17,8 +17,12 @@ return {
                 end
             end,
             on_highlights = function(hl)
+                local paraiso = require('paraiso')
                 local dark = vim.o.background ~= 'light'
-                for k, v in pairs(require('paraiso').tokyonight_highlights(dark)) do
+                for k, v in pairs(paraiso.tokyonight_highlights(dark)) do
+                    hl[k] = v
+                end
+                for k, v in pairs(paraiso.neotree_highlights(dark)) do
                     hl[k] = v
                 end
             end,

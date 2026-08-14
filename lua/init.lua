@@ -41,6 +41,14 @@ require('lazy').setup('plugins', {
     },
 })
 
+-- Runs before the first colorscheme call so the initial load is snapped too.
+-- auto-dark-mode re-invokes :colorscheme, which fires this again.
+vim.api.nvim_create_autocmd('ColorScheme', {
+    callback = function()
+        require('paraiso').enforce(vim.o.background ~= 'light')
+    end,
+})
+
 vim.cmd.colorscheme('tokyonight-moon')
 
 -- Ensure Zellij returns to normal mode when exiting NeoVim
