@@ -10,29 +10,6 @@ M.palette = {
   base0C = '#5bc4bf', base0D = '#06b6ef', base0E = '#815ba4', base0F = '#e96ba8',
 }
 
--- Paraiso's accents are tuned for the base00 background. WezTerm's light variant
--- swaps bg/fg but keeps identical accents, so on base07 every one of them fails
--- as text -- yellow worst at 1.30:1, then cyan 1.69, orange 1.76, blue 1.91,
--- green 2.06, pink 2.39, red 2.62, purple 4.31.
---
--- Same eight hues with HLS lightness reduced until each clears 5.0:1 on base07.
--- Hue and saturation are untouched, so they still read as Paraiso; only
--- luminance moves. Used for light mode only; dark mode keeps M.palette as-is.
-M.light_accents = {
-  base08 = '#be1f12', -- red     5.03:1
-  base09 = '#8d5404', -- orange  5.02:1
-  base0A = '#7b5c01', -- yellow  5.06:1
-  base0B = '#2b6d50', -- green   5.01:1
-  base0C = '#276b68', -- cyan    5.04:1
-  base0D = '#03698a', -- blue    5.04:1
-  base0E = '#755295', -- purple  5.03:1
-  base0F = '#b81b67', -- pink    5.04:1
-}
-
-local function accent(dark, key)
-  return dark and M.palette[key] or M.light_accents[key]
-end
-
 -- Collapse Tokyonight's 31-key palette onto Paraiso's 16.
 --
 -- Assignment is load-balanced, not hue-matched. Each Tokyonight key was measured
@@ -41,47 +18,40 @@ end
 -- hue-matching put 35% of all captures on base0C, which reads as flat.
 --
 -- Two deliberate splits worth preserving:
---   green  -> base0B, green1 -> base0D  strings green per atom-paraiso's
---                                       @syntax-color-value; @property keeps a
---                                       separate colour so YAML keys stay
---                                       distinct from YAML values, since
---                                       collapsing those made YAML monochrome.
+--   green1 -> base0B, green -> base0A   keeps @property (YAML keys) distinct from
+--                                       @string (YAML values); collapsing these
+--                                       is what made YAML look monochrome.
 --   blue5  -> base04                    demotes operators/punctuation to grey so
 --                                       they stop competing with real syntax.
---
--- base0A carries 2 captures only: it is the least readable accent on base07
--- (1.30:1) even after darkening, so nothing frequent is assigned to it.
 function M.tokyonight_colors(dark)
   local p = M.palette
-  local a = function(key) return accent(dark, key) end
   local bg = dark and p.base00 or p.base07
   local bg2 = dark and p.base01 or p.base06
   local fg = dark and p.base05 or p.base02
   local fg_dark = dark and p.base04 or p.base03
   local gutter = dark and p.base02 or p.base06
-  -- base04 sits at 2.90:1 on base07, too faint for light mode; base03 gives 4.01:1
-  local comment = dark and p.base03 or p.base03
+  local comment = dark and p.base03 or p.base04
 
   return {
     -- surfaces
     bg = bg, bg_dark = bg, bg_dark1 = bg, bg_float = bg, bg_popup = bg,
     bg_sidebar = bg, bg_highlight = bg2, bg_statusline = bg2,
     bg_visual = gutter, bg_search = p.base0E,
-    border = bg2, border_highlight = a('base0D'),
+    border = bg2, border_highlight = p.base0D,
     fg = fg, fg_dark = fg_dark, fg_float = fg, fg_sidebar = fg_dark,
     fg_gutter = gutter, comment = comment,
     dark3 = gutter, dark5 = comment, terminal_black = comment,
 
     -- syntax: see load-balancing note above
-    blue = a('base0D'), blue0 = a('base0D'), blue2 = a('base0D'),
-    green1 = a('base0D'), green2 = a('base0D'),       -- functions, properties    (17)
-    blue1 = a('base0C'), blue6 = a('base0C'), teal = a('base0C'), -- types, builtins (16)
-    magenta = a('base0E'), purple = a('base0E'),      -- keywords, control flow   (14)
-    cyan = a('base0F'),                               -- imports, macros, module  (7)
-    red = a('base08'), red1 = a('base08'),            -- variables                (3)
-    orange = a('base09'),                             -- numbers, constants       (5)
-    green = a('base0B'),                              -- strings                  (4)
-    yellow = a('base0A'),                             -- params, doc strings      (2)
+    blue = p.base0D,                                  -- functions, headings      (13)
+    blue1 = p.base0C, blue6 = p.base0C, teal = p.base0C, -- builtins, types, special (16)
+    magenta = p.base0E, purple = p.base0E,            -- keywords, control flow   (14)
+    cyan = p.base0F,                                  -- imports, macros, module  (7)
+    red = p.base08, red1 = p.base08,                  -- builtin variables        (3)
+    orange = p.base09, yellow = p.base0A,             -- literals, params         (8)
+    green = p.base0A,                                 -- strings                  (4)
+    green1 = p.base0B, green2 = p.base0B,             -- properties, fields       (4)
+    blue0 = p.base0D, blue2 = p.base0D,
     blue5 = p.base04, blue7 = gutter,
 
     -- derived at tokyonight/colors/init.lua:40 and :62-66, which run BEFORE
@@ -90,17 +60,14 @@ function M.tokyonight_colors(dark)
     -- (IncSearch, Substitute); leaving it at Tokyonight's blended #b4b5b9 gave
     -- 1.05:1 contrast on orange, i.e. invisible.
     black = p.base00,
-    error = a('base08'), warning = a('base09'), info = a('base0D'),
-    hint = a('base0C'), todo = a('base0E'),
+    error = p.base08, warning = p.base09, info = p.base0D,
+    hint = p.base0C, todo = p.base0E,
 
     -- six distinct markdown heading levels (@markup.heading.N.markdown)
-    rainbow = {
-      a('base08'), a('base09'), a('base0A'),
-      a('base0B'), a('base0D'), a('base0E'),
-    },
+    rainbow = { p.base08, p.base09, p.base0A, p.base0B, p.base0D, p.base0E },
 
-    git = { add = a('base0B'), change = a('base0D'), delete = a('base08') },
-    gitSigns = { add = a('base0B'), change = a('base0D'), delete = a('base08') },
+    git = { add = p.base0B, change = p.base0D, delete = p.base08 },
+    gitSigns = { add = p.base0B, change = p.base0D, delete = p.base08 },
   }
 end
 
