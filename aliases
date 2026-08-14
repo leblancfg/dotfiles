@@ -118,7 +118,9 @@ alias gags="git add . && git stash"
 # Back to master and pull
 function gmp () {
     MAIN_BRANCH=$(git symbolic-ref refs/remotes/origin/HEAD | xargs basename)
-    git checkout $MAIN_BRANCH && git pull origin $MAIN_BRANCH;
+    git fetch origin $MAIN_BRANCH &&
+    git merge --ff-only FETCH_HEAD &&
+    git checkout $MAIN_BRANCH
 }
 # Optimize for fat fingers ¯\_(ツ)_/¯
 alias mp="gmp"
