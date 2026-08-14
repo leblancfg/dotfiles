@@ -157,20 +157,6 @@ function M.tokyonight_highlights(dark)
   }
 end
 
--- Neo-tree leaves NeoTreeDirectoryName/RootName undefined, so they fall through
--- to Directory, which Tokyonight sets to `blue`. A file tree is mostly
--- directories, so the whole sidebar took the colour already carrying functions
--- and properties. Purple is unused in the tree and free.
-function M.neotree_highlights(dark)
-  local dir = accent(dark, 'base0E')
-  return {
-    NeoTreeDirectoryName = { fg = dir },
-    NeoTreeDirectoryIcon = { fg = dir },
-    NeoTreeRootName = { fg = dir, bold = true },
-    NeoTreeFileNameOpened = { fg = accent(dark, 'base0B') },
-  }
-end
-
 -- Anything Tokyonight computes with Util.blend_* lands between two palette
 -- entries, and groups Tokyonight never touches keep Neovim's own Nvim* defaults.
 -- Neither is reachable through on_colors, so snap the final highlight table:

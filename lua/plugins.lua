@@ -22,9 +22,6 @@ return {
                 for k, v in pairs(paraiso.tokyonight_highlights(dark)) do
                     hl[k] = v
                 end
-                for k, v in pairs(paraiso.neotree_highlights(dark)) do
-                    hl[k] = v
-                end
             end,
         },
     },
