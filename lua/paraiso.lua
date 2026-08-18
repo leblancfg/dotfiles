@@ -88,4 +88,52 @@ function M.tokyonight_highlights(_dark)
   }
 end
 
+-- Vendored replacement for tokyonight.nvim's lua/lightline/colorscheme/tokyonight.lua.
+--
+-- That file derived the tabline from `dark3` on `bg_highlight`. Under this
+-- palette those resolve to base02 on base01 in dark mode (1.26:1) and base06 on
+-- base06 in light mode (1.00:1 -- the inactive tab label was exactly its own
+-- background). Fixed here rather than by moving `dark3`, which also drives
+-- NonText, SpecialKey and LspInlayHint.
+--
+-- Entries are { guifg, guibg }; lightline#colorscheme#fill() derives cterm.
+function M.lightline_palette(dark)
+  local p = M.palette
+  local bg = dark and p.base00 or p.base07
+  local bar = dark and p.base01 or p.base06   -- statusline / tabline fill
+  local sel = dark and p.base02 or p.base06   -- selected-tab background
+  local fg = dark and p.base05 or p.base02
+  -- Inactive label: mid-ramp grey with real contrast against `bar`.
+  -- dark  base04 on base01 -> 3.36:1 (was 1.26:1)
+  -- light base02 on base06 -> 4.68:1 (was 1.00:1)
+  local dim = dark and p.base04 or p.base02
+
+  local mode_block = function(accent) return { { bg, accent }, { p.base0D, bg } } end
+
+  return {
+    normal = {
+      left = { { bg, p.base0D }, { p.base0D, sel } },
+      middle = { { fg, bar } },
+      right = { { bg, p.base0D }, { p.base0D, sel } },
+      error = { { bg, p.base08 } },
+      warning = { { bg, p.base09 } },
+    },
+    insert = { left = mode_block(p.base0B) },
+    visual = { left = mode_block(p.base0E) },
+    replace = { left = mode_block(p.base08) },
+    inactive = {
+      left = { { dim, bar }, { dim, bg } },
+      middle = { { dim, bar } },
+      right = { { dim, bar }, { dim, bg } },
+    },
+    tabline = {
+      left = { { dim, bar }, { dim, bg } },
+      middle = { { dim, bar } },
+      right = { { dim, bar }, { dim, bg } },
+      -- active tab keeps base0D on `sel`, unchanged from before
+      tabsel = { { p.base0D, sel }, { dim, bg } },
+    },
+  }
+end
+
 return M
