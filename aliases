@@ -1,3 +1,5 @@
+#!/usr/bin/env zsh
+
 # Just little things
 alias so=source
 alias cwd="pwd | tee /dev/stderr | tr -d '\n' | pbcopy"
