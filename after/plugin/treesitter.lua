@@ -11,6 +11,7 @@ local parsers = {
     "javascript",
     "markdown_inline",
     "typescript",
+    "tsx",
     "c",
     "lua",
     "vim",
