@@ -1,7 +1,7 @@
 {
   "lastChangelogVersion": "0.57.1",
   "quietStartup": true,
-  "theme": "ansi-dark",
+  "theme": "ansi-light/ansi-dark",
   "defaultThinkingLevel": "high",
   "doubleEscapeAction": "tree",
   "editorPaddingX": 1,
@@ -9,8 +9,10 @@
     "~/.pi/agent/skills"
   ],
   "packages": [
-    "~/src/github.com/leblancfg/pi-ansi-themes",
-    "~/src/github.com/leblancfg/lsp-pi"
+    "git:github.com/leblancfg/pi-fusion",
+    "git:github.com/leblancfg/pi-ansi-themes",
+    "git:github.com/leblancfg/pi-quiet-tools",
+    "git:github.com/leblancfg/lsp-pi"
   ],
   "defaultProvider": "anthropic",
   "defaultModel": "claude-opus-4-6",

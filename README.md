@@ -16,6 +16,21 @@ Running the command below will create symlinks between the dotfiles in this repo
     # Set up from home folder
     cd && git clone https://github.com/leblancfg/dotfiles && ./dotfiles/install
 
+## Pi
+
+The repository keeps Pi configuration under `pi/` rather than the project-specific `.pi/` path. The
+installer links the selected profile to `~/.pi/agent/settings.json` and links each portable skill into
+`~/.pi/agent/skills`.
+
+- `pi/agent/settings.json` is the personal profile.
+- `pi/agent-work/settings.json` is the work profile. The `USING_DEV` environment variable selects it.
+- Public packages from `github.com/leblancfg` appear in both profiles so they load on every machine.
+  Work-only packages and extensions belong only in the work profile.
+
+Pi does not support includes in its global settings. The two profiles therefore remain complete,
+ordinary settings files. Changes made through `/model` or `/settings` update the selected file through
+its symlink and appear as normal Git changes.
+
 ## Updating dotfiles
 As they're symlinks, changing your dotfiles from your home directory will in effect change them in the `dotfiles` repo. To update the repo, simply run:
 

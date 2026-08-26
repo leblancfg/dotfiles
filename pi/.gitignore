@@ -1,0 +1,6 @@
+# Credentials and machine-only configuration
+auth.json
+models.json
+
+# Session history -- full conversation transcripts
+sessions/

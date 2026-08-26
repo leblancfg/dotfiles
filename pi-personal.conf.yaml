@@ -9,4 +9,4 @@
 
 - link:
     ~/.pi/agent/settings.json:
-      path: .pi/agent/settings.json
+      path: pi/agent/settings.json

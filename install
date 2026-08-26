@@ -11,12 +11,13 @@ git -C "${DOTBOT_DIR}" submodule sync --quiet --recursive
 git submodule update --init --recursive "${DOTBOT_DIR}"
 
 "${BASEDIR}/${DOTBOT_DIR}/${DOTBOT_BIN}" -d "${BASEDIR}" -c "install.conf.yaml" "${@}"
+"${BASEDIR}/${DOTBOT_DIR}/${DOTBOT_BIN}" -d "${BASEDIR}" -c "pi-common.conf.yaml" "${@}"
 
 if [ -n "${USING_DEV}" ]; then
-  echo "Work environment detected, setting up pi agent profile with Shopify configs"
-  "${BASEDIR}/${DOTBOT_DIR}/${DOTBOT_BIN}" -d "${BASEDIR}" -c "pi-shopify.conf.yaml" "${@}"
+  echo "Work environment detected, setting up the Pi work profile"
+  "${BASEDIR}/${DOTBOT_DIR}/${DOTBOT_BIN}" -d "${BASEDIR}" -c "pi-work.conf.yaml" "${@}"
 else
-  echo "Personal environment detected, setting up pi agent profile"
+  echo "Personal environment detected, setting up the Pi personal profile"
   "${BASEDIR}/${DOTBOT_DIR}/${DOTBOT_BIN}" -d "${BASEDIR}" -c "pi-personal.conf.yaml" "${@}"
 fi
 

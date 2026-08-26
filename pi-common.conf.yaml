@@ -1,0 +1,18 @@
+---
+- defaults:
+    link:
+      relink: true
+      force: true
+
+- create:
+    - ~/.pi/agent/skills/
+
+- link:
+    ~/.pi/agent/skills/deslop:
+      path: pi/agent/skills/deslop
+    ~/.pi/agent/skills/kagi-search:
+      path: pi/agent/skills/kagi-search
+    ~/.pi/agent/skills/leblancfg:
+      path: pi/agent/skills/leblancfg
+    ~/.pi/agent/skills/prose:
+      path: pi/agent/skills/prose
