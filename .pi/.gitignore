@@ -6,6 +6,3 @@ agent-shopify/models.json
 
 # Session history -- full conversation transcripts
 sessions/
-
-# Skills -- may contain org-specific references
-skills/
