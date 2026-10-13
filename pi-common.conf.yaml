@@ -6,6 +6,7 @@
 
 - create:
     - ~/.pi/agent/skills/
+    - ~/.pi/agent/extensions/
 
 - link:
     ~/.pi/agent/skills/deslop:
@@ -16,3 +17,5 @@
       path: pi/agent/skills/leblancfg
     ~/.pi/agent/skills/prose:
       path: pi/agent/skills/prose
+    ~/.pi/agent/extensions/tmux-session-tag.ts:
+      path: pi/agent/extensions/tmux-session-tag.ts

@@ -34,6 +34,8 @@
       path: scripts/md-fmt
     ~/.local/bin/tmux-cd-panes:
       path: scripts/tmux-cd-panes
+    ~/.local/bin/tmux-pi-resurrect:
+      path: scripts/tmux-pi-resurrect
     ~/.wezterm.lua:
       path: wezterm.lua
 

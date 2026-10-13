@@ -1,0 +1,88 @@
+#!/usr/bin/env bash
+# tmux-resurrect hooks that bring pi sessions back after a tmux restart.
+#
+#   save     @resurrect-hook-post-save-all: record which pi session each pane runs
+#   restore  @resurrect-hook-post-restore-all: run `pi --session <file>` in those panes
+#
+# Resurrect restores pi panes as bare shells. `pi -c` is not enough because it
+# picks the newest session for the cwd, and several pi panes often share a cwd.
+# The pi extension pi/agent/extensions/tmux-session-tag.ts sets the pane option
+# @pi_session_file, so the exact session is known for every pane.
+#
+# Flags: --dry-run (restore only) prints what it would do.
+set -euo pipefail
+
+tmux_bin="${TMUX_BIN:-tmux}"
+dir="${TMUX_PI_RESURRECT_DIR:-$HOME/.local/share/tmux/resurrect}"
+map="$dir/pi-sessions.tsv"
+log="$dir/pi-sessions.log"
+
+save() {
+	mkdir -p "$dir"
+	local tmp
+	tmp="$(mktemp "$dir/.pi-sessions.XXXXXX")"
+	# Only panes whose foreground process is still pi: the option can be
+	# stale if pi crashed and something else now runs in the pane.
+	"$tmux_bin" list-panes -a -F \
+		$'#{session_name}:#{window_index}.#{pane_index}\t#{pane_id}\t#{pane_current_command}\t#{@pi_session_file}\t#{pane_current_path}' |
+		awk -F'\t' '$4 != "" && ($3 == "node" || $3 == "pi")' >"$tmp"
+	# A save that runs while restored panes are still empty shells would wipe
+	# the map; keep the previous one in that case.
+	if [ -s "$tmp" ] || [ ! -s "$map" ]; then
+		[ -f "$map" ] && cp "$map" "$map.prev"
+		mv "$tmp" "$map"
+	else
+		rm -f "$tmp"
+	fi
+}
+
+restore() {
+	local dry_run=0
+	[ "${1:-}" = "--dry-run" ] && dry_run=1
+	[ -s "$map" ] || { echo "tmux-pi-resurrect: no $map" >&2; return 0; }
+
+	local seen="" target _old_id _cmd file _cwd pane_id current
+	while IFS=$'\t' read -r target _old_id _cmd file _cwd; do
+		[ -n "$file" ] || continue
+		if ! pane_id="$("$tmux_bin" display-message -p -t "$target" '#{pane_id}' 2>/dev/null)"; then
+			echo "skip $target: pane is gone"
+			continue
+		fi
+		# Grouped sessions list the same pane under several names.
+		case " $seen " in *" $pane_id "*) continue ;; esac
+		seen="$seen $pane_id"
+		if [ ! -f "$file" ]; then
+			echo "skip $target: session file is gone: $file"
+			continue
+		fi
+		current="$("$tmux_bin" display-message -p -t "$pane_id" '#{pane_current_command}')"
+		case "$current" in
+		bash | zsh | sh | fish | login) ;;
+		*)
+			echo "skip $target: pane runs $current"
+			continue
+			;;
+		esac
+		if [ "$dry_run" -eq 1 ]; then
+			echo "would resume $target ($pane_id): pi --session $file"
+		else
+			"$tmux_bin" send-keys -t "$pane_id" "pi --session $(printf '%q' "$file")" C-m
+			echo "resumed $target ($pane_id): $file"
+		fi
+	done <"$map"
+}
+
+case "${1:-}" in
+save) save ;;
+restore)
+	if [ "${2:-}" = "--dry-run" ]; then
+		restore --dry-run
+	else
+		{ date; restore; } >>"$log" 2>&1
+	fi
+	;;
+*)
+	echo "usage: tmux-pi-resurrect save | restore [--dry-run]" >&2
+	exit 1
+	;;
+esac
