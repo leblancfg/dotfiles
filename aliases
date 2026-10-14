@@ -230,9 +230,9 @@ alias la='lsd -a'
 alias lla='lsd -la'
 alias lt='lsd --tree'
 alias t1="tree --dirsfirst -ChFL 1"
-alias devs="rm -rf client/node_modules/.vite node_modules/.vite && dev server"
 alias devus="dev up && dev server"
 alias bullet='pbpaste | sed "s/^.\{6\}//g" | pbcopy'
+alias wtp=_wtp
 
 ## Dotfiles
 # Update dotfiles
