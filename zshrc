@@ -152,6 +152,24 @@ source_if_exists ~/.aliases
 [[ -x /Users/leblancfg/.local/state/tec/profiles/base/current/global/init ]] && eval "$(/Users/leblancfg/.local/state/tec/profiles/base/current/global/init zsh)"
 typeset -U path PATH
 
+# binks: `devx binks` has no standalone binary, so wrap it and teach both spellings
+# to complete. Runs after the tec init above, which is what puts devx on PATH.
+if (( $+commands[devx] )); then
+  binks() { devx binks "$@" }
+  [[ -f ~/.zfunc/_binks ]] || { mkdir -p ~/.zfunc && devx binks completion zsh > ~/.zfunc/_binks }
+  autoload -Uz _binks && compdef _binks binks
+  _devx_binks() {
+    if (( CURRENT > 2 )) && [[ $words[2] == binks ]]; then
+      shift words
+      (( CURRENT-- ))
+      _binks
+      return
+    fi
+    _default
+  }
+  compdef _devx_binks devx
+fi
+
 # pnpm
 export PNPM_HOME="/Users/leblancfg/.local/share/pnpm"
 case ":$PATH:" in
