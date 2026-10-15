@@ -27,7 +27,7 @@ return {
     {
         'f-person/auto-dark-mode.nvim',
         opts = {
-            update_interval = 1000,
+            update_interval = 30000,
             set_dark_mode = function()
                 vim.o.background = 'dark'
                 vim.cmd.colorscheme('tokyonight-moon')
@@ -37,6 +37,24 @@ return {
                 vim.cmd.colorscheme('tokyonight-day')
             end,
         },
+        config = function(_, opts)
+            local interval = require('auto-dark-mode.interval')
+            local poll_dark_mode = interval.poll_dark_mode
+
+            interval.poll_dark_mode = function(callback)
+                local ok, err = pcall(poll_dark_mode, callback)
+                if not ok and not tostring(err):find('EAGAIN', 1, true) then
+                    error(err, 0)
+                end
+            end
+
+            require('auto-dark-mode').setup(opts)
+            vim.api.nvim_create_autocmd('FocusGained', {
+                callback = function()
+                    interval.poll_dark_mode(interval.parse_callback)
+                end,
+            })
+        end,
     },
     {
         "nvim-neo-tree/neo-tree.nvim",
